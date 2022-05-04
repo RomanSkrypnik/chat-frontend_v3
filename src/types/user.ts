@@ -1,8 +1,8 @@
 export interface UserDto {
-    id: number;
-    email: string;
-    username: string;
-    name: string;
-    avatar: string | null;
-    activated: boolean;
+    id: number
+    username: string
+    name: string
+    hash: string
+    avatar: string | null
+    online: boolean
 }

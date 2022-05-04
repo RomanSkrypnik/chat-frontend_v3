@@ -8,12 +8,12 @@ type InputProps = {
 
 const TextInput: FC<InputProps> = (props) => {
 
-    const {field: {onChange, value, name}} = useController(props);
+    const {field: {onChange, value, name}} = useController({...props, defaultValue: ''});
 
     return (
-        <label className="d-flex flex-column mt-2">
+        <label className="d-flex flex-column mt-3">
             {props.label}
-            <input type="text" onChange={onChange} value={value} name={name}/>
+            <input type="text" onChange={onChange} value={value} name={name} placeholder={props.placeholder}/>
         </label>
     );
 };

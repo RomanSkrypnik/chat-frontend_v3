@@ -10,7 +10,7 @@ const DefaultLayout: FC<DefaultLayoutProps> = ({children}) => {
         <div className="default-layout">
             <div className="d-flex">
                 <Sidebar/>
-                <main>{children}</main>
+                <main className="w-100">{children}</main>
             </div>
         </div>
     );

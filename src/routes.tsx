@@ -4,7 +4,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 
 
-export const ReactRoutes = () => {
+export const AppRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
