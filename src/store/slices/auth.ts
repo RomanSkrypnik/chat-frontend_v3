@@ -49,7 +49,7 @@ export const logout = createAsyncThunk(
 );
 
 const initialState: AuthState = {
-    user: {},
+    user: null,
     isLogged: false,
     isLoaded: false,
 }
@@ -66,7 +66,7 @@ const authSlice = createSlice({
         },
 
         exit(state) {
-            state.user = {};
+            state.user = null;
             state.isLogged = false;
         },
 

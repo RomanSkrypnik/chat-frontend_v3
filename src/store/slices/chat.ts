@@ -14,8 +14,20 @@ export const fetchChats = createAsyncThunk(
     }
 )
 
+export const fetchChat = createAsyncThunk(
+    'chat/fetchChat',
+    async (hash: string, {dispatch}) => {
+        try {
+            const {data} = await ChatService.getChat(hash);
+            dispatch(setChat(data.data))
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
 const initialState: ChatState = {
-    chat: {},
+    chat: null,
     chats: []
 }
 

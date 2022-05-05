@@ -1,7 +1,7 @@
 import {UserDto} from "./user";
 
 export interface AuthState {
-    user: UserDto | {};
+    user: UserDto | null;
     isLogged: boolean;
     isLoaded: boolean;
 }

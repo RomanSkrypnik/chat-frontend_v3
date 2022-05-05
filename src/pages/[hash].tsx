@@ -1,11 +1,15 @@
 import React from 'react';
+import ChatWrapper from "../components/partials/ChatWrapper";
+import withAuthorized from "../hocs/Authorized";
 
-const UserMessages = () => {
+const Chat = () => {
     return (
-        <section className="user-messages">
-
+        <section className="chat">
+            <div className="container">
+                <ChatWrapper/>
+            </div>
         </section>
     );
 };
 
-    export default UserMessages;
+export default withAuthorized(Chat);
