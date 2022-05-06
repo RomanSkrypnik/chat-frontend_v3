@@ -1,17 +1,26 @@
-import React from 'react';
+import React, {FC} from 'react';
 import TextInput from "../inputs/TextInput";
 import {useForm} from "react-hook-form";
 
-const ChatControls = () => {
+interface CreateMessageValues {
+    text: string;
+    file: null;
+}
 
-    const {handleSubmit, control} = useForm();
+interface ChatControlsProps {
+    onSubmit: (data: CreateMessageValues) => void;
+}
+
+const ChatControls: FC<ChatControlsProps> = ({onSubmit}) => {
+
+    const {handleSubmit, control} = useForm<CreateMessageValues>();
 
     return (
         <div className="chat-controls">
-            <div className="d-flex align-items-center mt-3">
+            <form onSubmit={handleSubmit(onSubmit)} className="d-flex align-items-center mt-3">
                 <TextInput className="w-100" name="text" control={control}/>
-                <button className="btn btn-primary ms-3">Send</button>
-            </div>
+                <button type="submit" className="btn btn-primary ms-3">Send</button>
+            </form>
         </div>
     );
 };

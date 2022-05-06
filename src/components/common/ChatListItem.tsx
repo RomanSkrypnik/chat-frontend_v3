@@ -16,10 +16,10 @@ const ChatListItem: FC<ChatListItemProps> = ({messageRow}) => {
     const isCurrUser = messageRow[0].user.id === user?.id;
 
     return (
-        <li className={cn("chat-list__item", isCurrUser ? 'align-self-start' : 'align-self-end')}>
+        <li className={cn("mt-3", isCurrUser ? 'align-self-end' : 'align-self-start')}>
             <div className="d-flex">
 
-                <Avatar className={cn(isCurrUser ? 'order-0' : 'order-1')}/>
+                <Avatar className={cn(isCurrUser ? 'order-1' : 'order-0')}/>
 
                 <div>
                     {

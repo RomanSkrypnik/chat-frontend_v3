@@ -16,7 +16,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
     }
 
     return (
-        <div className="pb-3">
+        <div className="chat-header bg-light p-3">
             <div className="d-flex justify-content-between">
 
                 <button onClick={handleClick} className="btn btn-secondary">Back</button>

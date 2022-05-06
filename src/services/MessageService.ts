@@ -1,4 +1,4 @@
-import {CreateMessageDto, MessageDto} from "../types";
+import {CreateMessageDto} from "../types";
 import $api from "../http";
 
 export default class MessageService {

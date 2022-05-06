@@ -1,10 +1,13 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {logout} from "../store/slices/auth";
 import {useAppDispatch} from "../store";
+import Avatar from "./ui/buttons/Avatar";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 
 const Sidebar = () => {
+
+    const {user} = useTypedSelector(state => state.auth);
 
     const dispatch = useAppDispatch();
 
@@ -18,6 +21,14 @@ const Sidebar = () => {
     return (
         <aside className="sidebar">
             <h4 className="text-center mb-3">Chat</h4>
+
+            <div className="d-flex mb-3">
+                <Avatar/>
+                <div className="ms-2">
+                    {user && <div>{user.name}</div>}
+                </div>
+                <button className="btn btn-primary ms-auto">Edit</button>
+            </div>
 
             <ul className="sidebar__menu list-unstyled">
                 {

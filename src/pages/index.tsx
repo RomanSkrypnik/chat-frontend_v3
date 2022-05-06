@@ -21,7 +21,7 @@ const Home = () => {
                 <ul className="list-group">
                     {
                         chats.map(chat => {
-                            return <MessageItem to={chat.user.hash}
+                            return <MessageItem user={chat.user}
                                                 message={chat.messages[chat.messages.length - 1]}
                                                 key={chat.id}/>
                         })

@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {ChatState} from "../../types";
 import {ChatService} from "../../services/ChatService";
+import {RootState} from "../index";
 
 export const fetchChats = createAsyncThunk(
     'chat/fetchChats',
@@ -23,6 +24,12 @@ export const fetchChat = createAsyncThunk(
         } catch (e) {
             console.log(e)
         }
+    },
+    {
+        condition(hash: string, {getState}): boolean {
+            const {chat} = getState() as RootState;
+            return chat.chats.length <= 0;
+        }
     }
 )
 
@@ -42,7 +49,7 @@ const chatSlice = createSlice({
 
         setChats(state, {payload}) {
             state.chats = payload;
-        }
+        },
 
     }
 })

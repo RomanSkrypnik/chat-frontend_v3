@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {AuthState, LoginDto} from "../../types/auth";
+import {AuthState, LoginDto} from "../../types";
 import {AuthService} from "../../services/AuthService";
 
 export const refresh = createAsyncThunk(
