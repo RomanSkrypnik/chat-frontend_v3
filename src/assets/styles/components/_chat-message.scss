@@ -1,0 +1,10 @@
+.chat__message {
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  max-width: 500px;
+  border-radius: 5px;
+  padding: 10px;
+}

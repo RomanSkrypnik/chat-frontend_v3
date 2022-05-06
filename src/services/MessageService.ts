@@ -1,9 +1,9 @@
-import {CreateMessageDto} from "../types";
+import {CreateMessageDto, MessageDto} from "../types";
 import $api from "../http";
 
 export default class MessageService {
 
-    async create(messageDto: CreateMessageDto) {
+    static async create(messageDto: CreateMessageDto) {
         return await $api.post('/message/create', messageDto);
     }
 

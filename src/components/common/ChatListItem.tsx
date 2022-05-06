@@ -23,9 +23,7 @@ const ChatListItem: FC<ChatListItemProps> = ({messageRow}) => {
 
                 <div>
                     {
-                        messageRow.map(message => (
-                            <ChatMessage message={message}/>
-                        ))
+                        messageRow.map(message => (<ChatMessage message={message} key={message.id}/>))
                     }
                 </div>
 

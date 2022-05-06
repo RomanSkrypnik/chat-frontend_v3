@@ -5,6 +5,10 @@ export interface CreateMessageDto {
     file: null;
 }
 
+export interface MessageState {
+    messages: MessageDto[]
+}
+
 export interface MessageDto {
     id: number;
     text: string;

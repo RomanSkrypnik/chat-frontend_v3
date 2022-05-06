@@ -9,5 +9,5 @@ export interface ChatState {
 export interface ChatDto {
     id?: number;
     user: UserDto;
-    messages: MessageDto[][];
+    messages: MessageDto[];
 }
