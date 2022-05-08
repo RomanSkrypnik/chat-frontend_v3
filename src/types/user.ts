@@ -1,3 +1,8 @@
+export interface UserState {
+    users: [] | UserDto[];
+    user: UserDto | null;
+}
+
 export interface UserDto {
     id: number
     username: string

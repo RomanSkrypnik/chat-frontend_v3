@@ -1,0 +1,34 @@
+.icon-button {
+
+  &:hover, &.active {
+    &::before {
+      content: "";
+      height: 100%;
+      width: 3px;
+      border-radius: 3px;
+      background-color: $primary;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    svg, path {
+      fill: $primary;
+    }
+
+    color: $primary;
+  }
+
+  &__text {
+    margin-left: 17px;
+  }
+
+  display: flex;
+  color: $darkGrey;
+  position: relative;
+  font-weight: 550;
+  width: 100%;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-left: 38px;
+}

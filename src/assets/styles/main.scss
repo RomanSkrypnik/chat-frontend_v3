@@ -2,6 +2,15 @@
 @import "components/components";
 @import "ui/ui";
 
+main {
+  background: linear-gradient(180deg, #F3F3FB 0%, #FDFBFD 100%);
+}
+
 .overlay_black {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+button {
+  border: 0;
+  background-color: transparent;
 }
