@@ -3,10 +3,9 @@ import ChatHeader from "../common/ChatHeader";
 import ChatList from "../common/ChatList";
 import ChatControls from "../common/ChatControls";
 import {useAppDispatch} from "../../store";
-import {fetchChat, setChat} from "../../store/slices/chat";
+import {fetchChat, sendMessage} from "../../store/slices/chat";
 import {useParams} from "react-router-dom";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {sendMessage, setMessages} from "../../store/slices/message";
 import {CreateMessageValues} from "../../types";
 
 const ChatWrapper = () => {
@@ -15,24 +14,13 @@ const ChatWrapper = () => {
 
     const dispatch = useAppDispatch();
 
-    const {chat, chats} = useTypedSelector(state => state.chat)
-
-    const {messages} = useTypedSelector(state => state.message)
+    const {chat} = useTypedSelector(state => state.chat)
 
     useEffect(() => {
         if (hash) {
             dispatch(fetchChat(hash))
         }
     }, [hash]);
-
-    useEffect(() => {
-        if (chat) {
-            dispatch(setMessages(chat.messages))
-        } else {
-            const chat = chats.find(({user}) => user.hash === hash)
-            dispatch(setChat(chat))
-        }
-    }, [chat]);
 
     const handleSubmit = (data: CreateMessageValues) => {
         if (hash) {
@@ -46,7 +34,7 @@ const ChatWrapper = () => {
                 chat &&
                 <>
                     <ChatHeader user={chat.user}/>
-                    <ChatList messages={messages}/>
+                    <ChatList messages={chat.messages}/>
                     <ChatControls onSubmit={handleSubmit}/>
                 </>
             }

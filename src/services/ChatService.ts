@@ -10,4 +10,8 @@ export class ChatService {
         return await $api.get('/chat/' + hash)
     }
 
+    static async search(search: string) {
+        return await $api.post('/chat/search', {search});
+    }
+
 }

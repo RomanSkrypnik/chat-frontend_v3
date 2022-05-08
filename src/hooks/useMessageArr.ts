@@ -2,11 +2,12 @@ import {MessageDto} from "../types";
 import {useEffect, useState} from "react";
 
 export function useMessageArr(messages: MessageDto[]) {
-
     const [twoDimsArr, setTwoDimsArr] = useState<[] | MessageDto[][]>([])
 
     useEffect(() => {
-        convertIntoTwoDimsArr()
+        if (messages.length > 0) {
+            convertIntoTwoDimsArr();
+        }
     }, [messages]);
 
     const convertIntoTwoDimsArr = () => {
@@ -23,5 +24,5 @@ export function useMessageArr(messages: MessageDto[]) {
         setTwoDimsArr(arr)
     }
 
-    return twoDimsArr
+    return twoDimsArr;
 }

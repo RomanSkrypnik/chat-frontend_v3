@@ -1,5 +1,17 @@
 .chat-list {
-  justify-content: flex-end;
-  height: 85vh;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+    background-color: $lightGrey;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: $primary;
+  }
+
+  height: 84vh;
   overflow: auto;
+  padding-right: 20px;
 }

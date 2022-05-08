@@ -21,7 +21,7 @@ const ChatListItem: FC<ChatListItemProps> = ({messageRow}) => {
 
                 <Avatar className={cn(isCurrUser ? 'order-1' : 'order-0')}/>
 
-                <div>
+                <div className={cn("d-flex flex-column", isCurrUser ? 'align-items-end' : 'align-items-start')}>
                     {
                         messageRow.map(message => (<ChatMessage message={message} key={message.id}/>))
                     }
