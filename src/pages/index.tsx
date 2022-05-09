@@ -1,50 +1,20 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import withAuthorized from "../hocs/Authorized";
-import {useTypedSelector} from "../hooks/useTypedSelector";
-import {useAppDispatch} from "../store";
-import {fetchChats, findChat} from "../store/slices/chat";
-import MessageItem from "../components/common/MessageItem";
-import TextInput from "../components/inputs/TextInput";
-import {useForm} from "react-hook-form";
-
-interface FormValues {
-    search: string;
-}
+import Typography from "../components/common/Typography";
+import MessageWrapper from "../components/partials/MessageWrapper";
+import ChatWrapper from "../components/partials/ChatWrapper";
+import {useParams} from "react-router-dom";
 
 const Home = () => {
 
-    const {chats} = useTypedSelector(state => state.chat);
-
-    const {control, watch, handleSubmit} = useForm<FormValues>();
-
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        const subscription = watch(() => handleSubmit(onSearchChange)())
-        return () => subscription.unsubscribe();
-    }, [watch]);
-
-    useEffect(() => {
-        dispatch(fetchChats())
-    }, []);
-
-    const onSearchChange = ({search}: FormValues) => {
-        dispatch(findChat(search))
-    }
+    const {hash} = useParams();
 
     return (
         <section className="home">
-            <div className="container">
-                <TextInput className="w-100 mb-3" control={control} name="search"/>
-                <ul className="list-group">
-                    {
-                        chats.map(chat => {
-                            return <MessageItem user={chat.user}
-                                                message={chat.messages[chat.messages.length - 1]}
-                                                key={chat.id}/>
-                        })
-                    }
-                </ul>
+            <Typography className="mb-3" fz={36}>Chats</Typography>
+            <div className="d-flex">
+                <MessageWrapper/>
+                {hash && <ChatWrapper/>}
             </div>
         </section>
     );

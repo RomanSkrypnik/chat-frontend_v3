@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import ChatHeader from "../common/ChatHeader";
 import ChatList from "../common/ChatList";
 import ChatControls from "../common/ChatControls";
@@ -7,6 +7,7 @@ import {fetchChat, sendMessage} from "../../store/slices/chat";
 import {useParams} from "react-router-dom";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {CreateMessageValues} from "../../types";
+import {SocketContext} from "../../hocs/Authorized";
 
 const ChatWrapper = () => {
 
@@ -14,7 +15,9 @@ const ChatWrapper = () => {
 
     const dispatch = useAppDispatch();
 
-    const {chat} = useTypedSelector(state => state.chat)
+    const socket = useContext(SocketContext);
+
+    const {chat} = useTypedSelector(state => state.chat);
 
     useEffect(() => {
         if (hash) {
@@ -25,11 +28,12 @@ const ChatWrapper = () => {
     const handleSubmit = (data: CreateMessageValues) => {
         if (hash) {
             dispatch(sendMessage({message: data, hash}));
+            socket?.emit('chat/message', 'fdsfs');
         }
     }
 
     return (
-        <div className="chat__wrapper">
+        <div className="flex-grow-1 bg-white">
             {
                 chat &&
                 <>

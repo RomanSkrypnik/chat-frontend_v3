@@ -7,9 +7,7 @@ interface EmptyLayoutProps {
 const EmptyLayout: FC<EmptyLayoutProps> = ({children}) => {
     return (
         <div className="empty-layout">
-            <main className="w-100 p-3">
-                {children}
-            </main>
+            <main>{children}</main>
         </div>
     );
 };

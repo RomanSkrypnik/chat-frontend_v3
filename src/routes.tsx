@@ -11,7 +11,7 @@ export const AppRoutes = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={Home}/>
-                <Route path="/:hash" element={Chat}/>
+                <Route path="/:hash" element={Home}/>
                 <Route path="/login" element={Login}/>
                 <Route path="/register" element={Register}/>
                 <Route path="/profile/:hash" element={Profile} />

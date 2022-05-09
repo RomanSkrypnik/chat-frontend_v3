@@ -1,0 +1,12 @@
+.chat-header {
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 125px;
+  }
+
+  border-bottom: 1px solid $headerGrey;
+  background-color: $lightWhite;
+  padding: 28px 38px 28px 60px;
+}

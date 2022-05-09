@@ -1,10 +1,10 @@
-import React, {FC} from 'react';
+import React, {FC, ReactNode} from 'react';
 
 interface TypographyProps {
     as?: 'div' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     fz?: number | string;
     lh?: number | string;
-    children: string;
+    children: ReactNode;
     className?: string;
 }
 

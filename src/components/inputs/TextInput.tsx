@@ -15,7 +15,7 @@ const TextInput: FC<InputProps> = (props) => {
     return (
         <label className={cn("d-flex flex-column", props.className)}>
             {props.label}
-            <input type="text" onChange={onChange} value={value} name={name} placeholder={props.placeholder}/>
+            <input className="text-input" type="text" onChange={onChange} value={value} name={name} placeholder={props.placeholder}/>
         </label>
     );
 };

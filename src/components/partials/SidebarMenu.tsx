@@ -23,7 +23,13 @@ const SidebarMenu = () => {
         <ul className="sidebar__menu list-unstyled">
             {
                 items.map(item =>
-                    <IconButton className="mt-4" icon={item.icon} text={item.text} href={item.to}/>
+                    <IconButton
+                        className="mt-4"
+                        icon={item.icon}
+                        text={item.text}
+                        href={item.to}
+                        key={item.key}
+                    />
                 )
             }
         </ul>

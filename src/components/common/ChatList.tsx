@@ -24,7 +24,7 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
     }
 
     return (
-        <ul className="chat-list list-group list-unstyled" ref={ref}>
+        <ul className="chat-list scrollbar list-unstyled" ref={ref}>
             {
                 twoDimsArr.map((messageRow, idx) => {
                     return <ChatListItem messageRow={messageRow} key={idx}/>

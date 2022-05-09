@@ -2,6 +2,10 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {AuthState, LoginDto} from "../../types";
 import {AuthService} from "../../services/AuthService";
 
+const rejectionReducer = (state: AuthState) => {
+    state.isLoaded = true;
+}
+
 export const refresh = createAsyncThunk(
     'auth/refresh',
     async (_, {dispatch}) => {
@@ -13,11 +17,10 @@ export const refresh = createAsyncThunk(
 
             dispatch(authenticate(data.data.user))
         } catch (e) {
-            dispatch(setIsLoaded(true))
             console.log(e)
         }
     }
-)
+);
 
 export const login = createAsyncThunk(
     'auth/login',
@@ -30,11 +33,10 @@ export const login = createAsyncThunk(
 
             dispatch(authenticate(data.data.user))
         } catch (e) {
-            dispatch(setIsLoaded(true))
             console.log(e);
         }
     }
-)
+);
 
 export const logout = createAsyncThunk(
     'auth/logout',
@@ -74,7 +76,11 @@ const authSlice = createSlice({
             state.isLoaded = payload
         }
 
-    }
+    },
+    extraReducers: (builder => {
+        builder.addCase(refresh.rejected, rejectionReducer);
+        builder.addCase(login.rejected, rejectionReducer);
+    })
 })
 
 export const {authenticate, exit, setIsLoaded} = authSlice.actions;
