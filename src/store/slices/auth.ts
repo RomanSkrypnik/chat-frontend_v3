@@ -17,7 +17,7 @@ export const refresh = createAsyncThunk(
 
             dispatch(authenticate(data.data.user))
         } catch (e) {
-            console.log(e)
+            throw e;
         }
     }
 );
@@ -33,7 +33,7 @@ export const login = createAsyncThunk(
 
             dispatch(authenticate(data.data.user))
         } catch (e) {
-            console.log(e);
+            throw e;
         }
     }
 );
@@ -45,7 +45,7 @@ export const logout = createAsyncThunk(
             await AuthService.logout();
             dispatch(exit())
         } catch (e) {
-            console.log(e);
+            throw e;
         }
     }
 );

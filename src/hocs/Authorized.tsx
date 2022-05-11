@@ -20,7 +20,7 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
 
     useEffect(() => {
         if (!socket) {
-            setSocket(io('http://localhost:5000/'));
+            setSocket(io('http://localhost:5000/', {autoConnect: false, multiplex:false}));
         }
     }, []);
 
@@ -33,7 +33,9 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
     }, [socket]);
 
     useEffect(() => {
-        if (!isLogged) navigate('/login')
+        if (!isLogged){
+            return navigate('/login');
+        }
     }, [isLogged]);
 
     return (
