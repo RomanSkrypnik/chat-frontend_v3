@@ -48,17 +48,17 @@ export const findChat = createAsyncThunk(
     }
 )
 
-export const sendMessage = createAsyncThunk(
-    'message/sendMessage',
-    async (createMessageDto: CreateMessageDto, {dispatch, getState}) => {
-        try {
-            const {data} = await MessageService.create(createMessageDto);
-            dispatch(addMessage(data.data));
-        } catch (e) {
-            console.log(e);
-        }
-    }
-);
+// export const sendMessage = createAsyncThunk(
+//     'message/sendMessage',
+//     async (createMessageDto: CreateMessageDto, {dispatch, getState}) => {
+//         try {
+//             const {data} = await MessageService.create(createMessageDto);
+//             dispatch(addMessage(data.data));
+//         } catch (e) {
+//             console.log(e);
+//         }
+//     }
+// );
 
 const initialState: ChatState = {
     chat: null,

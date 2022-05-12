@@ -3,6 +3,9 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
 import {io, Socket} from "socket.io-client";
+import {useAppDispatch} from "../store";
+import {MessageDto} from "../types";
+import {addMessage} from "../store/slices/chat";
 
 export const SocketContext = createContext<null | Socket<any, any>>(null);
 
@@ -16,24 +19,40 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
 
     const {isLogged} = useTypedSelector(state => state.auth);
 
+    const dispatch = useAppDispatch();
+
     const navigate = useNavigate();
 
     useEffect(() => {
         if (!socket) {
-            setSocket(io('http://localhost:5000/', {autoConnect: false, multiplex:false}));
+            setSocket(io('localhost:5000', {
+                autoConnect: false, transportOptions: {
+                    polling: {
+                        extraHeaders: {
+                            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                        }
+                    }
+                }
+            }));
         }
     }, []);
 
     useEffect(() => {
+        return () => { socket?.close(); }
+    }, [socket]);
+
+    useEffect(() => {
         if (socket) {
-            socket.on('message', () => {
-                console.log('here');
+            socket.connect();
+
+            socket.on('chat-message', (message: MessageDto) => {
+                dispatch(addMessage(message))
             });
         }
     }, [socket]);
 
     useEffect(() => {
-        if (!isLogged){
+        if (!isLogged) {
             return navigate('/login');
         }
     }, [isLogged]);

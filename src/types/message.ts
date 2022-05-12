@@ -1,4 +1,5 @@
 import {UserDto} from "./user";
+import {FileDto} from "./file";
 
 export interface CreateMessageDto {
     message: CreateMessageValues;
@@ -7,7 +8,7 @@ export interface CreateMessageDto {
 
 export interface CreateMessageValues {
     text: string;
-    file: null;
+    files: File[] | [];
 }
 
 export interface MessageState {
@@ -19,4 +20,5 @@ export interface MessageDto {
     text: string;
     createdAt: string;
     user: UserDto;
+    files: FileDto[];
 }

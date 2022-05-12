@@ -31,10 +31,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
                     </div>
                 </div>
 
-                <div className="chat-header__buttons">
-                    <CircleButton icon={<ClipIcon/>}/>
-                    <CircleButton icon={<ThreeDotsIcon/>}/>
-                </div>
+                <CircleButton icon={<ThreeDotsIcon/>}/>
             </div>
         </div>
     );

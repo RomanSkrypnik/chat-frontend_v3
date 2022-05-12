@@ -1,7 +1,19 @@
 .message-item {
 
+  &.active {
+    .message-item__text {
+      color: $white;
+    }
+
+    background: $blueGradient;
+  }
+
   &:not(:first-child) {
     margin-top: 20px;
+  }
+
+  &__text {
+    color: $darkGrey;
   }
 
   background-color: $white;

@@ -3,11 +3,12 @@ import ChatHeader from "../common/ChatHeader";
 import ChatList from "../common/ChatList";
 import ChatControls from "../common/ChatControls";
 import {useAppDispatch} from "../../store";
-import {fetchChat, sendMessage} from "../../store/slices/chat";
+import {fetchChat} from "../../store/slices/chat";
 import {useParams} from "react-router-dom";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {CreateMessageValues} from "../../types";
 import {SocketContext} from "../../hocs/Authorized";
+import MessageService from "../../services/MessageService";
 
 const ChatWrapper = () => {
 
@@ -25,10 +26,19 @@ const ChatWrapper = () => {
         }
     }, [hash]);
 
-    const handleSubmit = (data: CreateMessageValues) => {
+    const handleSubmit = async ({files, text}: CreateMessageValues) => {
         if (hash) {
-            dispatch(sendMessage({message: data, hash}));
-            socket?.emit('chat/message', 'fdsfs');
+            const fd = new FormData();
+
+            fd.append('hash', hash)
+            fd.append('text', text)
+
+            for (const file of files) {
+                fd.append('files', file);
+            }
+
+            const {data} = await MessageService.create(fd)
+            socket?.emit('send-message', {message: data.data, hash});
         }
     }
 
