@@ -29,9 +29,26 @@
   }
 
   &__text {
+    max-width: 480px;
+    max-height: 78px;
+    overflow: hidden;
     color: $darkGrey;
   }
 
+  &__unread {
+    color: $white;
+    background-color: $red;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-grow: 1;
+    padding: 2px 9px;
+  }
+
+  max-height: 220px;
+  overflow: hidden;
   background-color: $white;
   border-radius: 6px;
   text-decoration: none;

@@ -22,4 +22,5 @@ export interface MessageDto {
     user: UserDto;
     files: FileDto[];
     chatId: number;
+    isRead: boolean;
 }

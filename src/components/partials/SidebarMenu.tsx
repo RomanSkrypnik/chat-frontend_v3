@@ -13,7 +13,7 @@ const SidebarMenu = () => {
 
     const items = [
         {icon: <HomeIcon/>, text: 'My account', to: '/profile/' + user?.hash, key: 0},
-        {icon: <ChatIcon/>, text: 'Messages', to: '/', key: 1},
+        {icon: <ChatIcon/>, text: 'Chats', to: '/', key: 1},
         {icon: <HumanIcon/>, text: 'Rooms', to: '/rooms', key: 2},
         {icon: <PeopleIcon/>, text: 'Users', to: '/users', key: 3},
         {icon: <SettingsIcon/>, text: 'Settings', to: '/settings', key: 4}

@@ -1,10 +1,11 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import Avatar from "../ui/buttons/Avatar";
 import {NavLink} from "react-router-dom";
 import {MessageDto, UserDto} from "../../types";
 import Typography from "./Typography";
 import MessageItemFiles from "../partials/MessageItemFiles";
 import {formatDistance} from "date-fns";
+import {SocketContext} from "../../hocs/Authorized";
 
 interface MessageItemProps {
     user: UserDto;
@@ -32,6 +33,9 @@ const MessageItem: FC<MessageItemProps> = ({user, message}) => {
             </div>
             <div className="d-flex">
                 {message && <Typography className="message-item__text fw-bold mt-3">{message.text}</Typography>}
+                <div className="position-relative ms-auto">
+                    <div className="message-item__unread">5</div>
+                </div>
             </div>
             {message && <MessageItemFiles files={message.files}/>}
         </NavLink>

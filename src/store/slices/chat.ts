@@ -81,6 +81,22 @@ const chatSlice = createSlice({
             state.chats = payload;
         },
 
+        changeMessage(state, {payload}) {
+
+            if (state.chat && state.chat.id === payload.chatId) {
+                const idx = state.chat.messages.findIndex(({id}) => id === payload.id);
+                state.chat.messages[idx] = payload;
+            }
+
+            state.chats = state.chats.map(chat => {
+                if (chat.id === payload.chatId) {
+                    const idx = chat.messages.findIndex(({id}) => id === payload.id);
+                    chat.messages[idx] = payload;
+                }
+                return chat;
+            })
+        },
+
         addMessage(state, {payload}) {
 
             if (state.chat && state.chat.id === payload.chatId) {
@@ -112,6 +128,6 @@ const chatSlice = createSlice({
     }
 })
 
-export const {setChats, setChat, addMessage, addMessages} = chatSlice.actions;
+export const {setChats, setChat, changeMessage, addMessage, addMessages} = chatSlice.actions;
 
 export default chatSlice.reducer;

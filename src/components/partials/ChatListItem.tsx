@@ -19,7 +19,7 @@ const ChatListItem: FC<ChatListItemProps> = ({messageRow}) => {
         <li className={cn("mt-3", isCurrUser ? 'align-self-end' : 'align-self-start')}>
             <div className="d-flex">
 
-                <Avatar className={cn(isCurrUser ? 'order-1' : 'order-0')}/>
+                {!isCurrUser && <Avatar className="order-0" />}
 
                 <div className={cn("d-flex flex-column", isCurrUser ? 'align-items-end' : 'align-items-start')}>
                     {

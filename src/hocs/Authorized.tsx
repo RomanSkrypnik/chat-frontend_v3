@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {io, Socket} from "socket.io-client";
 import {useAppDispatch} from "../store";
 import {MessageDto} from "../types";
-import {addMessage} from "../store/slices/chat";
+import {addMessage, changeMessage} from "../store/slices/chat";
 
 export const SocketContext = createContext<null | Socket<any, any>>(null);
 
@@ -47,6 +47,10 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
 
             socket.on('chat-message', (message: MessageDto) => {
                 dispatch(addMessage(message));
+            });
+
+            socket.on('read-message', (message: MessageDto) => {
+                dispatch(changeMessage(message));
             });
         }
     }, [socket]);
