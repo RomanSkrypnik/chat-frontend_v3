@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ChatState, CreateMessageDto} from "../../types";
+import {ChatState} from "../../types";
 import {ChatService} from "../../services/ChatService";
 import {RootState} from "../index";
 import MessageService from "../../services/MessageService";
@@ -11,7 +11,7 @@ export const fetchChats = createAsyncThunk(
             const {data} = await ChatService.getChats();
             dispatch(setChats(data.data));
         } catch (e) {
-            console.log(e);
+            throw e;
         }
     }
 );
@@ -31,7 +31,7 @@ export const fetchChat = createAsyncThunk(
             }
 
         } catch (e) {
-            console.log(e)
+            throw e;
         }
     },
 );
@@ -43,26 +43,29 @@ export const findChat = createAsyncThunk(
             const {data} = await ChatService.search(search);
             dispatch(setChats(data.data));
         } catch (e) {
-            console.log(e)
+            throw e;
+        }
+    }
+);
+
+export const fetchMessages = createAsyncThunk(
+    'chat/fetchMessages',
+    async (chatId: number, {dispatch, getState}) => {
+        try {
+            const {chat: {skip, take}} = getState() as RootState;
+            const {data} = await MessageService.get(chatId, skip, take);
+            dispatch(addMessages(data.data));
+        } catch (e) {
+            throw e;
         }
     }
 )
 
-// export const sendMessage = createAsyncThunk(
-//     'message/sendMessage',
-//     async (createMessageDto: CreateMessageDto, {dispatch, getState}) => {
-//         try {
-//             const {data} = await MessageService.create(createMessageDto);
-//             dispatch(addMessage(data.data));
-//         } catch (e) {
-//             console.log(e);
-//         }
-//     }
-// );
-
 const initialState: ChatState = {
     chat: null,
-    chats: []
+    chats: [],
+    skip: 40,
+    take: 40,
 }
 
 const chatSlice = createSlice({
@@ -80,7 +83,7 @@ const chatSlice = createSlice({
 
         addMessage(state, {payload}) {
 
-            if (state.chat) {
+            if (state.chat && state.chat.id === payload.chatId) {
                 state.chat.messages = [...state.chat.messages, payload];
             }
 
@@ -90,11 +93,25 @@ const chatSlice = createSlice({
                 }
                 return chat;
             });
+        },
+
+        addMessages(state, {payload}) {
+
+            if (state.chat && state.chat.id === payload.chatId) {
+                state.chat.messages = [...state.chat.messages, ...payload];
+            }
+
+            state.chats = state.chats.map(chat => {
+                if (chat.id === state.chat?.id) {
+                    return {...chat, messages: [...chat.messages, ...payload]}
+                }
+                return chat;
+            });
         }
 
     }
 })
 
-export const {setChats, setChat, addMessage} = chatSlice.actions;
+export const {setChats, setChat, addMessage, addMessages} = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -21,4 +21,5 @@ export interface MessageDto {
     createdAt: string;
     user: UserDto;
     files: FileDto[];
+    chatId: number;
 }

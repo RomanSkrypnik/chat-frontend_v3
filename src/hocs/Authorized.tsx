@@ -46,7 +46,7 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
             socket.connect();
 
             socket.on('chat-message', (message: MessageDto) => {
-                dispatch(addMessage(message))
+                dispatch(addMessage(message));
             });
         }
     }, [socket]);

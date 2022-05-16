@@ -1,9 +1,8 @@
-import React, {FC, useContext, useEffect} from 'react';
+import React, {FC} from 'react';
 import {MessageDto} from "../../types";
-import {Link} from "react-router-dom";
-import {useInView} from "react-intersection-observer";
-import {ChatListContext} from "../common/ChatList";
-import ChatSwitch from "./ChatSwitch";
+import ChatMessageSwitch from "./ChatMessageSwitch";
+import cn from "classnames";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 interface ChatMessageProps {
     message: MessageDto;
@@ -11,23 +10,14 @@ interface ChatMessageProps {
 
 const ChatMessage: FC<ChatMessageProps> = ({message}) => {
 
-    const {inView, ref} = useInView({
-        threshold: 0.8,
-    });
+    const {user} = useTypedSelector(state => state.auth);
 
-    const handleInView = useContext(ChatListContext)
-
-    useEffect(() => {
-        if (handleInView) {
-            handleInView(message.createdAt)
-        }
-    }, [inView])
+    const isCurrUser = user?.hash === message.user.hash
 
     return (
-        <div className="chat__message mx-2 bg-light" ref={ref}>
-            <Link to={`/account/${message.user.hash}`} className="mb-2">{message.user.name}</Link>
+        <div className={cn("chat-message mx-2 bg-light", !isCurrUser && '_alternate')}>
             {
-                message.files.map(file => <ChatSwitch file={file}/>)
+                message.files.map(file => <ChatMessageSwitch file={file} key={file.id}/>)
             }
             <div className="text-break">{message.text}</div>
         </div>

@@ -30,11 +30,13 @@ const ChatWrapper = () => {
         if (hash) {
             const fd = new FormData();
 
-            fd.append('hash', hash)
-            fd.append('text', text)
+            fd.append('hash', hash);
+            fd.append('text', text);
 
-            for (const file of files) {
-                fd.append('files', file);
+            if (files.length > 0) {
+                for (const file of files) {
+                    fd.append('files', file);
+                }
             }
 
             const {data} = await MessageService.create(fd)

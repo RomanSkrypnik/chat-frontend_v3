@@ -1,14 +1,14 @@
 import $api from "../http";
-import {RegisterDto, LoginDto} from "../types/auth";
+import {RegisterDto, LoginDto} from "../types";
 
 export class AuthService {
 
-    static async register(data: RegisterDto) {
-        return await $api.post('/auth/register', data);
+    static async register(registerDto: RegisterDto) {
+        return await $api.post('/auth/register', registerDto);
     }
 
-    static async login(data: LoginDto) {
-        return await $api.post('/auth/login', data);
+    static async login(loginDto: LoginDto) {
+        return await $api.post('/auth/login', loginDto);
     }
 
     static async refresh() {

@@ -1,7 +1,8 @@
 .message-item {
 
   &.active {
-    .message-item__text {
+
+    .message-item__text{
       color: $white;
     }
 
@@ -10,6 +11,21 @@
 
   &:not(:first-child) {
     margin-top: 20px;
+  }
+
+  &__count {
+    &._picture {
+      background: rgba(255, 51, 102, 1);
+    }
+
+    &._file {
+      background: rgba(42, 139, 242, 1);
+    }
+
+    display: inline-block;
+    color: $white;
+    border-radius: 20px;
+    padding: 12px 17px 12px 13px;
   }
 
   &__text {

@@ -4,6 +4,8 @@ import {UserDto} from "./user";
 export interface ChatState {
     chat: ChatDto | null;
     chats: ChatDto[] | [];
+    skip: number;
+    take: number;
 }
 
 export interface ChatDto {

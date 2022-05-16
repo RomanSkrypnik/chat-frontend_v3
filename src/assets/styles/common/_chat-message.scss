@@ -1,10 +1,72 @@
-.chat__message {
+.chat-message {
+
+  &._alternate {
+
+    &__switch {
+      &-icon {
+        background: $lightBlue;
+      }
+    }
+
+    border: 0;
+    border-radius: 0 6px 6px 6px;
+    background: $blueGradient;
+    box-shadow: 10px 10px 25px rgba(42, 139, 242, 0.1), 15px 15px 35px rgba(42, 139, 242, 0.05), 10px 10px 50px rgba(42, 139, 242, 0.1);
+  }
 
   &:not(:first-child) {
     margin-top: 10px;
   }
 
+  &__switch {
+
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+
+    &-image {
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    &-icon {
+
+      svg {
+
+        rect {
+          fill: $primary;
+        }
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      position: relative;
+      display: flex;
+      background: $headerGrey;
+      border-radius: 6px;
+      margin-right: 20px;
+      padding: 8px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  color: $darkGrey;
+  border-radius: 6px 6px 0 6px;
+  border: 1px solid rgba(112, 124, 151, 0.25);
+  box-shadow: 10px 10px 25px rgba(112, 124, 151, 0.05), 15px 15px 35px rgba(112, 124, 151, 0.05);
   max-width: 500px;
-  border-radius: 5px;
   padding: 10px;
 }
