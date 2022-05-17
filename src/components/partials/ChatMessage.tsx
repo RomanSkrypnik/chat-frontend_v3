@@ -30,7 +30,7 @@ const ChatMessage: FC<ChatMessageProps> = ({message}) => {
     }, [inView]);
 
     return (
-        <div className="d-flex align-items-center" ref={ref}>
+        <div className="d-flex align-items-center mt-2" ref={ref}>
             <div className={cn("chat-message mx-2 bg-light", !isCurrUser && '_alternate')}>
                 {
                     message.files.map(file => <ChatMessageSwitch file={file} key={file.id}/>)

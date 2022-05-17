@@ -4,8 +4,8 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
 import {io, Socket} from "socket.io-client";
 import {useAppDispatch} from "../store";
-import {MessageDto} from "../types";
-import {addMessage, changeMessage} from "../store/slices/chat";
+import {MessageDto, UserDto} from "../types";
+import {addMessage, changeMessage, changeUser} from "../store/slices/chat";
 import {useSnackbar} from "../hooks/useSnackbar";
 import SnackbarMessage from "../components/partials/SnackbarMessage";
 
@@ -42,12 +42,6 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
     }, []);
 
     useEffect(() => {
-        return () => {
-            socket?.close();
-        }
-    }, [socket]);
-
-    useEffect(() => {
         if (socket) {
             socket.connect();
 
@@ -59,6 +53,18 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
             socket.on('read-message', (message: MessageDto) => {
                 dispatch(changeMessage(message));
             });
+
+            socket.on('logout', (user: UserDto) => {
+                dispatch(changeUser(user));
+            });
+
+            socket.on('login', (user: UserDto) => {
+                dispatch(changeUser(user));
+            })
+
+            return () => {
+                socket.disconnect();
+            }
         }
     }, [socket]);
 

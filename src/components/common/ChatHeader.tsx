@@ -1,23 +1,17 @@
 import React, {FC} from 'react';
 import Avatar from "../ui/buttons/Avatar";
-import {useNavigate} from "react-router-dom";
 import {UserDto} from "../../types";
 import CircleButton from "../ui/buttons/CircleButton";
-import ClipIcon from "../ui/icons/ClipIcon";
 import ThreeDotsIcon from "../ui/icons/ThreeDotsIcon";
 import Typography from "./Typography";
+import {useFormatDuration} from "../../hooks/useDate";
 
 interface ChatHeaderProps {
     user: UserDto;
 }
 
 const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
-
-    const navigate = useNavigate();
-
-    const handleClick = () => {
-        navigate('/');
-    }
+    const lastSeen = useFormatDuration(user.lastSeen);
 
     return (
         <div className="chat-header">
@@ -27,7 +21,9 @@ const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
                     <Avatar/>
                     <div className="ms-3">
                         <Typography fz={18} className="fw-bold">{user.name}</Typography>
-                        <Typography className="text-primary">Test</Typography>
+                        <Typography className="text-primary">
+                            {(user.online && 'Online') || `last seen ${lastSeen}`}
+                        </Typography>
                     </div>
                 </div>
 

@@ -45,7 +45,7 @@ const MessageItem: FC<MessageItemProps> = ({user, messages}) => {
     return (
         <NavLink to={`/${user.hash}`} className="message-item">
             <div className="d-flex">
-                <Avatar/>
+                <Avatar isOnline={user.online}/>
                 <div className="d-flex justify-content-between w-100 ms-3">
                     <Typography fz={18} className="message-item__text fw-bold mb-1">{user.name}</Typography>
                     <Typography className="message-item__text">{date}</Typography>

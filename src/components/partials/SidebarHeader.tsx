@@ -10,7 +10,7 @@ const SidebarHeader = () => {
     return (
         <div className="sidebar__header">
             <div className="d-flex flex-column align-items-center">
-                <Avatar width={96} height={96} className="mb-1"/>
+                <Avatar isOnline={user?.online} width={96} height={96} className="mb-1"/>
                 {user && <Typography fz="18px" lh="21px" className="fw-bold mt-2">{user.name}</Typography>}
             </div>
         </div>

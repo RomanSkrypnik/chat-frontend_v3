@@ -97,6 +97,20 @@ const chatSlice = createSlice({
             })
         },
 
+        changeUser(state, {payload}) {
+
+            if (state.chat && state.chat.user.id === payload.id) {
+                state.chat.user = payload;
+            }
+
+            state.chats = state.chats.map(chat => {
+                if (chat.user.id === payload.id) {
+                    chat.user = payload;
+                }
+                return chat;
+            });
+        },
+
         addMessage(state, {payload}) {
 
             if (state.chat && state.chat.id === payload.chatId) {
@@ -128,6 +142,6 @@ const chatSlice = createSlice({
     }
 })
 
-export const {setChats, setChat, changeMessage, addMessage, addMessages} = chatSlice.actions;
+export const {setChats, setChat, changeUser, changeMessage, addMessage, addMessages} = chatSlice.actions;
 
 export default chatSlice.reducer;
