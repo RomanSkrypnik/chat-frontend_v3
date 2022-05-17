@@ -47,7 +47,7 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
 
             socket.on('chat-message', (message: MessageDto) => {
                 dispatch(addMessage(message));
-                snackbar(<SnackbarMessage user={message.user} message={message}/>, {timeout: 1000});
+                snackbar(<SnackbarMessage user={message.user} message={message}/>);
             });
 
             socket.on('read-message', (message: MessageDto) => {

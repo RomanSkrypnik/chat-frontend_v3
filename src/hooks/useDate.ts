@@ -7,14 +7,20 @@ export function useFormatDate(date: string, dateFormat: string) {
 
 export function useFormatDuration(dateString: string) {
     const [date, setDate] = useState<null | string>(null);
+    // TODO :: CHANGE TYPE
+    const [dateInterval, setDateInterval] = useState<any>(null);
 
     useEffect(() => {
         formatDate();
-    }, []);
+    }, [dateString]);
 
     useEffect(() => {
         if (date) {
-            setInterval(() => formatDate(), 30000);
+            dateInterval && clearInterval(dateInterval);
+
+            const interval = setInterval(() => formatDate(), 30000);
+
+            setDateInterval(interval);
         }
     }, [date]);
 
