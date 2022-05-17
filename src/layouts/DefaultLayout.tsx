@@ -2,10 +2,13 @@ import React, {FC, ReactNode} from 'react';
 import Sidebar from "../components/Sidebar";
 
 interface DefaultLayoutProps {
-    children: ReactNode
+    children: ReactNode;
 }
 
 const DefaultLayout: FC<DefaultLayoutProps> = ({children}) => {
+
+
+
     return (
         <div className="default-layout">
             <div className="d-flex">

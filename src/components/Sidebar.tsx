@@ -3,7 +3,7 @@ import {logout} from "../store/slices/auth";
 import {useAppDispatch} from "../store";
 import SidebarMenu from "./partials/SidebarMenu";
 import SidebarHeader from "./partials/SidebarHeader";
-import IconButton from "./ui/buttons/IconButton";
+import SidebarButton from "./ui/buttons/SidebarButton";
 import PowerOnIcon from "./ui/icons/PowerOnIcon";
 
 const Sidebar = () => {
@@ -16,7 +16,7 @@ const Sidebar = () => {
         <aside className="sidebar">
             <SidebarHeader/>
             <SidebarMenu/>
-            <IconButton className="mt-auto" onClick={handleLogout} icon={<PowerOnIcon/>} text="Log out"/>
+            <SidebarButton className="mt-auto" onClick={handleLogout} icon={<PowerOnIcon/>} text="Log out"/>
         </aside>
     );
 };

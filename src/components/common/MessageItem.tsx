@@ -1,26 +1,46 @@
-import React, {FC, useContext, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Avatar from "../ui/buttons/Avatar";
 import {NavLink} from "react-router-dom";
 import {MessageDto, UserDto} from "../../types";
 import Typography from "./Typography";
 import MessageItemFiles from "../partials/MessageItemFiles";
 import {formatDistance} from "date-fns";
-import {SocketContext} from "../../hocs/Authorized";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 interface MessageItemProps {
     user: UserDto;
-    message?: MessageDto;
+    messages: MessageDto[];
 }
 
-const MessageItem: FC<MessageItemProps> = ({user, message}) => {
+const MessageItem: FC<MessageItemProps> = ({user, messages}) => {
     const [date, setDate] = useState<null | string>(null);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [lastMessage, setLastMessage] = useState<null | MessageDto>(null);
+
+    const {auth} = useTypedSelector(state => state);
 
     useEffect(() => {
-        if (message){
-            const date = formatDistance(new Date(message.createdAt), new Date());
+        if (messages.length > 0) {
+            setLastMessage(messages[messages.length - 1]);
+            countUnreadMessages();
+        }
+    }, [messages]);
+
+    useEffect(() => {
+        formatDate();
+    }, [lastMessage]);
+
+    const formatDate = () => {
+        if (lastMessage) {
+            const date = formatDistance(new Date(lastMessage.createdAt), new Date());
             setDate(`${date} ago`);
         }
-    }, []);
+    }
+
+    const countUnreadMessages = () => {
+        const unreadMessages = messages.filter(({isRead, user}) => !isRead && user.id !== auth.user?.id);
+        setUnreadCount(unreadMessages.length);
+    }
 
     return (
         <NavLink to={`/${user.hash}`} className="message-item">
@@ -32,12 +52,15 @@ const MessageItem: FC<MessageItemProps> = ({user, message}) => {
                 </div>
             </div>
             <div className="d-flex">
-                {message && <Typography className="message-item__text fw-bold mt-3">{message.text}</Typography>}
-                <div className="position-relative ms-auto">
-                    <div className="message-item__unread">5</div>
-                </div>
+                {lastMessage && <Typography className="message-item__text fw-bold mt-3">{lastMessage.text}</Typography>}
+                {
+                    unreadCount > 0 &&
+                    <div className="position-relative ms-auto">
+                        <div className="message-item__unread">{unreadCount}</div>
+                    </div>
+                }
             </div>
-            {message && <MessageItemFiles files={message.files}/>}
+            {lastMessage && <MessageItemFiles files={lastMessage.files}/>}
         </NavLink>
     );
 };

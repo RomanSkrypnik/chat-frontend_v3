@@ -1,33 +1,17 @@
 import React, {FC, ReactNode} from 'react';
-import cn from "classnames";
-import {NavLink} from "react-router-dom";
+import cn from 'classnames';
 
-interface IconLinkProps {
-    icon: ReactNode;
-    text: string;
-    onClick?: () => void;
+interface IconButtonProps {
     className?: string;
-    href?: string;
+    onClick: () => void;
+    children: ReactNode;
 }
 
-const IconButton: FC<IconLinkProps> = ({icon, text, onClick, className, href}) => {
-
+const IconButton: FC<IconButtonProps> = ({onClick, className, children}) => {
     return (
-        <>
-            {
-                href ?
-                    <NavLink className={cn("icon-button", className)} to={href}>
-                        {icon}
-                        <div className="icon-button__text">{text}</div>
-                    </NavLink>
-                    :
-                    <button className={cn("icon-button", className)} onClick={onClick}>
-                        {icon}
-                        <div className="icon-button__text">{text}</div>
-                    </button>
-
-            }
-        </>
+        <button className={cn("icon-button", className)} onClick={onClick}>
+            {children}
+        </button>
     );
 };
 

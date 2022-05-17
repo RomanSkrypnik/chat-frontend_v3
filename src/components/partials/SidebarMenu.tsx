@@ -5,7 +5,7 @@ import ChatIcon from "../ui/icons/ChatIcon";
 import HumanIcon from "../ui/icons/HumanIcon";
 import PeopleIcon from "../ui/icons/PeopleIcon";
 import SettingsIcon from "../ui/icons/SettingsIcon";
-import IconButton from "../ui/buttons/IconButton";
+import SidebarButton from "../ui/buttons/SidebarButton";
 
 const SidebarMenu = () => {
 
@@ -23,7 +23,7 @@ const SidebarMenu = () => {
         <ul className="sidebar__menu list-unstyled">
             {
                 items.map(item =>
-                    <IconButton
+                    <SidebarButton
                         className="mt-4"
                         icon={item.icon}
                         text={item.text}

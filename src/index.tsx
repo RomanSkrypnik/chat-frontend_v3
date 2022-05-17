@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./assets/styles/main.scss"
 import {Provider} from "react-redux";
 import store from "./store";
+import SnackbarProvider from "./components/providers/SnackbarProvider";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -12,6 +13,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <Provider store={store}>
-        <App/>
+        <SnackbarProvider>
+            <App/>
+        </SnackbarProvider>
     </Provider>
 );

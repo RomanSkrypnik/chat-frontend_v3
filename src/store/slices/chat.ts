@@ -104,7 +104,7 @@ const chatSlice = createSlice({
             }
 
             state.chats = state.chats.map(chat => {
-                if (chat.id === state.chat?.id) {
+                if (chat.id === chat?.id) {
                     return {...chat, messages: [...chat.messages, payload]}
                 }
                 return chat;

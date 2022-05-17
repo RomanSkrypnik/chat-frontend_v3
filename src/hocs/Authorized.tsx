@@ -6,6 +6,8 @@ import {io, Socket} from "socket.io-client";
 import {useAppDispatch} from "../store";
 import {MessageDto} from "../types";
 import {addMessage, changeMessage} from "../store/slices/chat";
+import {useSnackbar} from "../hooks/useSnackbar";
+import SnackbarMessage from "../components/partials/SnackbarMessage";
 
 export const SocketContext = createContext<null | Socket<any, any>>(null);
 
@@ -20,6 +22,8 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
     const {isLogged} = useTypedSelector(state => state.auth);
 
     const dispatch = useAppDispatch();
+
+    const {snackbar} = useSnackbar();
 
     const navigate = useNavigate();
 
@@ -38,7 +42,9 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
     }, []);
 
     useEffect(() => {
-        return () => { socket?.close(); }
+        return () => {
+            socket?.close();
+        }
     }, [socket]);
 
     useEffect(() => {
@@ -47,6 +53,7 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
 
             socket.on('chat-message', (message: MessageDto) => {
                 dispatch(addMessage(message));
+                snackbar(<SnackbarMessage user={message.user} message={message}/>, {timeout: 1000});
             });
 
             socket.on('read-message', (message: MessageDto) => {

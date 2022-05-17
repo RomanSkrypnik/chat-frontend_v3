@@ -72,10 +72,6 @@ const authSlice = createSlice({
             state.isLogged = false;
         },
 
-        setIsLoaded(state, {payload}) {
-            state.isLoaded = payload
-        }
-
     },
     extraReducers: (builder => {
         builder.addCase(refresh.rejected, rejectionReducer);
@@ -83,6 +79,6 @@ const authSlice = createSlice({
     })
 })
 
-export const {authenticate, exit, setIsLoaded} = authSlice.actions;
+export const {authenticate, exit} = authSlice.actions;
 
 export default authSlice.reducer;
