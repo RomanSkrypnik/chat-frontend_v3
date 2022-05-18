@@ -10,8 +10,7 @@ const MessageList: FC<MessageListProps> = ({chats}) => {
     return (
         <div className="message-list scrollbar">
             {
-                chats.map(({user, messages, id}) => <MessageItem user={user} messages={messages} key={id}/>
-                )
+                chats.map(({user, messages, id}) => <MessageItem user={user} messages={messages} key={id}/>)
             }
         </div>
     );

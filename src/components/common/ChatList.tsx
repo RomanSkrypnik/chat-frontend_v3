@@ -16,10 +16,6 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
     const ref = useRef<any>();
 
     useEffect(() => {
-        console.log(messages);
-    }, []);
-
-    useEffect(() => {
         handleScrollToBottom();
     }, [twoDimsArr, isLoaded]);
 
