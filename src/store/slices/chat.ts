@@ -59,7 +59,7 @@ export const fetchMessages = createAsyncThunk(
             throw e;
         }
     }
-)
+);
 
 const initialState: ChatState = {
     chat: null,
@@ -111,6 +111,19 @@ const chatSlice = createSlice({
             });
         },
 
+        changeChat(state, {payload}) {
+            if (state.chat && state.chat.id === payload.id) {
+                state.chat = payload;
+            }
+
+            state.chats = state.chats.map(chat => {
+                if (chat.id === payload.id) {
+                    return payload;
+                }
+                return chat;
+            })
+        },
+
         addMessage(state, {payload}) {
 
             if (state.chat && state.chat.id === payload.chatId) {
@@ -142,6 +155,6 @@ const chatSlice = createSlice({
     }
 })
 
-export const {setChats, setChat, changeUser, changeMessage, addMessage, addMessages} = chatSlice.actions;
+export const {setChats, setChat, changeUser, changeMessage, changeChat, addMessage, addMessages} = chatSlice.actions;
 
 export default chatSlice.reducer;

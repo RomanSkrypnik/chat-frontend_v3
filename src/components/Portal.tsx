@@ -3,7 +3,7 @@ import {createPortal} from "react-dom";
 
 interface PortalProps {
     onClick: () => void;
-    transparent: boolean;
+    transparent?: boolean;
     children: ReactNode;
 }
 
@@ -18,7 +18,7 @@ const Portal: FC<PortalProps> = ({onClick, transparent = false, children}) => {
 
         const className = getClassName(activeOverlay);
 
-        container.classList.add('overlay', className, 'position-absolute');
+        container.classList.add('overlay', className);
         onClick && container.addEventListener('click', onClick);
 
         return () => {

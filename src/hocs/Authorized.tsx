@@ -4,8 +4,8 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
 import {io, Socket} from "socket.io-client";
 import {useAppDispatch} from "../store";
-import {MessageDto, UserDto} from "../types";
-import {addMessage, changeMessage, changeUser} from "../store/slices/chat";
+import {ChatDto, MessageDto, UserDto} from "../types";
+import {addMessage, changeChat, changeMessage, changeUser} from "../store/slices/chat";
 import {useSnackbar} from "../hooks/useSnackbar";
 import SnackbarMessage from "../components/partials/SnackbarMessage";
 
@@ -60,7 +60,11 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
 
             socket.on('login', (user: UserDto) => {
                 dispatch(changeUser(user));
-            })
+            });
+
+            socket.on('block-unblock', (chat: ChatDto) => {
+               dispatch(changeChat(chat));
+            });
 
             return () => {
                 socket.disconnect();

@@ -51,7 +51,7 @@ const ChatWrapper = () => {
                 <>
                     <ChatHeader user={chat.user}/>
                     <ChatList messages={chat.messages}/>
-                    <ChatControls onSubmit={handleSubmit}/>
+                    <ChatControls isBlocked={chat.isBlockedByMe || chat.isBlockedByCompanion} onSubmit={handleSubmit}/>
                 </>
             }
         </div>

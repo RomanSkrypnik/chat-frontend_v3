@@ -12,4 +12,6 @@ export interface ChatDto {
     id?: number;
     user: UserDto;
     messages: MessageDto[];
+    isBlockedByMe: boolean;
+    isBlockedByCompanion: boolean;
 }

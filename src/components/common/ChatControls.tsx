@@ -8,10 +8,11 @@ import FileInput from "../inputs/FileInput";
 import {CreateMessageValues} from "../../types";
 
 interface ChatControlsProps {
+    isBlocked: boolean;
     onSubmit: (data: CreateMessageValues) => void;
 }
 
-const ChatControls: FC<ChatControlsProps> = ({onSubmit}) => {
+const ChatControls: FC<ChatControlsProps> = ({isBlocked, onSubmit}) => {
     const [files, setFiles] = useState<[] | File[]>([]);
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -36,10 +37,10 @@ const ChatControls: FC<ChatControlsProps> = ({onSubmit}) => {
     return (
         <div className="chat-controls">
             <form onSubmit={handleSubmit(handleOnSubmit)} className="d-flex align-items-center">
-                <CircleButton onClick={handleFileClick} className="bg-blue-linear" icon={<CrossIcon/>}/>
+                <CircleButton disabled={isBlocked} onClick={handleFileClick} className="bg-blue-linear" icon={<CrossIcon/>}/>
                 <FileInput ref={inputRef} onChange={handleFileChange}/>
-                <TextInput className="w-100" name="text" control={control} placeholder="Type a message here"/>
-                <CircleButton type="submit" className="bg-blue-linear" icon={<TelegramIcon/>}/>
+                <TextInput disabled={isBlocked} className="w-100 px-4" name="text" control={control} placeholder="Type a message here"/>
+                <CircleButton disabled={isBlocked} type="submit" className="bg-blue-linear" icon={<TelegramIcon/>}/>
             </form>
         </div>
     );

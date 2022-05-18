@@ -1,5 +1,9 @@
 .circle-button {
 
+  &:disabled {
+    background: $darkGrey;
+  }
+
   &__icon {
     position: absolute;
     top: 50%;

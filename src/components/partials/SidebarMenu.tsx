@@ -1,6 +1,4 @@
 import React from 'react';
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import HomeIcon from "../ui/icons/HomeIcon";
 import ChatIcon from "../ui/icons/ChatIcon";
 import HumanIcon from "../ui/icons/HumanIcon";
 import PeopleIcon from "../ui/icons/PeopleIcon";
@@ -9,14 +7,11 @@ import SidebarButton from "../ui/buttons/SidebarButton";
 
 const SidebarMenu = () => {
 
-    const {user} = useTypedSelector(state => state.auth);
-
     const items = [
-        {icon: <HomeIcon/>, text: 'My account', to: '/profile/' + user?.hash, key: 0},
-        {icon: <ChatIcon/>, text: 'Chats', to: '/', key: 1},
-        {icon: <HumanIcon/>, text: 'Rooms', to: '/rooms', key: 2},
-        {icon: <PeopleIcon/>, text: 'Users', to: '/users', key: 3},
-        {icon: <SettingsIcon/>, text: 'Settings', to: '/settings', key: 4}
+        {icon: <ChatIcon/>, text: 'Chats', to: '/', key: 0},
+        {icon: <HumanIcon/>, text: 'Rooms', to: '/rooms', key: 1},
+        {icon: <PeopleIcon/>, text: 'Users', to: '/users', key: 2},
+        {icon: <SettingsIcon/>, text: 'Settings', to: '/settings', key: 3}
     ];
 
     return (

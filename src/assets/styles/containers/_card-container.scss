@@ -1,7 +1,15 @@
 .card-container {
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   min-width: 400px;
   background-color: $white;
   border-radius: 14px;
-  border: 1px solid $black;
-  padding: 30px;
+  border: 1px solid $headerGrey;
+  padding: 20px 30px 30px 30px;
 }

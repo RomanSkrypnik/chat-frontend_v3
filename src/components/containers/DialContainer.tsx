@@ -1,14 +1,18 @@
 import React, {FC, ReactNode} from 'react';
+import Portal from "../Portal";
 
 interface DialContainerProps {
+    onClose: () => void;
     children: ReactNode;
 }
 
-const DialContainer: FC<DialContainerProps> = ({children}) => {
+const DialContainer: FC<DialContainerProps> = ({onClose, children}) => {
     return (
-        <div className="dial-container">
-            {children}
-        </div>
+        <Portal onClick={onClose}>
+            <div className="dial-container">
+                {children}
+            </div>
+        </Portal>
     );
 };
 
