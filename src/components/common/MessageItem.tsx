@@ -4,7 +4,6 @@ import {NavLink} from "react-router-dom";
 import {MessageDto, UserDto} from "../../types";
 import Typography from "./Typography";
 import MessageItemFiles from "../partials/MessageItemFiles";
-import {formatDistance} from "date-fns";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useFormatDuration} from "../../hooks/useDate";
 
@@ -21,7 +20,7 @@ const MessageItem: FC<MessageItemProps> = ({user, messages}) => {
 
     useEffect(() => {
         if (messages.length > 0) {
-            setLastMessage(messages[messages.length - 1]);
+            setLastMessage(messages[0]);
             countUnreadMessages();
         }
     }, [messages]);

@@ -132,7 +132,7 @@ const chatSlice = createSlice({
             }
 
             state.chats = state.chats.map(chat => {
-                if (chat.id === payload.id) {
+                if (chat.id === payload.chatId) {
                     return {...chat, messages: [payload, ...chat.messages]};
                 }
                 return chat;
@@ -146,7 +146,7 @@ const chatSlice = createSlice({
             }
 
             state.chats = state.chats.map(chat => {
-                if (chat.id === state.chat?.id) {
+                if (chat.id === payload[0].chatId) {
                     return {...chat, messages: [...payload, ...chat.messages]};
                 }
                 return chat;
