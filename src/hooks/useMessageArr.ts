@@ -9,17 +9,18 @@ export function useMessageArr(messages: MessageDto[]) {
     }, [messages]);
 
     const convertIntoTwoDimsArr = () => {
-        const arr: [] | MessageDto[][] = []
-        let i = 0
+        const arr: [] | MessageDto[][] = [];
+        const reversed = [...messages].reverse();
+        let i = 0;
 
-        messages.forEach((message, idx) => {
-            if (idx > 0 && message.user.id !== messages[idx - 1].user.id) {
-                i++
+        reversed.forEach((message, idx) => {
+            if (idx > 0 && message.user.id !== reversed[idx - 1].user.id) {
+                i++;
             }
-            arr[i] = arr[i] ? [...arr[i], message] : [message]
-        })
+            arr[i] = arr[i] ? [...arr[i], message] : [message];
+        });
 
-        setTwoDimsArr(arr)
+        setTwoDimsArr(arr);
     }
 
     return twoDimsArr;

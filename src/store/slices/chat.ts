@@ -128,12 +128,12 @@ const chatSlice = createSlice({
         addMessage(state, {payload}) {
 
             if (state.chat && state.chat.id === payload.chatId) {
-                state.chat.messages = [...state.chat.messages, payload];
+                state.chat.messages = [payload, ...state.chat.messages];
             }
 
             state.chats = state.chats.map(chat => {
-                if (chat.id === chat?.id) {
-                    return {...chat, messages: [...chat.messages, payload]}
+                if (chat.id === payload.id) {
+                    return {...chat, messages: [payload, ...chat.messages]};
                 }
                 return chat;
             });
@@ -142,12 +142,12 @@ const chatSlice = createSlice({
         addMessages(state, {payload}) {
 
             if (state.chat && state.chat.id === payload.chatId) {
-                state.chat.messages = [...state.chat.messages, ...payload];
+                state.chat.messages = [...payload, ...state.chat.messages];
             }
 
             state.chats = state.chats.map(chat => {
                 if (chat.id === state.chat?.id) {
-                    return {...chat, messages: [...chat.messages, ...payload]}
+                    return {...chat, messages: [...payload, ...chat.messages]};
                 }
                 return chat;
             });

@@ -1,7 +1,7 @@
 import React, {FC, ReactNode} from 'react';
 
 interface TypographyProps {
-    as?: 'div' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    as?: 'div' | 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     fz?: number | string;
     lh?: number | string;
     children: ReactNode;
