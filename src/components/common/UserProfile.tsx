@@ -1,4 +1,4 @@
-import React, {FC, useContext, useState} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import DialContainer from "../containers/DialContainer";
 import CardContainer from "../containers/CardContainer";
 import {UserDto} from "../../types";
@@ -18,17 +18,15 @@ interface UserProfileDialProps {
 }
 
 const UserProfile: FC<UserProfileDialProps> = ({user, onClose}) => {
-    const [toggled, setToggled] = useState(false);
-
     const {chat} = useTypedSelector(state => state.chat)
 
     const date = useFormatDuration(user.lastSeen);
 
     const socket = useContext(SocketContext);
 
-    const handleToggle = (value: boolean) => setToggled(value);
-
     const blockUnblock = () => socket?.emit('block-unblock', user.id);
+
+    const muteUnmute = () => socket?.emit('mute-unmute', user.id);
 
     return (
         <DialContainer onClose={onClose}>
@@ -48,7 +46,7 @@ const UserProfile: FC<UserProfileDialProps> = ({user, onClose}) => {
                         <Typography fz={14} className="text-grey">Username</Typography>
                         <div className="user-profile__personal mt-3">
                             <Typography>Notification</Typography>
-                            <SwitchButton onChange={handleToggle} value={toggled}/>
+                            {chat && <SwitchButton onChange={muteUnmute} value={!chat.isMutedByMe}/>}
                         </div>
                     </div>
 

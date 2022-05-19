@@ -25,8 +25,10 @@ export function useFormatDuration(dateString: string) {
     }, [date]);
 
     const formatDate = () => {
-        const date = formatDistance(new Date(dateString), new Date()) + ' ago';
-        setDate(date);
+        if (dateString) {
+            const date = formatDistance(new Date(dateString), new Date()) + ' ago';
+            setDate(date);
+        }
     }
 
     return date;

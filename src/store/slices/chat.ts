@@ -112,6 +112,7 @@ const chatSlice = createSlice({
         },
 
         changeChat(state, {payload}) {
+
             if (state.chat && state.chat.id === payload.id) {
                 state.chat = payload;
             }

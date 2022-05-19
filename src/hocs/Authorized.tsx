@@ -8,6 +8,7 @@ import {ChatDto, MessageDto, UserDto} from "../types";
 import {addMessage, changeChat, changeMessage, changeUser} from "../store/slices/chat";
 import {useSnackbar} from "../hooks/useSnackbar";
 import SnackbarMessage from "../components/partials/SnackbarMessage";
+import {SoundService} from "../services/SoundService";
 
 export const SocketContext = createContext<null | Socket<any, any>>(null);
 
@@ -19,7 +20,9 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
 
     const [socket, setSocket] = useState<null | Socket<any, any>>(null);
 
-    const {isLogged} = useTypedSelector(state => state.auth);
+    const {isLogged, user} = useTypedSelector(state => state.auth);
+
+    const {chat} = useTypedSelector(state => state.chat);
 
     const dispatch = useAppDispatch();
 
@@ -30,7 +33,7 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
     useEffect(() => {
         if (!socket) {
             setSocket(io('localhost:5000', {
-                autoConnect: false, transportOptions: {
+                transportOptions: {
                     polling: {
                         extraHeaders: {
                             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
@@ -43,12 +46,6 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
 
     useEffect(() => {
         if (socket) {
-            socket.connect();
-
-            socket.on('chat-message', (message: MessageDto) => {
-                dispatch(addMessage(message));
-                snackbar(<SnackbarMessage user={message.user} message={message}/>);
-            });
 
             socket.on('read-message', (message: MessageDto) => {
                 dispatch(changeMessage(message));
@@ -63,14 +60,34 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
             });
 
             socket.on('block-unblock', (chat: ChatDto) => {
-               dispatch(changeChat(chat));
+                dispatch(changeChat(chat));
             });
+
+            socket.on('mute-unmute', (chat: ChatDto) => {
+                dispatch(changeChat(chat));
+            })
 
             return () => {
                 socket.disconnect();
             }
         }
     }, [socket]);
+
+    // TODO :: MAKE CODE BETTER ( IF IT'S POSSIBLE )
+    useEffect(() => {
+        if (socket && chat && user) {
+            socket.removeListener('chat-message');
+
+            socket.on('chat-message', (message: MessageDto) => {
+                dispatch(addMessage(message));
+                snackbar(<SnackbarMessage user={message.user} message={message}/>);
+
+                if (message.user.id !== user.id && chat.id !== message.chatId && !chat.isMutedByMe) {
+                    SoundService.playSound();
+                }
+            });
+        }
+    }, [chat, user]);
 
     useEffect(() => {
         if (!isLogged) {

@@ -6,6 +6,7 @@ import Typography from "./Typography";
 import MessageItemFiles from "../partials/MessageItemFiles";
 import {formatDistance} from "date-fns";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useFormatDuration} from "../../hooks/useDate";
 
 interface MessageItemProps {
     user: UserDto;
@@ -13,7 +14,6 @@ interface MessageItemProps {
 }
 
 const MessageItem: FC<MessageItemProps> = ({user, messages}) => {
-    const [date, setDate] = useState<null | string>(null);
     const [unreadCount, setUnreadCount] = useState(0);
     const [lastMessage, setLastMessage] = useState<null | MessageDto>(null);
 
@@ -26,16 +26,7 @@ const MessageItem: FC<MessageItemProps> = ({user, messages}) => {
         }
     }, [messages]);
 
-    useEffect(() => {
-        formatDate();
-    }, [lastMessage]);
-
-    const formatDate = () => {
-        if (lastMessage) {
-            const date = formatDistance(new Date(lastMessage.createdAt), new Date());
-            setDate(`${date} ago`);
-        }
-    }
+    const date = useFormatDuration(messages[messages.length - 1]?.createdAt ?? '');
 
     const countUnreadMessages = () => {
         const unreadMessages = messages.filter(({isRead, user}) => !isRead && user.id !== auth.user?.id);

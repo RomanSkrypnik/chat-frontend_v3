@@ -5,9 +5,7 @@ export function useMessageArr(messages: MessageDto[]) {
     const [twoDimsArr, setTwoDimsArr] = useState<[] | MessageDto[][]>([])
 
     useEffect(() => {
-        if (messages.length > 0) {
-            convertIntoTwoDimsArr();
-        }
+        convertIntoTwoDimsArr();
     }, [messages]);
 
     const convertIntoTwoDimsArr = () => {

@@ -9,9 +9,11 @@ export interface ChatState {
 }
 
 export interface ChatDto {
-    id?: number;
+    id: number;
     user: UserDto;
     messages: MessageDto[];
     isBlockedByMe: boolean;
     isBlockedByCompanion: boolean;
+    isMutedByMe: boolean;
+    isMutedByCompanion: boolean;
 }
