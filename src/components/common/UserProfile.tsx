@@ -46,7 +46,7 @@ const UserProfile: FC<UserProfileDialProps> = ({user, onClose}) => {
                         <Typography fz={14} className="text-grey">Username</Typography>
                         <div className="user-profile__personal mt-3">
                             <Typography>Notification</Typography>
-                            {chat && <SwitchButton onChange={muteUnmute} value={!chat.isMutedByMe}/>}
+                            {chat && <SwitchButton onChange={muteUnmute} value={!chat.isMuted}/>}
                         </div>
                     </div>
 

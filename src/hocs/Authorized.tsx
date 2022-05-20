@@ -81,7 +81,7 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
             socket.on('chat-message', (message: MessageDto) => {
                 dispatch(addMessage(message));
 
-                if (message.user.id !== user.id && chat.id !== message.chatId && !chat.isMutedByMe) {
+                if (message.user.id !== user.id && chat.id !== message.chatId && !chat.isMuted) {
                     SoundService.playSound();
                     snackbar(<SnackbarMessage user={message.user} message={message}/>);
                 }

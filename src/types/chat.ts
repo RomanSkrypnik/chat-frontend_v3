@@ -4,7 +4,6 @@ import {UserDto} from "./user";
 export interface ChatState {
     chat: ChatDto | null;
     chats: ChatDto[] | [];
-    skip: number;
     take: number;
 }
 
@@ -12,8 +11,9 @@ export interface ChatDto {
     id: number;
     user: UserDto;
     messages: MessageDto[];
+    skip: number;
+    isMuted: boolean;
     isBlockedByMe: boolean;
     isBlockedByCompanion: boolean;
-    isMutedByMe: boolean;
-    isMutedByCompanion: boolean;
+    allMessagesFetched: boolean;
 }

@@ -11,7 +11,7 @@ interface ChatSwitchProps {
 
 export const ChatDocument: FC<ChatSwitchProps> = ({file}) => {
     return (
-        <a href={`${SERVER_URL}/chat/${file.filename}`} className="d-flex" download>
+        <a href={`${SERVER_URL}/chat/${file.filename}`} className="chat-message__switch-link" download>
             <div className="chat-message__switch-icon">
                 <DocumentIcon/>
             </div>

@@ -18,7 +18,7 @@ const SnackbarMessage: FC<MessageSnackbarProps> = ({user, message}) => {
                 <div className="ms-2">{user.name}</div>
             </div>
             <div className="d-flex justify-content-between mt-2">
-                <div>{message.text}</div>
+                <div>Send you new message</div>
                 <div>{date}</div>
             </div>
         </>
