@@ -25,7 +25,7 @@ const MessageItem: FC<MessageItemProps> = ({user, messages}) => {
         }
     }, [messages]);
 
-    const date = useFormatDuration(messages[messages.length - 1]?.createdAt ?? '');
+    const date = useFormatDuration(messages[0]?.createdAt ?? '');
 
     const countUnreadMessages = () => {
         const unreadMessages = messages.filter(({isRead, user}) => !isRead && user.id !== auth.user?.id);

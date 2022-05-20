@@ -1,4 +1,4 @@
-import React, {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
+import React, {FC, MutableRefObject, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {MessageDto} from "../../types";
 import ChatListItem from "../partials/ChatListItem";
 import {useMessageArr} from "../../hooks/useMessageArr";
@@ -30,21 +30,26 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
     const lastMessage = messages[0];
 
     useEffect(() => {
+        if (isLoaded) {
+            scrollToBottom();
+        }
+    }, [isLoaded, twoDimsArr]);
+
+    useEffect(() => {
+        if (lastMessage?.user.id === user?.id) {
+            scrollToBottom();
+        }
+    }, [lastMessage]);
+
+    useEffect(() => {
         setIsLoaded(false);
     }, [hash]);
 
     useEffect(() => {
-        if (chat?.skip === 40) {
-            scrollToBottom();
-        }
-    }, [twoDimsArr, isLoaded]);
-
-    useEffect(() => {
-        if (lastMessage.user.id === user?.id && isLoaded) {
-            scrollToBottom();
+        if (isLoaded) {
             ref.current.scrollTo(0, ref.current.scrollHeight - scrollTop);
         }
-    }, [lastMessage, isLoaded]);
+    }, [isLoaded]);
 
     const handleScroll = () => {
         if (ref.current.scrollTop === 0 && chat) {
