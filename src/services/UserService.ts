@@ -1,4 +1,5 @@
 import $api from "../http";
+import {EditUserDto} from "../types";
 
 export class UserService {
 
@@ -12,6 +13,14 @@ export class UserService {
 
     static async usersBySearch(search: string) {
         return await $api.post('/user', {search});
+    }
+
+    static async edit(editUserDto: EditUserDto) {
+        return await $api.post('/user/edit', editUserDto);
+    }
+
+    static async changePassword(password: string) {
+        return await $api.post('/user/change-password', {password})
     }
 
 }

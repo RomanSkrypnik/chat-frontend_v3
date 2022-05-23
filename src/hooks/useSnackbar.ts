@@ -17,7 +17,7 @@ export function useSnackbar() {
             if (snackbarContext) {
                 (snackbarContext as any)[prefix + property](v);
             }
-        })
+        });
     }
 
     const close = () => {

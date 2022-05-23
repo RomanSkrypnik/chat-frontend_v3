@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {useController, UseControllerProps} from "react-hook-form";
 import cn from "classnames";
+import Typography from "../common/Typography";
 
 type InputProps = {
     disabled?: boolean;
@@ -11,11 +12,13 @@ type InputProps = {
 
 const TextInput: FC<InputProps> = (props) => {
 
-    const {field: {onChange, value, name}} = useController({...props, defaultValue: ''});
+    const {field: {onChange, value, name}} = useController({...props, defaultValue: props.defaultValue ?? ''});
 
     return (
         <label className={cn("d-flex flex-column", props.className)}>
-            {props.label}
+
+            {props.label && <Typography as="span" fz={20} className="mb-2">{props.label}</Typography>}
+
             <input disabled={props.disabled}
                    className="text-input"
                    type="text"
@@ -24,6 +27,7 @@ const TextInput: FC<InputProps> = (props) => {
                    name={name}
                    placeholder={props.placeholder}
             />
+
         </label>
     );
 };

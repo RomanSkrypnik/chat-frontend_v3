@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {AuthState, LoginDto} from "../../types";
+import {AuthState, EditUserDto, LoginDto} from "../../types";
 import {AuthService} from "../../services/AuthService";
+import {UserService} from "../../services/UserService";
 
 const rejectionReducer = (state: AuthState) => {
     state.isLoaded = true;
@@ -50,6 +51,18 @@ export const logout = createAsyncThunk(
     }
 );
 
+export const editPersonalData = createAsyncThunk(
+    'auth/editPersonalData',
+    async (editUserDto: EditUserDto, {dispatch}) => {
+        try {
+            const {data} = await UserService.edit(editUserDto);
+            dispatch(setUser(data.data));
+        } catch (e) {
+            throw e;
+        }
+    }
+)
+
 const initialState: AuthState = {
     user: null,
     isLogged: false,
@@ -67,6 +80,10 @@ const authSlice = createSlice({
             state.isLoaded = true;
         },
 
+        setUser(state, {payload}) {
+            state.user = payload;
+        },
+
         exit(state) {
             state.user = null;
             state.isLogged = false;
@@ -79,6 +96,6 @@ const authSlice = createSlice({
     })
 })
 
-export const {authenticate, exit} = authSlice.actions;
+export const {authenticate, setUser, exit} = authSlice.actions;
 
 export default authSlice.reducer;

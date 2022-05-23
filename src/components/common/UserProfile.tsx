@@ -1,4 +1,4 @@
-import React, {FC, useContext, useEffect, useState} from 'react';
+import React, {FC, useContext} from 'react';
 import DialContainer from "../containers/DialContainer";
 import CardContainer from "../containers/CardContainer";
 import {UserDto} from "../../types";
@@ -30,7 +30,7 @@ const UserProfile: FC<UserProfileDialProps> = ({user, onClose}) => {
 
     return (
         <DialContainer onClose={onClose}>
-            <CardContainer onClose={onClose} title="User info">
+            <CardContainer className="_extended" onClose={onClose} title="User info">
                 <div className="user-profile">
 
                     <div className="d-flex align-items-center pb-3">

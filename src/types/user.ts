@@ -11,4 +11,11 @@ export interface UserDto {
     avatar: string | null;
     online: boolean;
     lastSeen: string;
+    email: string;
+}
+
+export interface EditUserDto {
+    username: string;
+    name: string;
+    email: string;
 }

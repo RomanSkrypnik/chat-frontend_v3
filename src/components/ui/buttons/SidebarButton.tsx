@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 interface IconLinkProps {
     icon: ReactNode;
     text: string;
-    onClick?: () => void;
+    onClick?: (param?: any) => void;
     className?: string;
     href?: string;
 }
