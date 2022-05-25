@@ -29,8 +29,7 @@ const ChatControls: FC<ChatControlsProps> = ({isBlocked, onSubmit}) => {
 
     const handleFileClick = () => inputRef?.current?.click();
 
-    const handleFileChange = (fileList: FileList) => {
-        const files = Array.from(fileList)
+    const handleFileChange = (files: File[]) => {
         setFiles(files);
     }
 

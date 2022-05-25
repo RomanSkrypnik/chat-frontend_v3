@@ -3,17 +3,18 @@ import cn from "classnames";
 import Typography from "../../common/Typography";
 
 interface RegularButtonProps {
+    type?: 'button' | 'submit' | 'reset';
     className?: string;
     onClick?: () => void;
     icon?: ReactNode;
     children: ReactNode;
 }
 
-const RegularButton: FC<RegularButtonProps> = ({className, onClick, icon, children}) => {
+const RegularButton: FC<RegularButtonProps> = ({type = 'button', className, onClick, icon, children}) => {
     return (
-        <button className={cn("regular-button", className)} onClick={onClick}>
+        <button type={type} className={cn("regular-button", className)} onClick={onClick}>
             {icon && <span className="regular-button__icon">{icon}</span>}
-            <Typography fz={18}>{children}</Typography>
+            <Typography fz={18} as="span">{children}</Typography>
         </button>
     );
 };

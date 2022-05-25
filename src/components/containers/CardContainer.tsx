@@ -13,14 +13,16 @@ interface CardContainer {
 const CardContainer: FC<CardContainer> = ({onClose, className, title, children}) => {
     const withHeader = onClose || title;
 
-    const handleClick = (e: any) => e.nativeEvent.stopImmediatePropagation();
+    const handleClick = (e: any) => {
+        e.nativeEvent.stopImmediatePropagation();
+    }
 
     return (
         <div className={cn("card-container", className)} onClick={handleClick}>
             {
                 withHeader &&
                 <div className="card-container__header mb-4">
-                    {title && <Typography fz={20}>{title}</Typography>}
+                    {title && <Typography fz={21}>{title}</Typography>}
                     {onClose && <CloseButton onClick={onClose}/>}
                 </div>
             }

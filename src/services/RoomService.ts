@@ -11,7 +11,7 @@ export class RoomService {
     }
 
     static async create(fd: FormData) {
-        return await $api.post('/room', fd);
+        return await $api.post('/room/create', fd);
     }
 
 }

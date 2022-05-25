@@ -54,11 +54,11 @@ const roomSlice = createSlice({
         },
 
         setRoom(state, {payload}) {
-          state.room = payload;
+            state.room = payload;
         },
 
         addRoom(state, {payload}) {
-            state.rooms = [...state.rooms, payload];
+            state.rooms = [payload, ...state.rooms];
         }
 
     }

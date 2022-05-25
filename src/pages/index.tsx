@@ -16,7 +16,7 @@ const Home = () => {
                 <div className="w-25 me-3">
                     <div className="d-flex justify-content-between mb-3">
                         <Typography className="mb-3" fz={36}>Chats</Typography>
-                        <RegularButton>Create Chat</RegularButton>
+                        <RegularButton>Create New Chat</RegularButton>
                     </div>
                     <MessageWrapper/>
                 </div>

@@ -38,8 +38,7 @@ const MessageItem: FC<MessageItemProps> = ({name, hash, online, messages}) => {
         <NavLink to={`/${hash}`} className="message-item">
 
             <div className="d-flex">
-                {/*TODO :: PROBABLY SHOULD BE REFACTORED*/}
-                {<Avatar isOnline={online}/>}
+                <Avatar isOnline={online}/>
                 <div className="d-flex justify-content-between w-100 ms-3">
                     <Typography fz={18} className="message-item__text fw-bold mb-1">{name}</Typography>
                     <Typography className="message-item__text">{date}</Typography>
