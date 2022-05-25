@@ -8,7 +8,7 @@ import FileInput from "../inputs/FileInput";
 import {CreateMessageValues} from "../../types";
 
 interface ChatControlsProps {
-    isBlocked: boolean;
+    isBlocked?: boolean;
     onSubmit: (data: CreateMessageValues) => void;
 }
 

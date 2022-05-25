@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
-import ChatHeader from "../common/ChatHeader";
+import ChatHeader from "./ChatHeader";
 import ChatList from "../common/ChatList";
-import ChatControls from "../common/ChatControls";
+import ChatControls from "./ChatControls";
 import {useAppDispatch} from "../../store";
 import {fetchChat} from "../../store/slices/chat";
 import {useParams} from "react-router-dom";

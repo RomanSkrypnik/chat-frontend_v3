@@ -1,20 +1,16 @@
 import React, {FC, useState} from 'react';
 import Avatar from "../ui/buttons/Avatar";
-import {UserDto} from "../../types";
+import Typography from "../common/Typography";
 import CircleButton from "../ui/buttons/CircleButton";
 import ThreeDotsIcon from "../ui/icons/ThreeDotsIcon";
-import Typography from "./Typography";
-import {useFormatDuration} from "../../hooks/useDate";
-import UserProfile from "./UserProfile";
+import {RoomDto} from "../../types/room";
 
-interface ChatHeaderProps {
-    user: UserDto;
+interface RoomHeaderProps {
+    room: RoomDto;
 }
 
-const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
+const RoomHeader: FC<RoomHeaderProps> = ({room}) => {
     const [show, setShow] = useState(false);
-
-    const lastSeen = useFormatDuration(user.lastSeen);
 
     const handleClick = () => setShow(!show);
 
@@ -26,10 +22,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
                     <div className="d-flex">
                         <Avatar/>
                         <div className="ms-3">
-                            <Typography fz={18} className="fw-bold">{user.name}</Typography>
-                            <Typography className="text-primary">
-                                {(user.online && 'Online') || `last seen ${lastSeen}`}
-                            </Typography>
+                            <Typography fz={18} className="fw-bold">{room.name}</Typography>
                         </div>
                     </div>
 
@@ -37,9 +30,9 @@ const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
                 </div>
             </div>
 
-            {show && <UserProfile user={user} onClose={handleClick}/>}
+            {/*{show && <UserProfile user={user} onClose={handleClick}/>}*/}
         </>
     );
 };
 
-export default ChatHeader;
+export default RoomHeader;

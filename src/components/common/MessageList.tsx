@@ -3,14 +3,19 @@ import {ChatDto} from "../../types";
 import MessageItem from "./MessageItem";
 
 interface MessageListProps {
-    chats: ChatDto[]
+    chats: ChatDto[];
 }
 
 const MessageList: FC<MessageListProps> = ({chats}) => {
+
     return (
         <div className="message-list scrollbar">
             {
-                chats.map(({user, messages, id}) => <MessageItem user={user} messages={messages} key={id}/>)
+                chats.map((chat) => <MessageItem name={chat.user.name}
+                                                 hash={chat.user.hash}
+                                                 messages={chat.messages}
+                                                 key={chat.id}
+                />)
             }
         </div>
     );

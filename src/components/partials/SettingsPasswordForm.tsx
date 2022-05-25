@@ -36,7 +36,7 @@ const SettingsPasswordForm = () => {
                     <div className="d-flex">
                         <div className="flex-grow-1 me-4">
                             <TextInput name="oldPassword" control={control} label="Old password"/>
-                            <TextInput name="password" control={control} label="New password"/>
+                            <TextInput name="password" control={control} label="New password" className="mt-3"/>
                         </div>
                         <div className="flex-grow-1 align-self-end">
                             <TextInput name="passwordConfirm" control={control} label="Confirm new password"/>
