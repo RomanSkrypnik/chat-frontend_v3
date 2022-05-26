@@ -18,3 +18,24 @@ export interface RoomDto {
     users: UserDto[];
     files: FileDto[];
 }
+
+export interface JoinRoomDto {
+    user: UserDto;
+    roomId: number;
+}
+
+export interface RoomFileDto {
+    id: number
+    filename: string
+    ext: string
+    messageId: number
+}
+
+export interface RoomMessageDto {
+    id: number
+    roomId: number
+    text: string
+    user: UserDto
+    files: [] | RoomFileDto[]
+    createdAt: string
+}

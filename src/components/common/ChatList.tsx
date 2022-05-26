@@ -1,4 +1,4 @@
-import React, {FC, MutableRefObject, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {MessageDto} from "../../types";
 import ChatListItem from "../partials/ChatListItem";
 import {useMessageArr} from "../../hooks/useMessageArr";
@@ -30,9 +30,7 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
     const lastMessage = messages[0];
 
     useEffect(() => {
-        if (isLoaded) {
-            scrollToBottom();
-        }
+        scrollToBottom();
     }, [isLoaded, twoDimsArr]);
 
     useEffect(() => {

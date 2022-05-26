@@ -8,9 +8,9 @@ import Typography from "./Typography";
 import ProhibitedIcon from "../ui/icons/ProhibitedIcon";
 import ButtonIcon from "../ui/buttons/ButtonIcon";
 import SwitchButton from "../ui/buttons/SwitchButton";
-import {SocketContext} from "../../hocs/Authorized";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import UnlockedIcon from "../ui/icons/UnlockedIcon";
+import {SocketContext} from "../providers/SocketProvider";
 
 interface UserProfileDialProps {
     user: UserDto;

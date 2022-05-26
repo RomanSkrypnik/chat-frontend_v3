@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import ChatList from "../common/ChatList";
 import ChatControls from "./ChatControls";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
@@ -6,6 +6,9 @@ import RoomHeader from "./RoomHeader";
 import {useParams} from "react-router-dom";
 import {useAppDispatch} from "../../store";
 import {fetchRoom} from "../../store/slices/room";
+import {RoomMessageService} from "../../services/RoomMessageService";
+import {CreateMessageValues} from "../../types";
+import {RoomSocketContext} from "../providers/RoomSocketProvider";
 
 const RoomWrapper = () => {
     const {hash} = useParams();
@@ -14,14 +17,40 @@ const RoomWrapper = () => {
 
     const {room} = useTypedSelector(state => state.room);
 
+    const roomSocket = useContext(RoomSocketContext);
+
     useEffect(() => {
         if (hash) {
             dispatch(fetchRoom(hash));
         }
     }, [hash]);
 
-    const handleSubmit = () => {
-        console.log('submitted');
+    useEffect(() => {
+        return () => {
+            roomSocket?.disconnect();
+        }
+    }, []);
+
+    useEffect(() => {
+        if (roomSocket && room) {
+            roomSocket.emit('join', room.id);
+        }
+    }, [roomSocket, room]);
+
+    const handleSubmit = async ({text, files}: CreateMessageValues) => {
+        const fd = new FormData();
+
+        fd.append('text', text);
+        fd.append('roomId', `${room?.id}`);
+
+        if (files.length > 0) {
+            for (const file of files) {
+                fd.append('files', file);
+            }
+        }
+
+        const {data} = await RoomMessageService.create(fd);
+        roomSocket?.emit('send-message', data.data);
     }
 
     return (

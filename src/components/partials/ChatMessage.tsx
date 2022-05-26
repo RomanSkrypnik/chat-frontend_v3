@@ -4,8 +4,8 @@ import ChatMessageSwitch from "./ChatMessageSwitch";
 import cn from "classnames";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useInView} from "react-intersection-observer";
-import {SocketContext} from "../../hocs/Authorized";
 import ClipsIcon from "../ui/icons/ClipsIcon";
+import {SocketContext} from "../providers/SocketProvider";
 
 interface ChatMessageProps {
     message: MessageDto;

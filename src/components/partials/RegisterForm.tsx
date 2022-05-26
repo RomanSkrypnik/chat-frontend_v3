@@ -1,6 +1,6 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-import {RegisterDto} from "../../types/auth";
+import {RegisterDto} from "../../types";
 import TextInput from "../inputs/TextInput";
 import {AuthService} from "../../services/AuthService";
 import {useNavigate} from "react-router-dom";

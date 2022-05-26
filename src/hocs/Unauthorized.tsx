@@ -1,5 +1,4 @@
 import React, {FC, ReactNode, useEffect} from 'react';
-import DefaultLayout from "../layouts/DefaultLayout";
 import EmptyLayout from "../layouts/EmptyLayout";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";

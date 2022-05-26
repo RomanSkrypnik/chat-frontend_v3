@@ -15,7 +15,7 @@ const Avatar: FC<AvatarProps> = ({className, width, height, isOnline = false}) =
             <button className={cn("avatar", className)} style={{width, height}}>
                 <img src="https://www.meme-arsenal.com/memes/7e237779d9ae164f9f17ca960c2fa150.jpg" alt=""/>
             </button>
-            {isOnline && <span className="avatar__online"></span>}
+            {isOnline && <span className="avatar__online" />}
         </div>
     );
 };
