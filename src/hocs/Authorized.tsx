@@ -3,6 +3,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
 import SocketProvider from "../components/providers/SocketProvider";
+import RoomSocketProvider from "../components/providers/RoomSocketProvider";
 
 interface AuthorizedProps {
     children: ReactNode
@@ -21,7 +22,9 @@ const Authorized: FC<AuthorizedProps> = ({children}) => {
 
     return (
         <SocketProvider>
-            {isLogged && children}
+            <RoomSocketProvider>
+                {isLogged && children}
+            </RoomSocketProvider>
         </SocketProvider>
     );
 };

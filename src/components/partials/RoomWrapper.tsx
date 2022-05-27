@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ChatList from "../common/ChatList";
 import ChatControls from "./ChatControls";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
@@ -11,6 +11,8 @@ import {CreateMessageValues} from "../../types";
 import {RoomSocketContext} from "../providers/RoomSocketProvider";
 
 const RoomWrapper = () => {
+    const [roomId, setRoomId] = useState<null | number>(null);
+
     const {hash} = useParams();
 
     const dispatch = useAppDispatch();
@@ -23,19 +25,23 @@ const RoomWrapper = () => {
         if (hash) {
             dispatch(fetchRoom(hash));
         }
+
+        return () => {
+            roomSocket?.emit('leave', {roomId: room?.id});
+        }
     }, [hash]);
 
     useEffect(() => {
-        return () => {
-            roomSocket?.disconnect();
+        if (room) {
+            setRoomId(prev => prev !== room.id ? room.id : prev);
         }
-    }, []);
+    }, [room]);
 
     useEffect(() => {
-        if (roomSocket && room) {
-            roomSocket.emit('join', room.id);
+        if (roomSocket && Number.isFinite(roomId)) {
+            roomSocket.emit('join', room?.id);
         }
-    }, [roomSocket, room]);
+    }, [roomSocket, roomId]);
 
     const handleSubmit = async ({text, files}: CreateMessageValues) => {
         const fd = new FormData();

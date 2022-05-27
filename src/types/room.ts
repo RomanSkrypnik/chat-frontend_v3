@@ -19,7 +19,7 @@ export interface RoomDto {
     files: FileDto[];
 }
 
-export interface JoinRoomDto {
+export interface JoinLeaveRoomDto {
     user: UserDto;
     roomId: number;
 }
@@ -32,10 +32,11 @@ export interface RoomFileDto {
 }
 
 export interface RoomMessageDto {
-    id: number
-    roomId: number
-    text: string
-    user: UserDto
-    files: [] | RoomFileDto[]
-    createdAt: string
+    id: number;
+    roomId: number;
+    text: string;
+    isRead: boolean;
+    user: UserDto;
+    files: [] | RoomFileDto[];
+    createdAt: string;
 }

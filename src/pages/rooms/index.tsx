@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import withAuthorized from "../../hocs/Authorized";
 import RoomWrapper from "../../components/partials/RoomWrapper";
 import {useParams} from "react-router-dom";
@@ -6,7 +6,6 @@ import RoomMessageWrapper from "../../components/partials/RoomMessageWrapper";
 import Typography from "../../components/common/Typography";
 import RegularButton from "../../components/ui/buttons/RegularButton";
 import RoomForm from "../../components/partials/RoomForm";
-import RoomSocketProvider from "../../components/providers/RoomSocketProvider";
 
 const Rooms = () => {
     const [show, setShow] = useState(false);
@@ -16,7 +15,6 @@ const Rooms = () => {
     const handleClick = () => setShow(!show);
 
     return (
-        <RoomSocketProvider>
             <section className="rooms">
                 <div className="d-flex">
                     <div className="w-25">
@@ -30,7 +28,6 @@ const Rooms = () => {
                     {show && <RoomForm onClose={handleClick}/>}
                 </div>
             </section>
-        </RoomSocketProvider>
     );
 };
 

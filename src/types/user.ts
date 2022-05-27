@@ -1,3 +1,5 @@
+import {RoomDto} from "./room";
+
 export interface UserState {
     users: [] | UserDto[];
     user: UserDto | null;
@@ -12,6 +14,8 @@ export interface UserDto {
     online: boolean;
     lastSeen: string;
     email: string;
+    rooms?: RoomDto[];
+    isInRoom?: boolean;
 }
 
 export interface EditUserDto {

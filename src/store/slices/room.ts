@@ -72,19 +72,23 @@ const roomSlice = createSlice({
         addUser(state, {payload}) {
             const {user, roomId} = payload;
 
-            if (state.room && state.room?.id === roomId) {
-                const userIdx = state.room.users.findIndex(roomUser => roomUser.id === user.id);
+            if (state.room && state.room.id === roomId) {
+                const userIdx = state.room.users.findIndex(({id}) => id === user.id);
 
                 if (userIdx === -1) {
                     state.room.users = [...state.room.users, user];
+                } else {
+                    state.room.users[userIdx] = user;
                 }
             }
 
-            const roomIdx = state.rooms.findIndex(room => room.id === roomId);
-            const userIdx = state.rooms[roomIdx].users.findIndex(roomUser => roomUser.id === user.id);
+            const roomIdx = state.rooms.findIndex(({id}) => id === roomId);
+            const userIdx = state.rooms[roomIdx].users.findIndex(({id}) => id === user.id);
 
             if (userIdx === -1) {
                 state.rooms[roomIdx].users = [...state.rooms[roomIdx].users, user];
+            } else {
+                state.rooms[roomIdx].users[userIdx] = user;
             }
         },
 
@@ -101,11 +105,55 @@ const roomSlice = createSlice({
                 }
                 return room;
             });
+        },
+
+        changeMessage(state, {payload}) {
+            const {roomId, id} = payload;
+
+            if (state.room && state.room.id === roomId) {
+                state.room.messages = state.room.messages.map(message => {
+                    if (message.id === id) {
+                        return {...message, ...payload};
+                    }
+                    return message;
+                });
+            }
+
+            const roomIdx = state.rooms.findIndex(room => room.id === roomId);
+
+            if (roomIdx !== -1) {
+                state.rooms[roomIdx].messages = state.rooms[roomIdx].messages.map(message => {
+                    if (message.id === id) {
+                        return {...message, ...payload};
+                    }
+                    return message;
+                })
+            }
+        },
+
+        changeUser(state, {payload}) {
+            const {roomId, user} = payload;
+
+            if (state.room && state.room.id === roomId) {
+                const userIdx = state.room.users.findIndex(({id}) => id === user.id);
+
+                if (userIdx !== -1) {
+                    state.room.users[userIdx] = payload;
+                }
+            }
+
+            const roomIdx = state.rooms.findIndex(({id}) => id === roomId);
+            const userIdx = state.rooms[roomIdx].users.findIndex(({id}) => id === user.id);
+
+            state.rooms[roomIdx].users[userIdx] = payload;
+        },
+
+        changeUserInRooms(state, {payload}) {
+            const {rooms, id} = payload;
         }
+        }
+    });
 
-    }
-})
-
-export const {setRooms, setRoom, addRoom, addUser, addMessage} = roomSlice.actions;
+export const {setRooms, setRoom, addRoom, addUser, addMessage, changeMessage, changeUser} = roomSlice.actions;
 
 export default roomSlice.reducer;

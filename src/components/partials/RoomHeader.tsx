@@ -4,6 +4,7 @@ import Typography from "../common/Typography";
 import CircleButton from "../ui/buttons/CircleButton";
 import ThreeDotsIcon from "../ui/icons/ThreeDotsIcon";
 import {RoomDto} from "../../types/room";
+import RoomProfile from "../common/RoomProfile";
 
 interface RoomHeaderProps {
     room: RoomDto;
@@ -30,7 +31,7 @@ const RoomHeader: FC<RoomHeaderProps> = ({room}) => {
                 </div>
             </div>
 
-            {/*{show && <UserProfile user={user} onClose={handleClick}/>}*/}
+            {show && <RoomProfile onClose={handleClick}/>}
         </>
     );
 };

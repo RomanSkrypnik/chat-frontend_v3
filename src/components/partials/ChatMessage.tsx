@@ -6,6 +6,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useInView} from "react-intersection-observer";
 import ClipsIcon from "../ui/icons/ClipsIcon";
 import {SocketContext} from "../providers/SocketProvider";
+import {RoomSocketContext} from "../providers/RoomSocketProvider";
 
 interface ChatMessageProps {
     message: MessageDto;
@@ -14,17 +15,25 @@ interface ChatMessageProps {
 const ChatMessage: FC<ChatMessageProps> = ({message}) => {
 
     const {user} = useTypedSelector(state => state.auth);
+    const {room} = useTypedSelector(state => state.room);
 
     const {inView, ref} = useInView({threshold: 0.8});
 
     const socket = useContext(SocketContext);
+    const roomSocket = useContext(RoomSocketContext);
 
     const isCurrUser = user?.hash === message.user.hash;
 
     useEffect(() => {
         if (inView && !message.isRead) {
             if (!isCurrUser) {
-                socket?.emit('read-message', {userId: user?.id, messageId: message.id})
+                const messageBody = {userId: user?.id, messageId: message.id};
+
+                if (roomSocket) {
+                    roomSocket.emit('read-message', {...messageBody, roomId: room?.id});
+                } else {
+                    socket?.emit('read-message', messageBody);
+                }
             }
         }
     }, [inView]);
