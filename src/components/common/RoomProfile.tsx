@@ -29,7 +29,7 @@ const RoomProfile: FC<RoomProfileProps> = ({onClose}) => {
                         <Typography className="mb-3" fz={20}>Users in room</Typography>
                         <div>
                             {
-                                room?.users.map(user => <RoomProfileUser user={user}/>)
+                                room?.users.map(user => <RoomProfileUser user={user} key={user.id}/>)
                             }
                         </div>
                     </div>

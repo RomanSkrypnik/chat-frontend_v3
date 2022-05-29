@@ -69,29 +69,6 @@ const roomSlice = createSlice({
             state.rooms = [payload, ...state.rooms];
         },
 
-        addUser(state, {payload}) {
-            const {user, roomId} = payload;
-
-            if (state.room && state.room.id === roomId) {
-                const userIdx = state.room.users.findIndex(({id}) => id === user.id);
-
-                if (userIdx === -1) {
-                    state.room.users = [...state.room.users, user];
-                } else {
-                    state.room.users[userIdx] = user;
-                }
-            }
-
-            const roomIdx = state.rooms.findIndex(({id}) => id === roomId);
-            const userIdx = state.rooms[roomIdx].users.findIndex(({id}) => id === user.id);
-
-            if (userIdx === -1) {
-                state.rooms[roomIdx].users = [...state.rooms[roomIdx].users, user];
-            } else {
-                state.rooms[roomIdx].users[userIdx] = user;
-            }
-        },
-
         addMessage(state, {payload}) {
             const {roomId} = payload;
 
@@ -131,6 +108,21 @@ const roomSlice = createSlice({
             }
         },
 
+        changeUsers(state, {payload}) {
+
+            if (state.room) {
+                state.room.users = payload;
+
+                state.rooms = state.rooms.map(room => {
+                    if (room.id === state.room?.id) {
+                        return {...room, users: payload}
+                    }
+                    return room;
+                });
+            }
+
+        },
+
         changeUser(state, {payload}) {
             const {roomId, user} = payload;
 
@@ -149,11 +141,31 @@ const roomSlice = createSlice({
         },
 
         changeUserInRooms(state, {payload}) {
-            const {rooms, id} = payload;
-        }
-        }
-    });
+            const {id} = payload;
 
-export const {setRooms, setRoom, addRoom, addUser, addMessage, changeMessage, changeUser} = roomSlice.actions;
+            if (state.room) {
+                state.room.users = state.room.users.map(user => user.id === id ? payload : user)
+            }
+
+            state.rooms = state.rooms.map(room => {
+                const users = room.users.map(user =>
+                    user.id === id ? payload : user
+                );
+                return {...room, users};
+            })
+        }
+    }
+});
+
+export const {
+    setRooms,
+    setRoom,
+    addRoom,
+    changeUsers,
+    addMessage,
+    changeMessage,
+    changeUser,
+    changeUserInRooms
+} = roomSlice.actions;
 
 export default roomSlice.reducer;

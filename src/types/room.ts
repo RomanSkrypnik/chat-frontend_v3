@@ -21,7 +21,6 @@ export interface RoomDto {
 
 export interface JoinLeaveRoomDto {
     user: UserDto;
-    roomId: number;
 }
 
 export interface RoomFileDto {

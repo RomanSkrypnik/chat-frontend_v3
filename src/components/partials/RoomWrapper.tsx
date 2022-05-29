@@ -27,7 +27,7 @@ const RoomWrapper = () => {
         }
 
         return () => {
-            roomSocket?.emit('leave', {roomId: room?.id});
+            roomSocket?.emit('leave');
         }
     }, [hash]);
 

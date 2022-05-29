@@ -1,8 +1,8 @@
 import React, {createContext, FC, ReactNode, useEffect, useState} from 'react';
 import {io, Socket} from "socket.io-client";
 import {useAppDispatch} from "../../store";
-import {addMessage, addUser, changeMessage, changeUser} from "../../store/slices/room";
-import {JoinLeaveRoomDto, RoomMessageDto} from "../../types/room";
+import {addMessage, changeMessage, changeUserInRooms, changeUsers} from "../../store/slices/room";
+import {RoomMessageDto} from "../../types/room";
 import {UserDto} from "../../types";
 
 interface RoomSocketProviderProps {
@@ -34,15 +34,19 @@ const RoomSocketProvider: FC<RoomSocketProviderProps> = ({children}) => {
     useEffect(() => {
         if (socket) {
             socket.on('login', (data: UserDto) => {
-                // dispatch()
+                dispatch(changeUserInRooms(data));
             });
 
-            socket.on('join', (data: JoinLeaveRoomDto) => {
-                dispatch(addUser(data));
+            socket.on('logout', (data: UserDto) => {
+                dispatch(changeUserInRooms(data));
             });
 
-            socket.on('leave', (data: JoinLeaveRoomDto) => {
-                dispatch(changeUser(data));
+            socket.on('join', (data: UserDto[]) => {
+                dispatch(changeUsers(data));
+            });
+
+            socket.on('leave', (data: UserDto[]) => {
+                dispatch(changeUsers(data));
             });
 
             socket.on('room-message', (data: RoomMessageDto) => {
@@ -53,8 +57,11 @@ const RoomSocketProvider: FC<RoomSocketProviderProps> = ({children}) => {
                 dispatch(changeMessage(data));
             });
 
+            // TODO :: :\
             return () => {
-                socket.disconnect();
+                setTimeout(() => {
+                    socket.disconnect();
+                }, 600)
             }
 
         }
