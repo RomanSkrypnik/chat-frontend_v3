@@ -11,16 +11,13 @@ export interface RoomState {
 export interface RoomDto {
     id: number;
     name: string;
+    description: string;
     hash: string;
     avatar: null | string;
     roomId: number;
     messages: MessageDto[];
     users: UserDto[];
     files: FileDto[];
-}
-
-export interface JoinLeaveRoomDto {
-    user: UserDto;
 }
 
 export interface RoomFileDto {

@@ -5,6 +5,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import Avatar from "../ui/buttons/Avatar";
 import Typography from "./Typography";
 import RoomProfileUser from "../partials/RoomProfileUser";
+import {ROOM_AVATAR_URL} from "../../http";
 
 interface RoomProfileProps {
     onClose: () => void;
@@ -19,10 +20,15 @@ const RoomProfile: FC<RoomProfileProps> = ({onClose}) => {
                 <div className="user-profile">
 
                     <div className="d-flex align-items-center pb-3">
-                        <Avatar width={70} height={70}/>
+                        <Avatar src={ROOM_AVATAR_URL + room?.avatar} width={70} height={70}/>
                         <div className="ms-4">
                             <Typography fz={18} className="fw-bold">{room?.name}</Typography>
                         </div>
+                    </div>
+
+                    <div className="border-top-grey py-3">
+                        <Typography>{room?.description}</Typography>
+                        <Typography fz={14} className="text-grey">Description</Typography>
                     </div>
 
                     <div className="border-top-grey py-3">

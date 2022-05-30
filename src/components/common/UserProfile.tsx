@@ -44,6 +44,14 @@ const UserProfile: FC<UserProfileDialProps> = ({user, onClose}) => {
                     <div className="border-top-grey py-3">
                         <Typography>{user.username}</Typography>
                         <Typography fz={14} className="text-grey">Username</Typography>
+
+                        {
+                            user.bio && <div className="mt-3">
+                                <Typography>{user.bio}</Typography>
+                                <Typography fz={14} className="text-grey">Bio</Typography>
+                            </div>
+                        }
+
                         <div className="user-profile__personal mt-3">
                             <Typography>Notification</Typography>
                             {chat && <SwitchButton onChange={muteUnmute} value={!chat.isMuted}/>}
@@ -53,8 +61,12 @@ const UserProfile: FC<UserProfileDialProps> = ({user, onClose}) => {
                     <div className="border-top-grey pt-3">
                         {
                             chat?.isBlockedByMe
-                                ? <ButtonIcon onClick={blockUnblock} className="red" icon={<UnlockedIcon/>}>Unblock user</ButtonIcon>
-                                : <ButtonIcon onClick={blockUnblock} className="red" icon={<ProhibitedIcon/>}>Block user</ButtonIcon>
+                                ? <ButtonIcon onClick={blockUnblock} className="red" icon={<UnlockedIcon/>}>
+                                    Unblock user
+                                </ButtonIcon>
+                                : <ButtonIcon onClick={blockUnblock} className="red" icon={<ProhibitedIcon/>}>
+                                    Block user
+                                </ButtonIcon>
                         }
                     </div>
 

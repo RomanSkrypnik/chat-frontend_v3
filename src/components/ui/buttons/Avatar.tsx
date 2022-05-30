@@ -2,6 +2,8 @@ import React, {FC} from 'react';
 import cn from "classnames";
 
 interface AvatarProps {
+    src?: string;
+    alt?: string;
     isOnline?: boolean;
     width?: number;
     height?: number;
@@ -9,11 +11,11 @@ interface AvatarProps {
     className?: string;
 }
 
-const Avatar: FC<AvatarProps> = ({className, width, height, isOnline = false}) => {
+const Avatar: FC<AvatarProps> = ({src, alt, className, width, height, isOnline = false}) => {
     return (
         <div className="position-relative">
             <button className={cn("avatar", className)} style={{width, height}}>
-                <img src="https://www.meme-arsenal.com/memes/7e237779d9ae164f9f17ca960c2fa150.jpg" alt=""/>
+                <img src={src} alt={alt}/>
             </button>
             {isOnline && <span className="avatar__online" />}
         </div>

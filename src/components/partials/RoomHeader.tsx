@@ -5,6 +5,7 @@ import CircleButton from "../ui/buttons/CircleButton";
 import ThreeDotsIcon from "../ui/icons/ThreeDotsIcon";
 import {RoomDto} from "../../types/room";
 import RoomProfile from "../common/RoomProfile";
+import {ROOM_AVATAR_URL} from "../../http";
 
 interface RoomHeaderProps {
     room: RoomDto;
@@ -21,7 +22,7 @@ const RoomHeader: FC<RoomHeaderProps> = ({room}) => {
                 <div className="d-flex justify-content-between">
 
                     <div className="d-flex">
-                        <Avatar/>
+                        <Avatar src={ROOM_AVATAR_URL + room.avatar}/>
                         <div className="ms-3">
                             <Typography fz={18} className="fw-bold">{room.name}</Typography>
                         </div>

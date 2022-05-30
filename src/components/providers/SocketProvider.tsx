@@ -15,12 +15,11 @@ interface SocketProviderProps {
 export const SocketContext = createContext<null | Socket<any, any>>(null);
 
 const SocketProvider: FC<SocketProviderProps> = ({children}) => {
-
+    const [lastMessage, setLastMessage] = useState<null | MessageDto>(null);
     const [socket, setSocket] = useState<null | Socket<any, any>>(null);
 
+    const {chats} = useTypedSelector(state => state.chat);
     const {user} = useTypedSelector(state => state.auth);
-
-    const {chat} = useTypedSelector(state => state.chat);
 
     const dispatch = useAppDispatch();
 
@@ -43,6 +42,11 @@ const SocketProvider: FC<SocketProviderProps> = ({children}) => {
     useEffect(() => {
         if (socket) {
 
+            socket.on('chat-message', (message: MessageDto) => {
+                dispatch(addMessage(message));
+                setLastMessage(message);
+            });
+
             socket.on('read-message', (message: MessageDto) => {
                 dispatch(changeMessage(message));
             });
@@ -61,7 +65,7 @@ const SocketProvider: FC<SocketProviderProps> = ({children}) => {
 
             socket.on('mute-unmute', (chat: ChatDto) => {
                 dispatch(changeChat(chat));
-            })
+            });
 
             return () => {
                 socket.disconnect();
@@ -69,21 +73,16 @@ const SocketProvider: FC<SocketProviderProps> = ({children}) => {
         }
     }, [socket]);
 
-    // TODO :: MAKE CODE BETTER ( IF IT'S POSSIBLE )
     useEffect(() => {
-        if (socket && chat && user) {
-            socket.removeListener('chat-message');
+        if (lastMessage) {
+            const chat = chats.find(({id}) => id === lastMessage.chatId);
 
-            socket.on('chat-message', (message: MessageDto) => {
-                dispatch(addMessage(message));
-
-                if (message.user.id !== user.id && chat.id !== message.chatId && !chat.isMuted) {
-                    SoundService.playSound();
-                    snackbar(<SnackbarMessage user={message.user} message={message}/>);
-                }
-            });
+            if (!chat?.isMuted && lastMessage?.user.id !== user?.id) {
+                SoundService.playSound();
+                snackbar(<SnackbarMessage user={lastMessage.user} message={lastMessage}/>);
+            }
         }
-    }, [chat, user]);
+    }, [lastMessage]);
 
     return (
         <SocketContext.Provider value={socket}>

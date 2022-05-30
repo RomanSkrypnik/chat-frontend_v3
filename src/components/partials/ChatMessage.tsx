@@ -29,8 +29,8 @@ const ChatMessage: FC<ChatMessageProps> = ({message}) => {
             if (!isCurrUser) {
                 const messageBody = {userId: user?.id, messageId: message.id};
 
-                if (roomSocket) {
-                    roomSocket.emit('read-message', {...messageBody, roomId: room?.id});
+                if (room) {
+                    roomSocket?.emit('read-message', {...messageBody, roomId: room?.id});
                 } else {
                     socket?.emit('read-message', messageBody);
                 }

@@ -3,23 +3,26 @@ import UploadIcon from "../ui/icons/UploadIcon";
 import Typography from "../common/Typography";
 import RegularButton from "../ui/buttons/RegularButton";
 import {useDropzone} from "react-dropzone";
+import cn from "classnames";
 
 interface FileInputProps {
     onChange: (files: File[]) => void;
     visible?: boolean;
     value?: '';
+    multiple?: boolean;
+    buttonText?: string;
 }
 
-const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({visible, onChange, value = ''}, ref) => {
+const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({buttonText, multiple = true, visible, onChange, value = ''}, ref) => {
 
     const onDrop = useCallback((files: File[]) => {
         onChange(files);
     }, []);
 
-    const {getRootProps, getInputProps, isDragActive, open} = useDropzone({onDrop, noClick: true, multiple: false});
+    const {getRootProps, getInputProps, isDragActive, open} = useDropzone({onDrop, noClick: true, multiple});
 
     return (
-        <div className="file-input">
+        <div className={cn("file-input", isDragActive && '_active')}>
             {
                 visible &&
                 <>
@@ -28,11 +31,11 @@ const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({visible, onChan
                         <Typography>{isDragActive ? 'Drop here' : 'Drag and drop here'}</Typography>
                         <Typography className="fw-bold my-2">Or</Typography>
                     </div>
-                    <RegularButton onClick={open}>Select files</RegularButton>
+                    <RegularButton onClick={open}>{buttonText ?? 'Select files'}</RegularButton>
                 </>
             }
             <input {...getInputProps()}
-                   multiple={true}
+                   multiple={multiple}
                    ref={ref}
                    className="file-input"
                    type="file"

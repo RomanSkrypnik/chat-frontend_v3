@@ -52,6 +52,7 @@ const SettingsAccountForm = () => {
                                        label="Name"
                             />
                             <TextInput
+                                defaultValue={user.bio}
                                 name="bio"
                                 control={control}
                                 label="Bio"
@@ -59,7 +60,7 @@ const SettingsAccountForm = () => {
                             />
                         </div>
                     </div>
-                    <RegularButton className="mt-4">Change data</RegularButton>
+                    <RegularButton type="submit" className="mt-4">Change data</RegularButton>
                 </form>
             }
         </CardContainer>

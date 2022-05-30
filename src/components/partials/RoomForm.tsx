@@ -4,9 +4,10 @@ import {useForm} from "react-hook-form";
 import {useAppDispatch} from "../../store";
 import {createRoom} from "../../store/slices/room";
 import TextInput from "../inputs/TextInput";
-import FileInput from "../inputs/FileInput";
 import RegularButton from "../ui/buttons/RegularButton";
 import DialContainer from "../containers/DialContainer";
+import TextAreaInput from "../inputs/TextAreaInput";
+import AvatarInput from "../inputs/AvatarInput";
 
 interface RoomFormProps {
     onClose: () => void;
@@ -14,6 +15,7 @@ interface RoomFormProps {
 
 interface FormValues {
     name: string;
+    description: string;
 }
 
 const RoomForm: FC<RoomFormProps> = ({onClose}) => {
@@ -27,6 +29,7 @@ const RoomForm: FC<RoomFormProps> = ({onClose}) => {
         const fd = new FormData();
 
         fd.append('name', data.name);
+        fd.append('description', data.description);
 
         if (file) {
             fd.append('avatar', file as Blob);
@@ -37,16 +40,17 @@ const RoomForm: FC<RoomFormProps> = ({onClose}) => {
         onClose();
     };
 
-    const handleChange = (files: File[]) => {
-        setFile(files[0]);
+    const handleChange = (file: File) => {
+        setFile(file);
     };
 
     return (
-        <DialContainer onClose={onClose}>
+        <DialContainer className="w-25" onClose={onClose}>
             <CardContainer title="Create new room" onClose={onClose}>
                 <form className="d-flex flex-column align-items-center" onSubmit={handleSubmit(onSubmit)}>
-                    <TextInput className="mb-3" placeholder="Name" defaultValue="" control={control} name="name"/>
-                    <FileInput visible onChange={handleChange}/>
+                    <TextInput className="w-100 mb-3" placeholder="Name" defaultValue="" control={control} name="name"/>
+                    <TextAreaInput className="mb-3" control={control} name="description" placeholder="Description"/>
+                    <AvatarInput onChange={handleChange}/>
                     <RegularButton type="submit" className="mt-3">Create</RegularButton>
                 </form>
             </CardContainer>

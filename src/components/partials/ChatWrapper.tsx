@@ -3,7 +3,7 @@ import ChatHeader from "./ChatHeader";
 import ChatList from "../common/ChatList";
 import ChatControls from "./ChatControls";
 import {useAppDispatch} from "../../store";
-import {fetchChat} from "../../store/slices/chat";
+import {fetchChat, setChat} from "../../store/slices/chat";
 import {useParams} from "react-router-dom";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {CreateMessageValues} from "../../types";
@@ -23,6 +23,10 @@ const ChatWrapper = () => {
     useEffect(() => {
         if (hash) {
             dispatch(fetchChat(hash))
+        }
+
+        return () => {
+            dispatch(setChat(null));
         }
     }, [hash]);
 

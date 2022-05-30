@@ -1,17 +1,22 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {FileDto} from "../../types";
 import {SERVER_URL} from "../../http";
 import cn from "classnames";
 import DocumentIcon from "../ui/icons/DocumentIcon";
 import {useFileType} from "../../hooks/useFileType";
+import ImageDial from "../common/ImageDial";
 
 interface ChatSwitchProps {
-    file: FileDto
+    file: FileDto;
 }
 
-export const ChatDocument: FC<ChatSwitchProps> = ({file}) => {
+interface ChatSwitchChildren extends ChatSwitchProps {
+    src: string;
+}
+
+export const ChatDocument: FC<ChatSwitchChildren> = ({file, src}) => {
     return (
-        <a href={`${SERVER_URL}/chat/${file.filename}`} className="chat-message__switch-link" download>
+        <a href={src} className="chat-message__switch-link" download>
             <div className="chat-message__switch-icon">
                 <DocumentIcon/>
             </div>
@@ -22,10 +27,15 @@ export const ChatDocument: FC<ChatSwitchProps> = ({file}) => {
     );
 };
 
-export const ChatPhoto: FC<ChatSwitchProps> = ({file}) => {
+export const ChatPhoto: FC<ChatSwitchChildren> = ({src}) => {
+    const [show, setShow] = useState(false);
+
+    const handleClick = () => setShow(!show);
+
     return (
         <div className="chat-message__switch-image">
-            <img src={`${SERVER_URL}/chat/${file.filename}`} alt=""/>
+            {show && <ImageDial onClose={handleClick} src={src}/>}
+            <img src={src} onClick={handleClick} alt=""/>
         </div>
     );
 };

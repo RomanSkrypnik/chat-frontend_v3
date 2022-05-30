@@ -1,5 +1,15 @@
 .file-input {
 
+  &._active {
+
+    .upload-icon {
+      &__arrow {
+        animation: 2s ease-in 0s infinite alternate both running arrowForward;
+      }
+    }
+
+  }
+
   input {
     display: none;
   }
@@ -7,4 +17,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@keyframes arrowForward {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-25%);
+  }
 }

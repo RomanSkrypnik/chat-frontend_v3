@@ -8,13 +8,14 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useFormatDuration} from "../../hooks/useDate";
 
 interface MessageItemProps {
+    src?: string;
     online?: boolean;
     name: string;
     hash: string;
     messages: MessageDto[];
 }
 
-const MessageItem: FC<MessageItemProps> = ({name, hash, online, messages}) => {
+const MessageItem: FC<MessageItemProps> = ({src, name, hash, online, messages}) => {
     const [unreadCount, setUnreadCount] = useState(0);
     const [lastMessage, setLastMessage] = useState<null | MessageDto>(null);
 
@@ -38,7 +39,7 @@ const MessageItem: FC<MessageItemProps> = ({name, hash, online, messages}) => {
         <NavLink to={`/${hash}`} className="message-item">
 
             <div className="d-flex">
-                <Avatar isOnline={online}/>
+                <Avatar src={src} isOnline={online}/>
                 <div className="d-flex justify-content-between w-100 ms-3">
                     <Typography fz={18} className="message-item__text fw-bold mb-1">{name}</Typography>
                     <Typography className="message-item__text">{date}</Typography>

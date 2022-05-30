@@ -9,6 +9,7 @@ export interface UserDto {
     id: number;
     username: string;
     name: string;
+    bio: string;
     hash: string;
     avatar: string | null;
     online: boolean;
@@ -22,4 +23,5 @@ export interface EditUserDto {
     username: string;
     name: string;
     email: string;
+    bio: string;
 }
