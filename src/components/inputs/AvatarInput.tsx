@@ -1,13 +1,14 @@
-import React, {FC, useCallback, useState} from 'react';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import {useDropzone} from "react-dropzone";
 import CameraIcon from "../ui/icons/CameraIcon";
 
 interface AvatarInputProps {
+    imgSrc?: string;
     onChange: (file: File) => void;
 }
 
-const AvatarInput: FC<AvatarInputProps> = ({onChange}) => {
-    const [src, setSrc] = useState<null | string>(null);
+const AvatarInput: FC<AvatarInputProps> = ({onChange, imgSrc}) => {
+    const [src, setSrc] = useState<undefined | string>(imgSrc);
 
     const onDrop = useCallback((files: File[]) => {
         const file = files[0];
@@ -16,6 +17,10 @@ const AvatarInput: FC<AvatarInputProps> = ({onChange}) => {
         const src = URL.createObjectURL(file);
         setSrc(src);
     }, []);
+
+    useEffect(() => {
+        setSrc(imgSrc);
+    }, [imgSrc]);
 
     const {getInputProps, getRootProps} = useDropzone({onDrop});
 

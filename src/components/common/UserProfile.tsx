@@ -11,6 +11,7 @@ import SwitchButton from "../ui/buttons/SwitchButton";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import UnlockedIcon from "../ui/icons/UnlockedIcon";
 import {SocketContext} from "../providers/SocketProvider";
+import useStorageUrl from "../../hooks/useStorageUrl";
 
 interface UserProfileDialProps {
     user: UserDto;
@@ -24,6 +25,8 @@ const UserProfile: FC<UserProfileDialProps> = ({user, onClose}) => {
 
     const socket = useContext(SocketContext);
 
+    const src = useStorageUrl('/avatars/', user.avatar);
+
     const blockUnblock = () => socket?.emit('block-unblock', user.id);
 
     const muteUnmute = () => socket?.emit('mute-unmute', user.id);
@@ -34,7 +37,7 @@ const UserProfile: FC<UserProfileDialProps> = ({user, onClose}) => {
                 <div className="user-profile">
 
                     <div className="d-flex align-items-center pb-3">
-                        <Avatar width={70} height={70}/>
+                        <Avatar src={src} width={70} height={70}/>
                         <div className="ms-4">
                             <Typography fz={18} className="fw-bold">{user.name}</Typography>
                             <Typography>{(user.online && 'Online') || `last seen ${date}`}</Typography>

@@ -53,9 +53,9 @@ export const logout = createAsyncThunk(
 
 export const editPersonalData = createAsyncThunk(
     'auth/editPersonalData',
-    async (editUserDto: EditUserDto, {dispatch}) => {
+    async (fd: FormData, {dispatch}) => {
         try {
-            const {data} = await UserService.edit(editUserDto);
+            const {data} = await UserService.edit(fd);
             dispatch(setUser(data.data));
         } catch (e) {
             throw e;

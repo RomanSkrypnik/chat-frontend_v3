@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import CardContainer from "../containers/CardContainer";
 import TextInput from "../inputs/TextInput";
 import {useForm} from "react-hook-form";
@@ -9,8 +9,11 @@ import {editPersonalData} from "../../store/slices/auth";
 import {EditUserDto} from "../../types";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useSnackbar} from "../../hooks/useSnackbar";
+import AvatarInput from "../inputs/AvatarInput";
+import useStorageUrl from "../../hooks/useStorageUrl";
 
 const SettingsAccountForm = () => {
+    const [file, setFile] = useState<null | File>(null);
 
     const {control, handleSubmit} = useForm<EditUserDto>();
 
@@ -18,11 +21,28 @@ const SettingsAccountForm = () => {
 
     const {snackbar} = useSnackbar();
 
+    const src = useStorageUrl('/avatars/', user?.avatar);
+
     const dispatch = useAppDispatch();
 
     const onSubmit = (data: EditUserDto) => {
-        dispatch(editPersonalData(data));
+        const fd = new FormData();
+
+        fd.append('username', data.username);
+        fd.append('name', data.name);
+        fd.append('email', data.email);
+        fd.append('bio', data.bio);
+
+        if (file) {
+            fd.append('avatar', file);
+        }
+
+        dispatch(editPersonalData(fd));
         snackbar('Personal data is successfully changed');
+    }
+
+    const handleChange = (file: File) => {
+        setFile(file);
     }
 
     return (
@@ -32,6 +52,13 @@ const SettingsAccountForm = () => {
                 user &&
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="d-flex">
+                        <div className="d-flex flex-column align-items-center me-5 pe-1">
+                            <AvatarInput imgSrc={src} onChange={handleChange}/>
+                            <Typography className="text-center mt-1">
+                                Drag or click here
+                            </Typography>
+                            <RegularButton type="submit" className="mt-4">Change data</RegularButton>
+                        </div>
                         <div className="flex-grow-1 me-4">
                             <TextInput defaultValue={user.username}
                                        name="username"
@@ -60,7 +87,6 @@ const SettingsAccountForm = () => {
                             />
                         </div>
                     </div>
-                    <RegularButton type="submit" className="mt-4">Change data</RegularButton>
                 </form>
             }
         </CardContainer>
