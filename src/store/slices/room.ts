@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RoomState} from "../../types/room";
 import {RoomService} from "../../services/RoomService";
 import {RootState} from "../index";
+import {RoomMessageService} from "../../services/RoomMessageService";
 
 export const fetchRooms = createAsyncThunk(
     'room/fetchRooms',
@@ -44,12 +45,28 @@ export const createRoom = createAsyncThunk(
             throw e;
         }
     }
-)
+);
+
+export const fetchMessages = createAsyncThunk(
+    'chat/fetchMessages',
+    async (chatId: number, {dispatch, getState}) => {
+        try {
+            const {room: {take, room}} = getState() as RootState;
+
+            if (!room?.isLoaded) {
+                const {data} = await RoomMessageService.get(chatId, room?.skip ?? 40, take);
+                dispatch(addOlderMessages(data.data))
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+);
 
 const initialState: RoomState = {
     rooms: [],
     room: null,
-    skip: 0,
+    take: 40,
 }
 
 const roomSlice = createSlice({
@@ -81,6 +98,30 @@ const roomSlice = createSlice({
                     return {...room, messages: [payload, ...room.messages]};
                 }
                 return room;
+            });
+        },
+
+        addOlderMessages(state, {payload}) {
+            const {messages, ...room} = payload;
+            const {roomId} = messages[0];
+
+            if (state.room && state.room.id === roomId) {
+                state.room = {
+                    ...state.room,
+                    ...room,
+                    messages: [...state.room.messages, ...messages]
+                };
+            }
+
+            state.rooms = state.rooms.map(roomChat => {
+                if (roomChat.id === roomId) {
+                    return {
+                        ...roomChat,
+                        ...room,
+                        messages: [...roomChat.messages, ...messages]
+                    };
+                }
+                return roomChat;
             });
         },
 
@@ -165,7 +206,8 @@ export const {
     addMessage,
     changeMessage,
     changeUser,
-    changeUserInRooms
+    changeUserInRooms,
+    addOlderMessages
 } = roomSlice.actions;
 
 export default roomSlice.reducer;

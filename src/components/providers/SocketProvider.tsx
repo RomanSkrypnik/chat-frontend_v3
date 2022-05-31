@@ -1,7 +1,14 @@
 import React, {createContext, FC, ReactNode, useEffect, useState} from 'react';
 import {io, Socket} from "socket.io-client";
 import {ChatDto, MessageDto, UserDto} from "../../types";
-import {addMessage, changeChat, changeMessage, changeUser} from "../../store/slices/chat";
+import {
+    addChat,
+    addMessage,
+    changeChat,
+    changeMessage,
+    changeUser,
+    setChat
+} from "../../store/slices/chat";
 import {SoundService} from "../../services/SoundService";
 import SnackbarMessage from "../partials/SnackbarMessage";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
@@ -41,6 +48,13 @@ const SocketProvider: FC<SocketProviderProps> = ({children}) => {
 
     useEffect(() => {
         if (socket) {
+
+            socket.on('new-chat', (chat: ChatDto) => {
+                dispatch(setChat(chat));
+                dispatch(addChat(chat));
+
+                setLastMessage(chat.messages[0]);
+            });
 
             socket.on('chat-message', (message: MessageDto) => {
                 dispatch(addMessage(message));

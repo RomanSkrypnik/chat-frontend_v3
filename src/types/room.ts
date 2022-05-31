@@ -5,7 +5,7 @@ import {MessageDto} from "./message";
 export interface RoomState {
     rooms: RoomDto[];
     room: null | RoomDto;
-    skip: number;
+    take: number;
 }
 
 export interface RoomDto {
@@ -14,10 +14,12 @@ export interface RoomDto {
     description: string;
     hash: string;
     avatar: null | string;
+    skip: number;
     roomId: number;
     messages: MessageDto[];
     users: UserDto[];
     files: FileDto[];
+    isLoaded: boolean;
 }
 
 export interface RoomFileDto {

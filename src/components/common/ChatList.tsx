@@ -3,9 +3,10 @@ import {MessageDto} from "../../types";
 import ChatListItem from "../partials/ChatListItem";
 import {useMessageArr} from "../../hooks/useMessageArr";
 import {useAppDispatch} from "../../store";
-import {fetchMessages} from "../../store/slices/chat";
+import {fetchMessages as fetchChatMessages} from "../../store/slices/chat";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useParams} from "react-router-dom";
+import {fetchMessages as fetchRoomMessages} from "../../store/slices/room";
 
 interface ChatListProps {
     messages: MessageDto[]
@@ -18,7 +19,7 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
     const {hash} = useParams();
 
     const {chat} = useTypedSelector(state => state.chat);
-
+    const {room} = useTypedSelector(state => state.room);
     const {user} = useTypedSelector(state => state.auth);
 
     const twoDimsArr = useMessageArr(messages);
@@ -30,7 +31,9 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
     const lastMessage = messages[0];
 
     useEffect(() => {
-        scrollToBottom();
+        if (messages.length === 40 || isLoaded) {
+            scrollToBottom();
+        }
     }, [isLoaded, twoDimsArr]);
 
     useEffect(() => {
@@ -50,8 +53,13 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
     }, [isLoaded]);
 
     const handleScroll = () => {
-        if (ref.current.scrollTop === 0 && chat) {
-            dispatch(fetchMessages(chat.id));
+        if (ref.current.scrollTop === 0) {
+
+            if (chat) {
+                dispatch(fetchChatMessages(chat.id));
+            } else if (room) {
+                dispatch(fetchRoomMessages(room.id));
+            }
 
             setScrollTop(ref.current.scrollHeight);
             setIsLoaded(false);

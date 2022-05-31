@@ -54,7 +54,7 @@ export const fetchMessages = createAsyncThunk(
         try {
             const {chat: {take, chat}} = getState() as RootState;
 
-            if (!chat?.allMessagesFetched) {
+            if (!chat?.isLoaded) {
                 const {data} = await MessageService.get(chatId, chat?.skip ?? 40, take);
                 dispatch(addOlderMessages(data.data))
             }
@@ -127,6 +127,10 @@ const chatSlice = createSlice({
             })
         },
 
+        addChat(state, {payload}) {
+            state.chats = [payload, ...state.chats];
+        },
+
         addMessage(state, {payload}) {
             const {chatId} = payload;
 
@@ -134,12 +138,14 @@ const chatSlice = createSlice({
                 state.chat.messages = [payload, ...state.chat.messages];
             }
 
-            state.chats = state.chats.map(chat => {
-                if (chat.id === chatId) {
-                    return {...chat, messages: [payload, ...chat.messages]};
-                }
-                return chat;
-            });
+            const chat = state.chats.find(({id}) => id === chatId);
+
+            if (chat) {
+                const chats = state.chats.filter(({id}) => id !== chatId);
+                chat.messages = [payload, ...chat.messages];
+                state.chats = [chat, ...chats];
+            }
+
         },
 
         addOlderMessages(state, {payload}) {
@@ -175,6 +181,7 @@ export const {
     changeUser,
     changeMessage,
     changeChat,
+    addChat,
     addMessage,
     addOlderMessages
 } = chatSlice.actions;

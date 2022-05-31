@@ -44,7 +44,9 @@ const ChatWrapper = () => {
             }
 
             const {data} = await MessageService.create(fd);
-            socket?.emit('send-message', {message: data.data, hash});
+            const withChat = !chat?.id
+
+            socket?.emit('send-message', {message: data.data, hash, withChat});
         }
     }
 

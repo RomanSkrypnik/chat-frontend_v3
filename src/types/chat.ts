@@ -15,5 +15,5 @@ export interface ChatDto {
     isMuted: boolean;
     isBlockedByMe: boolean;
     isBlockedByCompanion: boolean;
-    allMessagesFetched: boolean;
+    isLoaded: boolean;
 }
