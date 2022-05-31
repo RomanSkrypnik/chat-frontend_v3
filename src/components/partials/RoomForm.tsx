@@ -48,9 +48,13 @@ const RoomForm: FC<RoomFormProps> = ({onClose}) => {
         <DialContainer className="w-25" onClose={onClose}>
             <CardContainer title="Create new room" onClose={onClose}>
                 <form className="d-flex flex-column align-items-center" onSubmit={handleSubmit(onSubmit)}>
-                    <TextInput className="w-100 mb-3" placeholder="Name" defaultValue="" control={control} name="name"/>
+
+                    <div className="d-flex align-items-center w-100 mb-3">
+                        <AvatarInput onChange={handleChange}/>
+                        <TextInput className="flex-grow-1 ms-3" placeholder="Name" defaultValue="" control={control} name="name"/>
+                    </div>
+
                     <TextAreaInput className="mb-3" control={control} name="description" placeholder="Description"/>
-                    <AvatarInput onChange={handleChange}/>
                     <RegularButton type="submit" className="mt-3">Create</RegularButton>
                 </form>
             </CardContainer>

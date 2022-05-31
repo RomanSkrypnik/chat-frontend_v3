@@ -13,14 +13,15 @@ interface ChatListProps {
 }
 
 const ChatList: FC<ChatListProps> = ({messages}) => {
+    const [lastMessage, setLastMessage] = useState<null | MessageDto>(null);
     const [scrollTop, setScrollTop] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 
     const {hash} = useParams();
 
+    const {user} = useTypedSelector(state => state.auth);
     const {chat} = useTypedSelector(state => state.chat);
     const {room} = useTypedSelector(state => state.room);
-    const {user} = useTypedSelector(state => state.auth);
 
     const twoDimsArr = useMessageArr(messages);
 
@@ -28,13 +29,14 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
 
     const ref = useRef() as MutableRefObject<HTMLUListElement>;
 
-    const lastMessage = messages[0];
-
     useEffect(() => {
-        if (messages.length === 40 || isLoaded) {
-            scrollToBottom();
+        if (twoDimsArr.length > 0) {
+            const i = twoDimsArr.length - 1;
+            const j = twoDimsArr[i].length - 1;
+
+            setLastMessage(twoDimsArr[i][j]);
         }
-    }, [isLoaded, twoDimsArr]);
+    }, [twoDimsArr]);
 
     useEffect(() => {
         if (lastMessage?.user.id === user?.id) {
@@ -47,10 +49,8 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
     }, [hash]);
 
     useEffect(() => {
-        if (isLoaded) {
-            ref.current.scrollTo(0, ref.current.scrollHeight - scrollTop);
-        }
-    }, [isLoaded]);
+        ref.current.scrollTo(0, ref.current.scrollHeight - scrollTop);
+    }, [twoDimsArr, isLoaded]);
 
     const handleScroll = () => {
         if (ref.current.scrollTop === 0) {
