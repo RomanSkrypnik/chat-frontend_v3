@@ -1,7 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
 import authReducer from "./slices/auth";
 import chatReducer from "./slices/chat";
-import userReducer from "./slices/user";
 import roomReducer from "./slices/room"
 import {useDispatch} from "react-redux";
 
@@ -9,7 +8,6 @@ const store = configureStore({
     reducer: {
         auth: authReducer,
         chat: chatReducer,
-        user: userReducer,
         room: roomReducer
     }
 })

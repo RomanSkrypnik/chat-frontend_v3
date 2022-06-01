@@ -11,10 +11,10 @@ interface AvatarProps {
     className?: string;
 }
 
-const Avatar: FC<AvatarProps> = ({src, alt, className, width, height, isOnline = false}) => {
+const Avatar: FC<AvatarProps> = ({onClick, src, alt, className, width, height, isOnline = false}) => {
     return (
         <div className="position-relative">
-            <button className={cn("avatar", className)} style={{width, height}}>
+            <button className={cn("avatar", className)} style={{width, height}} onClick={onClick}>
                 <img src={src} alt={alt}/>
             </button>
             {isOnline && <span className="avatar__online" />}

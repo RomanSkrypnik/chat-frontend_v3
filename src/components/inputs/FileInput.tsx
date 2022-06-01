@@ -6,14 +6,22 @@ import {useDropzone} from "react-dropzone";
 import cn from "classnames";
 
 interface FileInputProps {
+    name?: string;
     onChange: (files: File[]) => void;
     visible?: boolean;
-    value?: '';
+    value?: string;
     multiple?: boolean;
     buttonText?: string;
 }
 
-const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({buttonText, multiple = true, visible, onChange, value = ''}, ref) => {
+const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({
+                                                                    name,
+                                                                    buttonText,
+                                                                    multiple = true,
+                                                                    visible,
+                                                                    onChange,
+                                                                    value = ''
+                                                                }, ref) => {
 
     const onDrop = useCallback((files: File[]) => {
         onChange(files);
@@ -23,6 +31,7 @@ const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({buttonText, mul
 
     return (
         <div className={cn("file-input", isDragActive && '_active')}>
+
             {
                 visible &&
                 <>
@@ -34,7 +43,9 @@ const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({buttonText, mul
                     <RegularButton onClick={open}>{buttonText ?? 'Select files'}</RegularButton>
                 </>
             }
+
             <input {...getInputProps()}
+                   name={name}
                    multiple={multiple}
                    ref={ref}
                    className="file-input"

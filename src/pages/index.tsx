@@ -12,11 +12,12 @@ const Home = () => {
 
     const {hash} = useParams();
 
+
     const handleClick = () => setShow(!show);
 
     return (
         <section className="home">
-            <div className="d-flex">
+            <div className="d-flex fade-in">
                 <div className="w-25 me-3">
                     <div className="d-flex justify-content-between mb-3">
                         <Typography className="mb-3" fz={36}>Chats</Typography>
@@ -24,9 +25,13 @@ const Home = () => {
                     </div>
                     <MessageWrapper/>
                 </div>
-                {hash && <ChatWrapper/>}
+                {
+                    hash && <ChatWrapper/>
+                }
             </div>
-            {show && <UserSearch onClose={handleClick}/>}
+            {
+                show && <UserSearch onClose={handleClick}/>
+            }
         </section>
     );
 };

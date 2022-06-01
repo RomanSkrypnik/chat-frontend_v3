@@ -1,0 +1,41 @@
+.fade-in {
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+}
+
+.slide-in {
+  animation-name: slide-in;
+  animation-duration: .5s;
+}
+
+.slide-out {
+  animation-name: slide-out;
+  animation-duration: .5s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(125%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(125%);
+  }
+}

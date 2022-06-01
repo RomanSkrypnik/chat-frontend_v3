@@ -27,8 +27,8 @@ const Rooms = () => {
 
     return (
         <section className="rooms">
-            <div className="d-flex">
-                <div className="w-25">
+            <div className="d-flex fade-in">
+                <div className="w-25 me-3">
                     <div className="d-flex justify-content-between mb-3">
                         <Typography className="mb-3" fz={36}>Rooms</Typography>
                         <RegularButton onClick={handleClick}>Create New Room</RegularButton>

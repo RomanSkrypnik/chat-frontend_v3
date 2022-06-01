@@ -24,7 +24,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
                 <div className="d-flex justify-content-between">
 
                     <div className="d-flex">
-                        <Avatar/>
+                        <Avatar onClick={handleClick}/>
                         <div className="ms-3">
                             <Typography fz={18} className="fw-bold">{user.name}</Typography>
                             <Typography className="text-primary">

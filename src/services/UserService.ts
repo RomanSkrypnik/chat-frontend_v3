@@ -11,7 +11,7 @@ export class UserService {
     }
 
     static async usersBySearch(search: string) {
-        return await $api.post('/user', {search});
+        return await $api.post('/user/search', {search});
     }
 
     static async edit(fd: FormData) {
@@ -20,6 +20,10 @@ export class UserService {
 
     static async changePassword(password: string) {
         return await $api.post('/user/change-password', {password})
+    }
+
+    static async comparePassword(password: string) {
+        return await $api.post('/user/compare-password', {password});
     }
 
 }

@@ -18,7 +18,7 @@ const CardContainer: FC<CardContainer> = ({onClose, className, title, children})
     }
 
     return (
-        <div className={cn("card-container", className)} onClick={handleClick}>
+        <div className={cn("card-container fade-in", className)} onClick={handleClick}>
             {
                 withHeader &&
                 <div className="card-container__header mb-4">

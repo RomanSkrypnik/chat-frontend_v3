@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ChatHeader from "./ChatHeader";
 import ChatList from "../common/ChatList";
 import ChatControls from "./ChatControls";
@@ -9,9 +9,10 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {CreateMessageValues} from "../../types";
 import MessageService from "../../services/MessageService";
 import {SocketContext} from "../providers/SocketProvider";
+import cn from "classnames";
+import Wrapper from "../common/Wrapper";
 
 const ChatWrapper = () => {
-
     const {hash} = useParams();
 
     const dispatch = useAppDispatch();
@@ -22,7 +23,7 @@ const ChatWrapper = () => {
 
     useEffect(() => {
         if (hash) {
-            dispatch(fetchChat(hash))
+            dispatch(fetchChat(hash));
         }
 
         return () => {
@@ -51,16 +52,19 @@ const ChatWrapper = () => {
     }
 
     return (
-        <div className="flex-grow-1 bg-white">
-            {
-                chat &&
-                <>
-                    <ChatHeader user={chat.user}/>
-                    <ChatList messages={chat.messages}/>
-                    <ChatControls isBlocked={chat.isBlockedByMe || chat.isBlockedByCompanion} onSubmit={handleSubmit}/>
-                </>
-            }
-        </div>
+        <Wrapper>
+            <div className="flex-grow-1 bg-white">
+                {
+                    chat &&
+                    <>
+                        <ChatHeader user={chat.user}/>
+                        <ChatList messages={chat.messages}/>
+                        <ChatControls isBlocked={chat.isBlockedByMe || chat.isBlockedByCompanion}
+                                      onSubmit={handleSubmit}/>
+                    </>
+                }
+            </div>
+        </Wrapper>
     );
 };
 

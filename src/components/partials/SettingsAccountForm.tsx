@@ -11,11 +11,13 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useSnackbar} from "../../hooks/useSnackbar";
 import AvatarInput from "../inputs/AvatarInput";
 import useStorageUrl from "../../hooks/useStorageUrl";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {accountSchema} from "../../validation";
 
 const SettingsAccountForm = () => {
     const [file, setFile] = useState<null | File>(null);
 
-    const {control, handleSubmit} = useForm<EditUserDto>();
+    const {control, handleSubmit} = useForm<EditUserDto>({resolver: yupResolver(accountSchema)});
 
     const {user} = useTypedSelector(state => state.auth);
 

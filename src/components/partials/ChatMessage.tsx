@@ -30,6 +30,7 @@ const ChatMessage: FC<ChatMessageProps> = ({message}) => {
                 const messageBody = {userId: user?.id, messageId: message.id};
 
                 if (room) {
+                    console.log('here');
                     roomSocket?.emit('read-message', {...messageBody, roomId: room?.id});
                 } else {
                     socket?.emit('read-message', messageBody);

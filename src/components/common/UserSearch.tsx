@@ -18,11 +18,22 @@ interface FormValues {
 const UserSearch: FC<UserSearchProps> = ({onClose}) => {
     const [users, setUsers] = useState<[] | UserDto[]>([]);
 
-    const {control} = useForm<FormValues>();
+    const {control, watch, handleSubmit} = useForm<FormValues>();
+
+    useEffect(() => {
+        const subscription = watch(() => handleSubmit(onSubmit)());
+
+        return () => subscription.unsubscribe();
+    }, [watch]);
 
     useEffect(() => {
         fetchUsers();
     }, []);
+
+    const onSubmit = async (data: FormValues) => {
+        const {data: users} = await UserService.usersBySearch(data.search);
+        setUsers(users.data);
+    }
 
     const fetchUsers = async () => {
         const {data} = await UserService.users();

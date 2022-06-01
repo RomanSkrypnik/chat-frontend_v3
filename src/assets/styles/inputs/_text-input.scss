@@ -1,5 +1,17 @@
 .text-input {
 
+  &._error {
+    border: 1px solid $red;
+  }
+
+  & + span {
+    font-size: 14px;
+    color: $red;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+  }
+
   &:focus {
     outline: none;
   }

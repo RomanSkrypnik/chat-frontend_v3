@@ -3,6 +3,7 @@
   &::-webkit-scrollbar {
     width: 12px;
     background-color: transparent;
+    padding-left: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -11,4 +12,5 @@
     background-color: $scrollGrey;
   }
 
+  padding-right: 20px;
 }
