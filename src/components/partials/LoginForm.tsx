@@ -6,11 +6,10 @@ import {login} from "../../store/slices/auth";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../store";
 import {Link} from "react-router-dom";
-import CardContainer from "../containers/CardContainer";
-import CenteredContainer from "../containers/CenteredContainer";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {loginSchema} from "../../validation";
 import { Typography } from '../common';
+import { CardContainer, CenteredContainer } from '../containers';
 
 const LoginForm = () => {
 

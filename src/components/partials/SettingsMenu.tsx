@@ -1,6 +1,6 @@
 import React, {FC, ReactNode} from 'react';
 import SidebarButton from "../ui/buttons/SidebarButton";
-import CardContainer from "../containers/CardContainer";
+import { CardContainer } from '../containers';
 
 interface SettingsMenuButtonDto {
     id: number;

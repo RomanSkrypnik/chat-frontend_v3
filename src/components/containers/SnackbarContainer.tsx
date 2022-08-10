@@ -7,7 +7,7 @@ interface SnackbarContainerProps {
     children: ReactNode
 }
 
-const SnackbarContainer: FC<SnackbarContainerProps> = ({children}) => {
+export const SnackbarContainer: FC<SnackbarContainerProps> = ({children}) => {
     const {close} = useSnackbar();
 
     return (
@@ -21,5 +21,3 @@ const SnackbarContainer: FC<SnackbarContainerProps> = ({children}) => {
         </div>
     );
 };
-
-export default SnackbarContainer;

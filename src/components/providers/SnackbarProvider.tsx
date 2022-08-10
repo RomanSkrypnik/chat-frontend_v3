@@ -1,5 +1,5 @@
-import React, {createContext, Dispatch, FC, ReactNode, SetStateAction, useEffect, useState} from 'react';
-import SnackbarContainer from "../containers/SnackbarContainer";
+import React, { createContext, Dispatch, FC, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import { SnackbarContainer } from '../containers';
 
 export const SnackbarContext = createContext<null | SnackbarContextDto>(null);
 
@@ -10,10 +10,10 @@ interface SnackbarProviderProps {
 interface SnackbarContextDto {
     setOpen: Dispatch<SetStateAction<boolean>>;
     setSnackbarChildren: Dispatch<SetStateAction<string | ReactNode>>;
-    setSnackbarTimeout: Dispatch<SetStateAction<number>>
+    setSnackbarTimeout: Dispatch<SetStateAction<number>>;
 }
 
-const SnackbarProvider: FC<SnackbarProviderProps> = ({children}) => {
+const SnackbarProvider: FC<SnackbarProviderProps> = ({ children }) => {
     const [open, setOpen] = useState(false);
     const [snackbarChildren, setSnackbarChildren] = useState<string | ReactNode>('');
     const [snackbarTimeout, setSnackbarTimeout] = useState(5000);
@@ -27,7 +27,7 @@ const SnackbarProvider: FC<SnackbarProviderProps> = ({children}) => {
     }, [open]);
 
     return (
-        <SnackbarContext.Provider value={{setOpen, setSnackbarChildren, setSnackbarTimeout}}>
+        <SnackbarContext.Provider value={{ setOpen, setSnackbarChildren, setSnackbarTimeout }}>
             {
                 open &&
                 <SnackbarContainer>

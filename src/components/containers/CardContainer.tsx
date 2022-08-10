@@ -10,7 +10,7 @@ interface CardContainer {
     children: ReactNode;
 }
 
-const CardContainer: FC<CardContainer> = ({onClose, className, title, children}) => {
+export const CardContainer: FC<CardContainer> = ({onClose, className, title, children}) => {
     const withHeader = onClose || title;
 
     const handleClick = (e: any) => {
@@ -30,5 +30,3 @@ const CardContainer: FC<CardContainer> = ({onClose, className, title, children})
         </div>
     );
 };
-
-export default CardContainer;

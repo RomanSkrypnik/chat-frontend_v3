@@ -1,11 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
-import DialContainer from '../containers/DialContainer';
-import CardContainer from '../containers/CardContainer';
 import TextInput from '../inputs/TextInput';
 import { useForm } from 'react-hook-form';
 import { UserDto } from '../../types';
 import { UserService } from '../../services';
 import UserSearchItem from '../partials/UserSearchItem';
+import { CardContainer, DialContainer } from '../containers';
 
 interface UserSearchProps {
     onClose: () => void;

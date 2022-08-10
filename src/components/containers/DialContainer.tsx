@@ -8,7 +8,7 @@ interface DialContainerProps {
     children: ReactNode;
 }
 
-const DialContainer: FC<DialContainerProps> = ({className, onClose, children}) => {
+export const DialContainer: FC<DialContainerProps> = ({className, onClose, children}) => {
     return (
         <Portal onClick={onClose}>
             <div className={cn("dial-container", className)}>
@@ -17,5 +17,3 @@ const DialContainer: FC<DialContainerProps> = ({className, onClose, children}) =
         </Portal>
     );
 };
-
-export default DialContainer;

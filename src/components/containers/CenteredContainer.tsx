@@ -4,12 +4,10 @@ interface CenteredContainerProps {
     children: ReactNode;
 }
 
-const CenteredContainer: FC<CenteredContainerProps> = ({children}) => {
+export const CenteredContainer: FC<CenteredContainerProps> = ({children}) => {
     return (
         <div className="top-50 start-50 translate-middle position-absolute">
             {children}
         </div>
     );
 };
-
-export default CenteredContainer;
