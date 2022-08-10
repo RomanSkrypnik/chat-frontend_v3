@@ -1,20 +1,19 @@
-import React, {FC, ReactNode} from 'react';
-import IconButton from "../ui/buttons/IconButton";
-import CloseCrossIcon from "../ui/icons/CloseCrossIcon";
-import {useSnackbar} from "../../hooks/useSnackbar";
+import React, { FC, ReactNode } from 'react';
+import { useSnackbar } from '../../hooks/useSnackbar';
+import { CloseCrossIcon, IconButton } from '../ui';
 
 interface SnackbarContainerProps {
-    children: ReactNode
+    children: ReactNode;
 }
 
-export const SnackbarContainer: FC<SnackbarContainerProps> = ({children}) => {
-    const {close} = useSnackbar();
+export const SnackbarContainer: FC<SnackbarContainerProps> = ({ children }) => {
+    const { close } = useSnackbar();
 
     return (
-        <div className="snackbar-container">
-            <div className="position-relative">
-                <IconButton className="position-absolute top-0 end-0" onClick={close}>
-                    <CloseCrossIcon/>
+        <div className='snackbar-container'>
+            <div className='position-relative'>
+                <IconButton className='position-absolute top-0 end-0' onClick={close}>
+                    <CloseCrossIcon />
                 </IconButton>
                 {children}
             </div>

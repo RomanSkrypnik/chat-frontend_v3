@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
 import { FileDto } from '../../types';
 import cn from 'classnames';
-import DocumentIcon from '../ui/icons/DocumentIcon';
 import { useFileType } from '../../hooks/useFileType';
 import { ImageDial } from '../common';
+import { DocumentIcon } from '../ui';
 
 interface ChatSwitchProps {
     file: FileDto;

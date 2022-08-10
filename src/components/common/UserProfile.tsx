@@ -1,23 +1,20 @@
 import React, { FC, useContext } from 'react';
 import { UserDto } from '../../types';
-import Avatar from '../ui/buttons/Avatar';
 import { useFormatDuration } from '../../hooks/useDate';
-import ProhibitedIcon from '../ui/icons/ProhibitedIcon';
-import ButtonIcon from '../ui/buttons/ButtonIcon';
-import SwitchButton from '../ui/buttons/SwitchButton';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import UnlockedIcon from '../ui/icons/UnlockedIcon';
-import { SocketContext } from '../providers/SocketProvider';
 import useStorageUrl from '../../hooks/useStorageUrl';
 import { Typography } from './Typography';
 import { CardContainer, DialContainer } from '../containers';
+import { ButtonIcon, ProhibitedIcon, SwitchButton, UnlockedIcon } from '../ui';
+import { Avatar } from '../ui/buttons/Avatar';
+import { SocketContext } from '../providers';
 
 interface UserProfileDialProps {
     user: UserDto;
     onClose: () => void;
 }
 
-const UserProfile: FC<UserProfileDialProps> = ({ user, onClose }) => {
+export const UserProfile: FC<UserProfileDialProps> = ({ user, onClose }) => {
     const { chat } = useTypedSelector(state => state.chat);
 
     const date = useFormatDuration(user.lastSeen);
@@ -71,11 +68,8 @@ const UserProfile: FC<UserProfileDialProps> = ({ user, onClose }) => {
                                 </ButtonIcon>
                         }
                     </div>
-
                 </div>
             </CardContainer>
         </DialContainer>
     );
 };
-
-export default UserProfile;

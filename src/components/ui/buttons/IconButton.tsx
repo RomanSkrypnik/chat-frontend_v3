@@ -7,12 +7,10 @@ interface IconButtonProps {
     children: ReactNode;
 }
 
-const IconButton: FC<IconButtonProps> = ({onClick, className, children}) => {
+export const IconButton: FC<IconButtonProps> = ({onClick, className, children}) => {
     return (
         <button className={cn("icon-button", className)} onClick={onClick}>
             {children}
         </button>
     );
 };
-
-export default IconButton;

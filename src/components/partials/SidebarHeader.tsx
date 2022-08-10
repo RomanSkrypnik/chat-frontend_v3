@@ -1,8 +1,8 @@
 import React from 'react';
-import Avatar from '../ui/buttons/Avatar';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import useStorageUrl from '../../hooks/useStorageUrl';
 import { Typography } from '../common';
+import { Avatar } from '../ui/buttons/Avatar';
 
 export const SidebarHeader = () => {
 

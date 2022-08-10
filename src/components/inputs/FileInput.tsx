@@ -1,9 +1,8 @@
 import React, { forwardRef, useCallback } from 'react';
-import UploadIcon from '../ui/icons/UploadIcon';
-import RegularButton from '../ui/buttons/RegularButton';
 import { useDropzone } from 'react-dropzone';
 import cn from 'classnames';
 import { Typography } from '../common';
+import { RegularButton, UploadIcon } from '../ui';
 
 interface FileInputProps {
     name?: string;

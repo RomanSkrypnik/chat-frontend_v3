@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TelegramIcon = () => {
+export const TelegramIcon = () => {
     return (
         <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_dd_1_392)">
@@ -32,5 +32,3 @@ const TelegramIcon = () => {
 
     );
 };
-
-export default TelegramIcon;

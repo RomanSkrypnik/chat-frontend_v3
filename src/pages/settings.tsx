@@ -1,8 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import withAuthorized from '../hocs/Authorized';
-import HouseIcon from '../components/ui/icons/HouseIcon';
-import KeyIcon from '../components/ui/icons/KeyIcon';
 import { SettingsAccountForm, SettingsMenu, SettingsPasswordForm } from '../components/partials';
+import { HouseIcon, KeyIcon } from '../components/ui';
 
 const Settings = () => {
     const [component, setComponent] = useState<ReactNode>(<SettingsAccountForm />);

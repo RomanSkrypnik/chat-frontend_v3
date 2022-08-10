@@ -11,7 +11,7 @@ interface AvatarProps {
     className?: string;
 }
 
-const Avatar: FC<AvatarProps> = ({onClick, src, alt, className, width, height, isOnline = false}) => {
+export const Avatar: FC<AvatarProps> = ({onClick, src, alt, className, width, height, isOnline = false}) => {
     return (
         <div className="position-relative">
             <button className={cn("avatar", className)} style={{width, height}} onClick={onClick}>
@@ -21,5 +21,3 @@ const Avatar: FC<AvatarProps> = ({onClick, src, alt, className, width, height, i
         </div>
     );
 };
-
-export default Avatar;

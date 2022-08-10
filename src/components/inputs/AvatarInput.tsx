@@ -1,13 +1,13 @@
-import React, {FC, useCallback, useEffect, useState} from 'react';
-import {useDropzone} from "react-dropzone";
-import CameraIcon from "../ui/icons/CameraIcon";
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+import { CameraIcon } from '../ui';
 
 interface AvatarInputProps {
     imgSrc?: string;
     onChange: (file: File) => void;
 }
 
-const AvatarInput: FC<AvatarInputProps> = ({onChange, imgSrc}) => {
+const AvatarInput: FC<AvatarInputProps> = ({ onChange, imgSrc }) => {
     const [src, setSrc] = useState<undefined | string>(imgSrc);
 
     const onDrop = useCallback((files: File[]) => {
@@ -22,21 +22,21 @@ const AvatarInput: FC<AvatarInputProps> = ({onChange, imgSrc}) => {
         setSrc(imgSrc);
     }, [imgSrc]);
 
-    const {getInputProps, getRootProps} = useDropzone({onDrop});
+    const { getInputProps, getRootProps } = useDropzone({ onDrop });
 
     return (
-        <div className="avatar-input" {...getRootProps()}>
+        <div className='avatar-input' {...getRootProps()}>
 
             {
                 src ?
-                    <img src={src} alt="Avatar"/>
+                    <img src={src} alt='Avatar' />
                     :
-                    <div className="avatar-input__wrapper">
-                        <CameraIcon/>
+                    <div className='avatar-input__wrapper'>
+                        <CameraIcon />
                     </div>
             }
 
-            <input type="file" accept="image/png, image/gif, image/jpeg" {...getInputProps()}/>
+            <input type='file' accept='image/png, image/gif, image/jpeg' {...getInputProps()} />
         </div>
     );
 };

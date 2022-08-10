@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../store';
 import { createRoom } from '../../store/slices/room';
 import TextInput from '../inputs/TextInput';
-import RegularButton from '../ui/buttons/RegularButton';
 import TextAreaInput from '../inputs/TextAreaInput';
 import AvatarInput from '../inputs/AvatarInput';
 import { CardContainer, DialContainer } from '../containers';
+import { RegularButton } from '../ui';
 
 interface RoomFormProps {
     onClose: () => void;

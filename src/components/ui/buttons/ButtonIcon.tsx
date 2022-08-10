@@ -9,7 +9,7 @@ interface ButtonWithIconProps {
     children: ReactNode;
 }
 
-const ButtonIcon: FC<ButtonWithIconProps> = ({onClick, className, icon, children}) => {
+export const ButtonIcon: FC<ButtonWithIconProps> = ({onClick, className, icon, children}) => {
     return (
         <button className={cn("button-icon", className)} onClick={onClick}>
             {icon}
@@ -17,5 +17,3 @@ const ButtonIcon: FC<ButtonWithIconProps> = ({onClick, className, icon, children
         </button>
     );
 };
-
-export default ButtonIcon;

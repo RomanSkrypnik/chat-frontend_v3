@@ -1,9 +1,8 @@
 import React from 'react';
 import { logout } from '../store/slices/auth';
 import { useAppDispatch } from '../store';
-import SidebarButton from './ui/buttons/SidebarButton';
-import PowerOnIcon from './ui/icons/PowerOnIcon';
 import { SidebarHeader, SidebarMenu } from './partials';
+import { PowerOnIcon, SidebarButton } from './ui';
 
 const Sidebar = () => {
 

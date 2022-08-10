@@ -1,10 +1,9 @@
 import React, { FC, useState } from 'react';
-import Avatar from '../ui/buttons/Avatar';
-import CircleButton from '../ui/buttons/CircleButton';
-import ThreeDotsIcon from '../ui/icons/ThreeDotsIcon';
 import { RoomDto } from '../../types/room';
 import { ROOM_AVATAR_URL } from '../../http';
 import { RoomProfile, Typography } from '../common';
+import { CircleButton, ThreeDotsIcon } from '../ui';
+import { Avatar } from '../ui/buttons/Avatar';
 
 interface RoomHeaderProps {
     room: RoomDto;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import TextInput from '../inputs/TextInput';
 import { useForm } from 'react-hook-form';
-import RegularButton from '../ui/buttons/RegularButton';
 import { useAppDispatch } from '../../store';
 import { editPersonalData } from '../../store/slices/auth';
 import { EditUserDto } from '../../types';
@@ -13,6 +12,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { accountSchema } from '../../validation';
 import { Typography } from '../common';
 import { CardContainer } from '../containers';
+import { RegularButton } from '../ui';
 
 export const SettingsAccountForm = () => {
     const [file, setFile] = useState<null | File>(null);

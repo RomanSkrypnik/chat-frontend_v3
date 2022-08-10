@@ -5,7 +5,7 @@ interface SwitchButtonProps {
     value: boolean;
 }
 
-const SwitchButton: FC<SwitchButtonProps> = ({onChange, value}) => {
+export const SwitchButton: FC<SwitchButtonProps> = ({onChange, value}) => {
 
     const handleToggle = (e: ChangeEvent<HTMLInputElement>) => onChange(e.target.checked);
 
@@ -16,5 +16,3 @@ const SwitchButton: FC<SwitchButtonProps> = ({onChange, value}) => {
         </label>
     );
 };
-
-export default SwitchButton;
