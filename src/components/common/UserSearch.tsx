@@ -3,8 +3,8 @@ import TextInput from '../inputs/TextInput';
 import { useForm } from 'react-hook-form';
 import { UserDto } from '../../types';
 import { UserService } from '../../services';
-import UserSearchItem from '../partials/UserSearchItem';
 import { CardContainer, DialContainer } from '../containers';
+import { UserSearchItem } from '../partials';
 
 interface UserSearchProps {
     onClose: () => void;

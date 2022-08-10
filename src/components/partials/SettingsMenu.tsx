@@ -15,7 +15,7 @@ interface SettingsMenuProps {
     onClick: (component: ReactNode, id: number) => void;
 }
 
-const SettingsMenu: FC<SettingsMenuProps> = ({buttons, value, onClick}) => {
+export const SettingsMenu: FC<SettingsMenuProps> = ({buttons, value, onClick}) => {
 
     const handleClick = (component: ReactNode, id: number) => {
         onClick(component, id);
@@ -37,5 +37,3 @@ const SettingsMenu: FC<SettingsMenuProps> = ({buttons, value, onClick}) => {
         </CardContainer>
     );
 };
-
-export default SettingsMenu;

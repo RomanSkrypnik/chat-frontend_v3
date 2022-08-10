@@ -1,12 +1,12 @@
 import React, { FC, MutableRefObject, useEffect, useRef, useState } from 'react';
 import { MessageDto } from '../../types';
-import ChatListItem from '../partials/ChatListItem';
 import { useMessageArr } from '../../hooks/useMessageArr';
 import { useAppDispatch } from '../../store';
 import { fetchMessages as fetchChatMessages } from '../../store/slices/chat';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useParams } from 'react-router-dom';
 import { fetchMessages as fetchRoomMessages } from '../../store/slices/room';
+import { ChatListItem } from '../partials';
 
 interface ChatListProps {
     messages: MessageDto[];

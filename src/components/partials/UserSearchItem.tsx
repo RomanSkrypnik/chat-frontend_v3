@@ -10,7 +10,7 @@ interface UserSearchItemProps {
     onClose: () => void;
 }
 
-const UserSearchItem: FC<UserSearchItemProps> = ({ user, onClose }) => {
+export const UserSearchItem: FC<UserSearchItemProps> = ({ user, onClose }) => {
     const navigate = useNavigate();
 
     const src = useStorageUrl('/avatars/', user.avatar);
@@ -30,5 +30,3 @@ const UserSearchItem: FC<UserSearchItemProps> = ({ user, onClose }) => {
         </div>
     );
 };
-
-export default UserSearchItem;

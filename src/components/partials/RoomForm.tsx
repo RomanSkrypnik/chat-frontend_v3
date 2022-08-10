@@ -17,7 +17,7 @@ interface FormValues {
     description: string;
 }
 
-const RoomForm: FC<RoomFormProps> = ({ onClose }) => {
+export const RoomForm: FC<RoomFormProps> = ({ onClose }) => {
     const [file, setFile] = useState<[] | File>([]);
 
     const { handleSubmit, control } = useForm<FormValues>();
@@ -61,5 +61,3 @@ const RoomForm: FC<RoomFormProps> = ({ onClose }) => {
         </DialContainer>
     );
 };
-
-export default RoomForm;

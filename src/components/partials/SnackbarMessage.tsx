@@ -8,7 +8,7 @@ interface MessageSnackbarProps {
     message: MessageDto;
 }
 
-const SnackbarMessage: FC<MessageSnackbarProps> = ({user, message}) => {
+export const SnackbarMessage: FC<MessageSnackbarProps> = ({user, message}) => {
     const date = useFormatDate(message.createdAt, 'hh:mm');
 
     return (
@@ -24,5 +24,3 @@ const SnackbarMessage: FC<MessageSnackbarProps> = ({user, message}) => {
         </>
     );
 };
-
-export default SnackbarMessage;

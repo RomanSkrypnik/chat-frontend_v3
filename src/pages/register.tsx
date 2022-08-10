@@ -1,6 +1,6 @@
 import React from 'react';
 import withUnauthorized from "../hocs/Unauthorized";
-import RegisterForm from "../components/partials/RegisterForm";
+import { RegisterForm } from '../components/partials';
 
 const Register = () => {
     return (

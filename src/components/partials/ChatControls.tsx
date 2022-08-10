@@ -12,7 +12,7 @@ interface ChatControlsProps {
     onSubmit: (data: CreateMessageValues) => void;
 }
 
-const ChatControls: FC<ChatControlsProps> = ({isBlocked, onSubmit}) => {
+export const ChatControls: FC<ChatControlsProps> = ({isBlocked, onSubmit}) => {
     const [files, setFiles] = useState<[] | File[]>([]);
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -55,5 +55,3 @@ const ChatControls: FC<ChatControlsProps> = ({isBlocked, onSubmit}) => {
         </div>
     );
 };
-
-export default ChatControls;

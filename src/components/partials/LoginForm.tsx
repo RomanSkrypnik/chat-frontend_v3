@@ -11,7 +11,7 @@ import {loginSchema} from "../../validation";
 import { Typography } from '../common';
 import { CardContainer, CenteredContainer } from '../containers';
 
-const LoginForm = () => {
+export const LoginForm = () => {
 
     const {control, handleSubmit} = useForm<LoginDto>({resolver: yupResolver(loginSchema)});
 
@@ -46,5 +46,3 @@ const LoginForm = () => {
         </CenteredContainer>
     );
 };
-
-export default LoginForm;

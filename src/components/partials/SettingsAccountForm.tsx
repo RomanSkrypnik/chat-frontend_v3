@@ -14,7 +14,7 @@ import { accountSchema } from '../../validation';
 import { Typography } from '../common';
 import { CardContainer } from '../containers';
 
-const SettingsAccountForm = () => {
+export const SettingsAccountForm = () => {
     const [file, setFile] = useState<null | File>(null);
 
     const { control, handleSubmit } = useForm<EditUserDto>({ resolver: yupResolver(accountSchema) });
@@ -94,5 +94,3 @@ const SettingsAccountForm = () => {
         </CardContainer>
     );
 };
-
-export default SettingsAccountForm;

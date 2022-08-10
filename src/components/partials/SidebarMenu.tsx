@@ -4,7 +4,7 @@ import HumanIcon from "../ui/icons/HumanIcon";
 import SettingsIcon from "../ui/icons/SettingsIcon";
 import SidebarButton from "../ui/buttons/SidebarButton";
 
-const SidebarMenu = () => {
+export const SidebarMenu = () => {
 
     const items = [
         {icon: <ChatIcon/>, text: 'Chats', to: '/', key: 0},
@@ -28,5 +28,3 @@ const SidebarMenu = () => {
         </ul>
     );
 };
-
-export default SidebarMenu;

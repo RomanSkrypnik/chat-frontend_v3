@@ -1,19 +1,19 @@
-import React, {createContext, FC, ReactNode, useEffect, useState} from 'react';
-import {io, Socket} from "socket.io-client";
-import {ChatDto, MessageDto, UserDto} from "../../types";
+import React, { createContext, FC, ReactNode, useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
+import { ChatDto, MessageDto, UserDto } from '../../types';
 import {
     addChat,
     addMessage,
     changeChat,
     changeMessage,
     changeUser,
-    setChat
-} from "../../store/slices/chat";
-import {SoundService} from "../../services/SoundService";
-import SnackbarMessage from "../partials/SnackbarMessage";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useAppDispatch} from "../../store";
-import {useSnackbar} from "../../hooks/useSnackbar";
+    setChat,
+} from '../../store/slices/chat';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useAppDispatch } from '../../store';
+import { useSnackbar } from '../../hooks/useSnackbar';
+import { SnackbarMessage } from '../partials';
+import { SoundService } from '../../services';
 
 interface SocketProviderProps {
     children: ReactNode;
@@ -21,16 +21,16 @@ interface SocketProviderProps {
 
 export const SocketContext = createContext<null | Socket<any, any>>(null);
 
-const SocketProvider: FC<SocketProviderProps> = ({children}) => {
+const SocketProvider: FC<SocketProviderProps> = ({ children }) => {
     const [lastMessage, setLastMessage] = useState<null | MessageDto>(null);
     const [socket, setSocket] = useState<null | Socket<any, any>>(null);
 
-    const {chats} = useTypedSelector(state => state.chat);
-    const {user} = useTypedSelector(state => state.auth);
+    const { chats } = useTypedSelector(state => state.chat);
+    const { user } = useTypedSelector(state => state.auth);
 
     const dispatch = useAppDispatch();
 
-    const {snackbar} = useSnackbar();
+    const { snackbar } = useSnackbar();
 
     useEffect(() => {
         if (!socket) {
@@ -39,9 +39,9 @@ const SocketProvider: FC<SocketProviderProps> = ({children}) => {
                     polling: {
                         extraHeaders: {
                             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             }));
         }
     }, []);
@@ -83,17 +83,17 @@ const SocketProvider: FC<SocketProviderProps> = ({children}) => {
 
             return () => {
                 socket.disconnect();
-            }
+            };
         }
     }, [socket]);
 
     useEffect(() => {
         if (lastMessage) {
-            const chat = chats.find(({id}) => id === lastMessage.chatId);
+            const chat = chats.find(({ id }) => id === lastMessage.chatId);
 
             if (!chat?.isMuted && lastMessage?.user.id !== user?.id) {
                 SoundService.playSound();
-                snackbar(<SnackbarMessage user={lastMessage.user} message={lastMessage}/>);
+                snackbar(<SnackbarMessage user={lastMessage.user} message={lastMessage} />);
             }
         }
     }, [lastMessage]);

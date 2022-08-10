@@ -9,7 +9,7 @@ import { AuthService } from '../../services';
 import { Typography } from '../common';
 import { CardContainer, CenteredContainer } from '../containers';
 
-const RegisterForm = () => {
+export const RegisterForm = () => {
 
     const { control, handleSubmit } = useForm<RegisterDto>({ resolver: yupResolver(registerSchema) });
 
@@ -50,5 +50,3 @@ const RegisterForm = () => {
         </CenteredContainer>
     );
 };
-
-export default RegisterForm;

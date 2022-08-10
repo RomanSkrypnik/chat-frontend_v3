@@ -10,7 +10,7 @@ interface RoomHeaderProps {
     room: RoomDto;
 }
 
-const RoomHeader: FC<RoomHeaderProps> = ({ room }) => {
+export const RoomHeader: FC<RoomHeaderProps> = ({ room }) => {
     const [show, setShow] = useState(false);
 
     const handleClick = () => setShow(!show);
@@ -35,5 +35,3 @@ const RoomHeader: FC<RoomHeaderProps> = ({ room }) => {
         </>
     );
 };
-
-export default RoomHeader;

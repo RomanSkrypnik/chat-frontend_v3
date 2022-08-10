@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../store';
 import TextInput from '../inputs/TextInput';
 import { fetchRooms } from '../../store/slices/room';
-import RoomMessageList from './RoomMessageList';
+import { RoomMessageList } from './RoomMessageList';
 
-const RoomMessageWrapper = () => {
+export const RoomMessageWrapper = () => {
     const { rooms } = useTypedSelector(state => state.room);
 
     const { control, watch, handleSubmit } = useForm<{ search: string }>();
@@ -34,5 +34,3 @@ const RoomMessageWrapper = () => {
         </div>
     );
 };
-
-export default RoomMessageWrapper;

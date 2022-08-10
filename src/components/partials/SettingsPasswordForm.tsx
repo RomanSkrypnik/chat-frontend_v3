@@ -15,7 +15,7 @@ interface FormValues {
     oldPassword: string;
 }
 
-const SettingsPasswordForm = () => {
+export const SettingsPasswordForm = () => {
 
     const { control, handleSubmit } = useForm<FormValues>({ resolver: yupResolver(passwordSchema) });
 
@@ -58,5 +58,3 @@ const SettingsPasswordForm = () => {
         </CardContainer>
     );
 };
-
-export default SettingsPasswordForm;

@@ -1,23 +1,23 @@
-import React, {useContext, useEffect, useState} from 'react';
-import ChatControls from "./ChatControls";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import RoomHeader from "./RoomHeader";
-import {useParams} from "react-router-dom";
-import {useAppDispatch} from "../../store";
-import {fetchRoom} from "../../store/slices/room";
-import {RoomMessageService} from '../../services';
-import {CreateMessageValues} from "../../types";
-import {RoomSocketContext} from "../providers/RoomSocketProvider";
+import React, { useContext, useEffect, useState } from 'react';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../store';
+import { fetchRoom } from '../../store/slices/room';
+import { RoomMessageService } from '../../services';
+import { CreateMessageValues } from '../../types';
+import { RoomSocketContext } from '../providers/RoomSocketProvider';
 import { ChatList } from '../common';
+import { ChatControls } from './ChatControls';
+import { RoomHeader } from './RoomHeader';
 
-const RoomWrapper = () => {
+export const RoomWrapper = () => {
     const [roomId, setRoomId] = useState<null | number>(null);
 
-    const {hash} = useParams();
+    const { hash } = useParams();
 
     const dispatch = useAppDispatch();
 
-    const {room} = useTypedSelector(state => state.room);
+    const { room } = useTypedSelector(state => state.room);
 
     const roomSocket = useContext(RoomSocketContext);
 
@@ -28,7 +28,7 @@ const RoomWrapper = () => {
 
         return () => {
             roomSocket?.emit('leave');
-        }
+        };
     }, [hash]);
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const RoomWrapper = () => {
         }
     }, [roomSocket, roomId]);
 
-    const handleSubmit = async ({text, files}: CreateMessageValues) => {
+    const handleSubmit = async ({ text, files }: CreateMessageValues) => {
         const fd = new FormData();
 
         fd.append('text', text);
@@ -55,22 +55,20 @@ const RoomWrapper = () => {
             }
         }
 
-        const {data} = await RoomMessageService.create(fd);
+        const { data } = await RoomMessageService.create(fd);
         roomSocket?.emit('send-message', data.data);
-    }
+    };
 
     return (
-        <div className="flex-grow-1 bg-white slide-in">
+        <div className='flex-grow-1 bg-white slide-in'>
             {
                 room &&
                 <>
-                    <RoomHeader room={room}/>
-                    <ChatList messages={room.messages}/>
-                    <ChatControls onSubmit={handleSubmit}/>
+                    <RoomHeader room={room} />
+                    <ChatList messages={room.messages} />
+                    <ChatControls onSubmit={handleSubmit} />
                 </>
             }
         </div>
     );
 };
-
-export default RoomWrapper;

@@ -39,7 +39,7 @@ export const ChatPhoto: FC<ChatSwitchChildren> = ({ src }) => {
     );
 };
 
-const ChatMessageSwitch: FC<ChatSwitchProps> = ({ file }) => {
+export const ChatMessageSwitch: FC<ChatSwitchProps> = ({ file }) => {
     const { className, element } = useFileType(file);
 
     return (
@@ -48,5 +48,3 @@ const ChatMessageSwitch: FC<ChatSwitchProps> = ({ file }) => {
         </div>
     );
 };
-
-export default ChatMessageSwitch;

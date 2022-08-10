@@ -6,7 +6,7 @@ interface MessageItemAttachmentProps {
     files: FileDto[];
 }
 
-const MessageItemFiles: FC<MessageItemAttachmentProps> = ({files}) => {
+export const MessageItemFiles: FC<MessageItemAttachmentProps> = ({files}) => {
 
     const {fileCount, pictureCount} = useFileCount(files);
 
@@ -17,5 +17,3 @@ const MessageItemFiles: FC<MessageItemAttachmentProps> = ({files}) => {
         </div>
     );
 };
-
-export default MessageItemFiles;

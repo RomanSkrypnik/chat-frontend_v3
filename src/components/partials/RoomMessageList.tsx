@@ -1,6 +1,6 @@
-import React, {FC} from 'react';
-import {RoomDto} from "../../types/room";
-import useStorageUrl from "../../hooks/useStorageUrl";
+import React, { FC } from 'react';
+import { RoomDto } from '../../types/room';
+import useStorageUrl from '../../hooks/useStorageUrl';
 import { MessageItem } from '../common';
 
 interface RoomMessageListProps {
@@ -11,7 +11,7 @@ interface RoomMessageItemWrapper {
     room: RoomDto;
 }
 
-const RoomMessageWrapper: FC<RoomMessageItemWrapper> = ({room}) => {
+const RoomMessageWrapper: FC<RoomMessageItemWrapper> = ({ room }) => {
 
     const src = useStorageUrl('/room/avatar/', room.avatar);
 
@@ -22,17 +22,15 @@ const RoomMessageWrapper: FC<RoomMessageItemWrapper> = ({room}) => {
                      src={src}
                      key={room.id}
         />
-    )
-}
+    );
+};
 
-const RoomMessageList: FC<RoomMessageListProps> = ({rooms}) => {
+export const RoomMessageList: FC<RoomMessageListProps> = ({ rooms }) => {
     return (
-        <div className="message-list scrollbar">
+        <div className='message-list scrollbar'>
             {
-                rooms.map((room) => <RoomMessageWrapper room={room} key={room.id}/>)
+                rooms.map((room) => <RoomMessageWrapper room={room} key={room.id} />)
             }
         </div>
     );
 };
-
-export default RoomMessageList;

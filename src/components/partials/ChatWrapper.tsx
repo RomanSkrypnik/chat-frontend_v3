@@ -1,6 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import ChatHeader from './ChatHeader';
-import ChatControls from './ChatControls';
 import { useAppDispatch } from '../../store';
 import { fetchChat, setChat } from '../../store/slices/chat';
 import { useParams } from 'react-router-dom';
@@ -9,8 +7,10 @@ import { CreateMessageValues } from '../../types';
 import { SocketContext } from '../providers/SocketProvider';
 import { ChatList, Wrapper } from '../common';
 import { MessageService } from '../../services';
+import { ChatHeader } from './ChatHeader';
+import { ChatControls } from './ChatControls';
 
-const ChatWrapper = () => {
+export const ChatWrapper = () => {
     const { hash } = useParams();
 
     const dispatch = useAppDispatch();
@@ -67,5 +67,3 @@ const ChatWrapper = () => {
         </Wrapper>
     );
 };
-
-export default ChatWrapper;

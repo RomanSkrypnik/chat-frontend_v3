@@ -8,7 +8,7 @@ interface RoomProfileUserProps {
     user: UserDto;
 }
 
-const RoomProfileUser: FC<RoomProfileUserProps> = ({ user }) => {
+export const RoomProfileUser: FC<RoomProfileUserProps> = ({ user }) => {
 
     const lastSeen = useFormatDuration(user.lastSeen);
 
@@ -26,5 +26,3 @@ const RoomProfileUser: FC<RoomProfileUserProps> = ({ user }) => {
         </div>
     );
 };
-
-export default RoomProfileUser;

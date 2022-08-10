@@ -6,7 +6,7 @@ import {useAppDispatch} from "../../store";
 import {fetchChats, findChat} from "../../store/slices/chat";
 import { MessageList } from '../common';
 
-const MessageWrapper = () => {
+export const MessageWrapper = () => {
 
     const {chats} = useTypedSelector(state => state.chat);
 
@@ -34,5 +34,3 @@ const MessageWrapper = () => {
         </div>
     );
 };
-
-export default MessageWrapper;

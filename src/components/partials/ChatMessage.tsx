@@ -1,18 +1,18 @@
 import React, {FC, useContext, useEffect} from 'react';
 import {MessageDto} from "../../types";
-import ChatMessageSwitch from "./ChatMessageSwitch";
 import cn from "classnames";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useInView} from "react-intersection-observer";
 import ClipsIcon from "../ui/icons/ClipsIcon";
 import {SocketContext} from "../providers/SocketProvider";
 import {RoomSocketContext} from "../providers/RoomSocketProvider";
+import { ChatMessageSwitch } from './ChatMessageSwitch';
 
 interface ChatMessageProps {
     message: MessageDto;
 }
 
-const ChatMessage: FC<ChatMessageProps> = ({message}) => {
+export const ChatMessage: FC<ChatMessageProps> = ({message}) => {
 
     const {user} = useTypedSelector(state => state.auth);
     const {room} = useTypedSelector(state => state.room);
@@ -51,5 +51,3 @@ const ChatMessage: FC<ChatMessageProps> = ({message}) => {
         </div>
     );
 };
-
-export default ChatMessage;

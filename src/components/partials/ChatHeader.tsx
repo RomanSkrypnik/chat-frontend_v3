@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, { FC, useState } from 'react';
 import Avatar from "../ui/buttons/Avatar";
 import {UserDto} from "../../types";
 import CircleButton from "../ui/buttons/CircleButton";
@@ -11,7 +11,7 @@ interface ChatHeaderProps {
     user: UserDto;
 }
 
-const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
+export const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
     const [show, setShow] = useState(false);
 
     const lastSeen = useFormatDuration(user.lastSeen);
@@ -41,5 +41,3 @@ const ChatHeader: FC<ChatHeaderProps> = ({user}) => {
         </>
     );
 };
-
-export default ChatHeader;

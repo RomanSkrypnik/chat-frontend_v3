@@ -4,7 +4,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import useStorageUrl from '../../hooks/useStorageUrl';
 import { Typography } from '../common';
 
-const SidebarHeader = () => {
+export const SidebarHeader = () => {
 
     const { user } = useTypedSelector(state => state.auth);
 
@@ -19,5 +19,3 @@ const SidebarHeader = () => {
         </div>
     );
 };
-
-export default SidebarHeader;

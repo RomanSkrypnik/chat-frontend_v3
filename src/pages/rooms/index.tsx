@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import withAuthorized from "../../hocs/Authorized";
-import RoomWrapper from "../../components/partials/RoomWrapper";
 import {useParams} from "react-router-dom";
-import RoomMessageWrapper from "../../components/partials/RoomMessageWrapper";
 import RegularButton from "../../components/ui/buttons/RegularButton";
-import RoomForm from "../../components/partials/RoomForm";
 import {useAppDispatch} from "../../store";
 import {setRoom} from "../../store/slices/room";
 import { Typography } from '../../components/common';
+import { RoomForm, RoomMessageWrapper, RoomWrapper } from '../../components/partials';
 
 const Rooms = () => {
     const [show, setShow] = useState(false);

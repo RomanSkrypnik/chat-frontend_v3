@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import withAuthorized from '../hocs/Authorized';
-import MessageWrapper from '../components/partials/MessageWrapper';
-import ChatWrapper from '../components/partials/ChatWrapper';
 import { useParams } from 'react-router-dom';
 import RegularButton from '../components/ui/buttons/RegularButton';
 import { Typography, UserSearch } from '../components/common';
+import { ChatWrapper, MessageWrapper } from '../components/partials';
 
 const Home = () => {
     const [show, setShow] = useState(false);
