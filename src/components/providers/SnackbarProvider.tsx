@@ -13,7 +13,7 @@ interface SnackbarContextDto {
     setSnackbarTimeout: Dispatch<SetStateAction<number>>;
 }
 
-const SnackbarProvider: FC<SnackbarProviderProps> = ({ children }) => {
+export const SnackbarProvider: FC<SnackbarProviderProps> = ({ children }) => {
     const [open, setOpen] = useState(false);
     const [snackbarChildren, setSnackbarChildren] = useState<string | ReactNode>('');
     const [snackbarTimeout, setSnackbarTimeout] = useState(5000);
@@ -38,5 +38,3 @@ const SnackbarProvider: FC<SnackbarProviderProps> = ({ children }) => {
         </SnackbarContext.Provider>
     );
 };
-
-export default SnackbarProvider;

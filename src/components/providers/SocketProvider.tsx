@@ -21,7 +21,7 @@ interface SocketProviderProps {
 
 export const SocketContext = createContext<null | Socket<any, any>>(null);
 
-const SocketProvider: FC<SocketProviderProps> = ({ children }) => {
+export const SocketProvider: FC<SocketProviderProps> = ({ children }) => {
     const [lastMessage, setLastMessage] = useState<null | MessageDto>(null);
     const [socket, setSocket] = useState<null | Socket<any, any>>(null);
 
@@ -104,5 +104,3 @@ const SocketProvider: FC<SocketProviderProps> = ({ children }) => {
         </SocketContext.Provider>
     );
 };
-
-export default SocketProvider;

@@ -11,7 +11,7 @@ interface RoomSocketProviderProps {
 
 export const RoomSocketContext = createContext<null | Socket<any, any>>(null);
 
-const RoomSocketProvider: FC<RoomSocketProviderProps> = ({children}) => {
+export const RoomSocketProvider: FC<RoomSocketProviderProps> = ({children}) => {
     const [socket, setSocket] = useState<null | Socket<any, any>>(null);
 
     const dispatch = useAppDispatch();
@@ -74,5 +74,3 @@ const RoomSocketProvider: FC<RoomSocketProviderProps> = ({children}) => {
         </RoomSocketContext.Provider>
     );
 };
-
-export default RoomSocketProvider;
