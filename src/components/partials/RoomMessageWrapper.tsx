@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../store';
 import TextInput from '../inputs/TextInput';
 import { fetchRooms } from '../../store/slices/room';
 import { RoomMessageList } from './RoomMessageList';
+import { useTypedSelector } from '../../hooks';
 
 export const RoomMessageWrapper = () => {
     const { rooms } = useTypedSelector(state => state.room);

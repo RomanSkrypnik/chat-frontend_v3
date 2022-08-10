@@ -4,15 +4,13 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../store';
 import { editPersonalData } from '../../store/slices/auth';
 import { EditUserDto } from '../../types';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { useSnackbar } from '../../hooks/useSnackbar';
 import AvatarInput from '../inputs/AvatarInput';
-import useStorageUrl from '../../hooks/useStorageUrl';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { accountSchema } from '../../validation';
 import { Typography } from '../common';
 import { CardContainer } from '../containers';
 import { RegularButton } from '../ui';
+import { useSnackbar, useStorageUrl, useTypedSelector } from '../../hooks';
 
 export const SettingsAccountForm = () => {
     const [file, setFile] = useState<null | File>(null);

@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { UserDto } from '../../types';
-import useStorageUrl from '../../hooks/useStorageUrl';
 import { useNavigate } from 'react-router-dom';
 import { Typography } from '../common';
 import { Avatar } from '../ui/buttons/Avatar';
+import { useStorageUrl } from '../../hooks';
 
 interface UserSearchItemProps {
     user: UserDto;

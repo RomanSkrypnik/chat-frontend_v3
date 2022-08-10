@@ -7,8 +7,6 @@ interface DefaultLayoutProps {
 
 const DefaultLayout: FC<DefaultLayoutProps> = ({children}) => {
 
-
-
     return (
         <div className="default-layout">
             <div className="d-flex">

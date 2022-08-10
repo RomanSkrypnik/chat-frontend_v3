@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { ROOM_AVATAR_URL } from '../../http';
 import { Typography } from './Typography';
 import { CardContainer, DialContainer } from '../containers';
 import { RoomProfileUser } from '../partials';
 import { Avatar } from '../ui/buttons/Avatar';
+import { useTypedSelector } from '../../hooks';
 
 interface RoomProfileProps {
     onClose: () => void;

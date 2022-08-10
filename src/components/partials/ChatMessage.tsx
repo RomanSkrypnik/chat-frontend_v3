@@ -1,11 +1,11 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { MessageDto } from '../../types';
 import cn from 'classnames';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useInView } from 'react-intersection-observer';
 import { SocketContext, RoomSocketContext } from '../providers';
 import { ChatMessageSwitch } from './ChatMessageSwitch';
 import { ClipsIcon } from '../ui';
+import { useTypedSelector } from '../../hooks';
 
 interface ChatMessageProps {
     message: MessageDto;

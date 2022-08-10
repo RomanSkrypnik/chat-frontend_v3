@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { UserDto } from '../../types';
-import { useFormatDuration } from '../../hooks/useDate';
 import { Typography } from '../common';
 import { Avatar } from '../ui/buttons/Avatar';
+import { useFormatDuration } from '../../hooks';
 
 interface RoomProfileUserProps {
     user: UserDto;

@@ -1,7 +1,7 @@
-import {ReactNode, useContext} from "react";
-import {SnackbarContext} from "../components/providers/SnackbarProvider";
-import {SnackbarOptions} from "../types";
-import {capitalizeFirstLetter} from "../helpers";
+import { ReactNode, useContext } from 'react';
+import { SnackbarOptions } from '../types';
+import { capitalizeFirstLetter } from '../helpers';
+import { SnackbarContext } from '../components/providers';
 
 export function useSnackbar() {
     const snackbarContext = useContext(SnackbarContext);
@@ -12,17 +12,17 @@ export function useSnackbar() {
 
         Object.entries(options).forEach(([k, v]) => {
             const prefix = 'setSnackbar';
-            const property = capitalizeFirstLetter(k)
+            const property = capitalizeFirstLetter(k);
 
             if (snackbarContext) {
                 (snackbarContext as any)[prefix + property](v);
             }
         });
-    }
+    };
 
     const close = () => {
         snackbarContext?.setOpen(false);
-    }
+    };
 
-    return {snackbar, close}
+    return { snackbar, close };
 }

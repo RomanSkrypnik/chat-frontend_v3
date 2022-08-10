@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
-import { useSnackbar } from '../../hooks/useSnackbar';
 import { CloseCrossIcon, IconButton } from '../ui';
+import { useSnackbar } from '../../hooks';
 
 interface SnackbarContainerProps {
     children: ReactNode;

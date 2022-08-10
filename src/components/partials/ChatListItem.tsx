@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { MessageDto } from '../../types';
 import cn from 'classnames';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { ChatMessage } from './ChatMessage';
 import { Avatar } from '../ui/buttons/Avatar';
+import { useTypedSelector } from '../../hooks';
 
 interface ChatListItemProps {
     messageRow: MessageDto[];

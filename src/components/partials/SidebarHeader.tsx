@@ -1,8 +1,7 @@
 import React from 'react';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import useStorageUrl from '../../hooks/useStorageUrl';
 import { Typography } from '../common';
 import { Avatar } from '../ui/buttons/Avatar';
+import { useStorageUrl, useTypedSelector } from '../../hooks';
 
 export const SidebarHeader = () => {
 

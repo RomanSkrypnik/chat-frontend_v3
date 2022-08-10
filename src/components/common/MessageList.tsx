@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ChatDto } from '../../types';
 import { MessageItem } from './MessageItem';
-import useStorageUrl from '../../hooks/useStorageUrl';
+import { useStorageUrl } from '../../hooks';
 
 interface MessageListProps {
     chats: ChatDto[];

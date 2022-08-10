@@ -1,8 +1,8 @@
 import React, { FC, ReactNode, useEffect } from 'react';
 import DefaultLayout from '../layouts/DefaultLayout';
-import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useNavigate } from 'react-router-dom';
 import { RoomSocketProvider, SocketProvider } from '../components/providers';
+import { useTypedSelector } from '../hooks';
 
 interface AuthorizedProps {
     children: ReactNode;

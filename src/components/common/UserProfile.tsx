@@ -1,13 +1,11 @@
 import React, { FC, useContext } from 'react';
 import { UserDto } from '../../types';
-import { useFormatDuration } from '../../hooks/useDate';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import useStorageUrl from '../../hooks/useStorageUrl';
 import { Typography } from './Typography';
 import { CardContainer, DialContainer } from '../containers';
 import { ButtonIcon, ProhibitedIcon, SwitchButton, UnlockedIcon } from '../ui';
 import { Avatar } from '../ui/buttons/Avatar';
 import { SocketContext } from '../providers';
+import { useFormatDuration, useStorageUrl, useTypedSelector } from '../../hooks';
 
 interface UserProfileDialProps {
     user: UserDto;

@@ -26,7 +26,6 @@ const AvatarInput: FC<AvatarInputProps> = ({ onChange, imgSrc }) => {
 
     return (
         <div className='avatar-input' {...getRootProps()}>
-
             {
                 src ?
                     <img src={src} alt='Avatar' />
@@ -35,7 +34,6 @@ const AvatarInput: FC<AvatarInputProps> = ({ onChange, imgSrc }) => {
                         <CameraIcon />
                     </div>
             }
-
             <input type='file' accept='image/png, image/gif, image/jpeg' {...getInputProps()} />
         </div>
     );

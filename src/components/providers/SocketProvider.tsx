@@ -9,11 +9,10 @@ import {
     changeUser,
     setChat,
 } from '../../store/slices/chat';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useAppDispatch } from '../../store';
-import { useSnackbar } from '../../hooks/useSnackbar';
 import { SnackbarMessage } from '../partials';
 import { SoundService } from '../../services';
+import { useSnackbar, useTypedSelector } from '../../hooks';
 
 interface SocketProviderProps {
     children: ReactNode;

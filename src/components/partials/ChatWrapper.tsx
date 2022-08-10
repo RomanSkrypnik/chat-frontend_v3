@@ -2,13 +2,13 @@ import React, { useContext, useEffect } from 'react';
 import { useAppDispatch } from '../../store';
 import { fetchChat, setChat } from '../../store/slices/chat';
 import { useParams } from 'react-router-dom';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { CreateMessageValues } from '../../types';
-import { SocketContext } from '../providers/SocketProvider';
 import { ChatList, Wrapper } from '../common';
 import { MessageService } from '../../services';
 import { ChatHeader } from './ChatHeader';
 import { ChatControls } from './ChatControls';
+import { SocketContext } from '../providers';
+import { useTypedSelector } from '../../hooks';
 
 export const ChatWrapper = () => {
     const { hash } = useParams();
@@ -18,7 +18,6 @@ export const ChatWrapper = () => {
     const socket = useContext(SocketContext);
 
     const { chat } = useTypedSelector(state => state.chat);
-
 
     useEffect(() => {
         if (hash) {

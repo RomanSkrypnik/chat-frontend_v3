@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {SERVER_URL} from "../http";
 
-export default function useStorageUrl(prefix: string, file: string | null | undefined) {
+export function useStorageUrl(prefix: string, file: string | null | undefined) {
     const [url, setUrl] = useState('');
 
     useEffect(() => {

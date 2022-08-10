@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { MessageDto, UserDto } from '../../types';
-import { useFormatDate } from '../../hooks/useDate';
 import { Avatar } from '../ui/buttons/Avatar';
+import { useFormatDate } from '../../hooks';
 
 interface MessageSnackbarProps {
     user: UserDto;

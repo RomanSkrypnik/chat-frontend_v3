@@ -1,86 +1,85 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {AuthState, EditUserDto, LoginDto} from "../../types";
-import {AuthService} from "../../services/AuthService";
-import {UserService} from "../../services/UserService";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { AuthState, LoginDto } from '../../types';
+import { AuthService, UserService } from '../../services';
 
 const rejectionReducer = (state: AuthState) => {
     state.isLoaded = true;
-}
+};
 
 export const refresh = createAsyncThunk(
     'auth/refresh',
-    async (_, {dispatch}) => {
+    async (_, { dispatch }) => {
         try {
-            const {data} = await AuthService.refresh();
-            const {accessToken} = data.data.tokens;
+            const { data } = await AuthService.refresh();
+            const { accessToken } = data.data.tokens;
 
             localStorage.setItem('accessToken', accessToken);
 
-            dispatch(authenticate(data.data.user))
+            dispatch(authenticate(data.data.user));
         } catch (e) {
             throw e;
         }
-    }
+    },
 );
 
 export const login = createAsyncThunk(
     'auth/login',
-    async (loginData: LoginDto, {dispatch}) => {
+    async (loginData: LoginDto, { dispatch }) => {
         try {
-            const {data} = await AuthService.login(loginData);
-            const {accessToken} = data.data.tokens;
+            const { data } = await AuthService.login(loginData);
+            const { accessToken } = data.data.tokens;
 
             localStorage.setItem('accessToken', accessToken);
 
-            dispatch(authenticate(data.data.user))
+            dispatch(authenticate(data.data.user));
         } catch (e) {
             throw e;
         }
-    }
+    },
 );
 
 export const logout = createAsyncThunk(
     'auth/logout',
-    async (_, {dispatch}) => {
+    async (_, { dispatch }) => {
         try {
             await AuthService.logout();
-            dispatch(exit())
+            dispatch(exit());
         } catch (e) {
             throw e;
         }
-    }
+    },
 );
 
 export const editPersonalData = createAsyncThunk(
     'auth/editPersonalData',
-    async (fd: FormData, {dispatch}) => {
+    async (fd: FormData, { dispatch }) => {
         try {
-            const {data} = await UserService.edit(fd);
+            const { data } = await UserService.edit(fd);
             dispatch(setUser(data.data));
         } catch (e) {
             throw e;
         }
-    }
-)
+    },
+);
 
 const initialState: AuthState = {
     user: null,
     isLogged: false,
     isLoaded: false,
-}
+};
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
 
-        authenticate(state, {payload}) {
+        authenticate(state, { payload }) {
             state.user = payload;
             state.isLogged = true;
             state.isLoaded = true;
         },
 
-        setUser(state, {payload}) {
+        setUser(state, { payload }) {
             state.user = payload;
         },
 
@@ -93,9 +92,9 @@ const authSlice = createSlice({
     extraReducers: (builder => {
         builder.addCase(refresh.rejected, rejectionReducer);
         builder.addCase(login.rejected, rejectionReducer);
-    })
-})
+    }),
+});
 
-export const {authenticate, setUser, exit} = authSlice.actions;
+export const { authenticate, setUser, exit } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,11 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MessageDto } from '../../types';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { useFormatDuration } from '../../hooks/useDate';
 import { Typography } from './Typography';
 import { MessageItemFiles } from '../partials';
 import { Avatar } from '../ui/buttons/Avatar';
+import { useFormatDuration, useTypedSelector } from '../../hooks';
 
 interface MessageItemProps {
     src?: string;

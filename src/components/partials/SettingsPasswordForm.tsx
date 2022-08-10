@@ -1,13 +1,13 @@
 import React from 'react';
 import TextInput from '../inputs/TextInput';
 import { useForm } from 'react-hook-form';
-import { useSnackbar } from '../../hooks/useSnackbar';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { passwordSchema } from '../../validation';
 import { Typography } from '../common';
 import { CardContainer } from '../containers';
 import { UserService } from '../../services';
 import { RegularButton } from '../ui';
+import { useSnackbar } from '../../hooks';
 
 interface FormValues {
     password: string;
