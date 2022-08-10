@@ -1,7 +1,7 @@
-import React, {FC} from 'react';
-import {ChatDto} from "../../types";
-import MessageItem from "./MessageItem";
-import useStorageUrl from "../../hooks/useStorageUrl";
+import React, { FC } from 'react';
+import { ChatDto } from '../../types';
+import { MessageItem } from './MessageItem';
+import useStorageUrl from '../../hooks/useStorageUrl';
 
 interface MessageListProps {
     chats: ChatDto[];
@@ -11,7 +11,7 @@ interface MessageItemProps {
     chat: ChatDto;
 }
 
-const MessageItemWrapper: FC<MessageItemProps> = ({chat}) => {
+const MessageItemWrapper: FC<MessageItemProps> = ({ chat }) => {
 
     const src = useStorageUrl('/avatars/', chat.user.avatar);
 
@@ -22,18 +22,16 @@ const MessageItemWrapper: FC<MessageItemProps> = ({chat}) => {
                      messages={chat.messages}
                      key={chat.id}
         />
-    )
-}
+    );
+};
 
-const MessageList: FC<MessageListProps> = ({chats}) => {
+export const MessageList: FC<MessageListProps> = ({ chats }) => {
 
     return (
-        <div className="message-list scrollbar">
+        <div className='message-list scrollbar'>
             {
-                chats.map((chat) => <MessageItemWrapper chat={chat} key={chat.id}/>)
+                chats.map((chat) => <MessageItemWrapper chat={chat} key={chat.id} />)
             }
         </div>
     );
 };
-
-export default MessageList;

@@ -1,30 +1,29 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ChatState} from "../../types";
-import {ChatService} from "../../services/ChatService";
-import {RootState} from "../index";
-import MessageService from "../../services/MessageService";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { ChatState } from '../../types';
+import { ChatService, MessageService } from '../../services';
+import { RootState } from '../index';
 
 export const fetchChats = createAsyncThunk(
     'chat/fetchChats',
-    async (_, {dispatch}) => {
+    async (_, { dispatch }) => {
         try {
-            const {data} = await ChatService.getChats();
+            const { data } = await ChatService.getChats();
             dispatch(setChats(data.data));
         } catch (e) {
             throw e;
         }
-    }
+    },
 );
 
 export const fetchChat = createAsyncThunk(
     'chat/fetchChat',
-    async (hash: string, {dispatch, getState}) => {
+    async (hash: string, { dispatch, getState }) => {
         try {
-            const {chat} = getState() as RootState;
-            const foundChat = chat.chats.find(({user}) => user.hash === hash);
+            const { chat } = getState() as RootState;
+            const foundChat = chat.chats.find(({ user }) => user.hash === hash);
 
             if (!foundChat) {
-                const {data} = await ChatService.getChat(hash);
+                const { data } = await ChatService.getChat(hash);
                 dispatch(setChat(data.data));
             } else {
                 dispatch(setChat(foundChat));
@@ -38,68 +37,68 @@ export const fetchChat = createAsyncThunk(
 
 export const findChat = createAsyncThunk(
     'chat/findChat',
-    async (search: string, {dispatch}) => {
+    async (search: string, { dispatch }) => {
         try {
-            const {data} = await ChatService.search(search);
+            const { data } = await ChatService.search(search);
             dispatch(setChats(data.data));
         } catch (e) {
             throw e;
         }
-    }
+    },
 );
 
 export const fetchMessages = createAsyncThunk(
     'chat/fetchMessages',
-    async (chatId: number, {dispatch, getState}) => {
+    async (chatId: number, { dispatch, getState }) => {
         try {
-            const {chat: {take, chat}} = getState() as RootState;
+            const { chat: { take, chat } } = getState() as RootState;
 
             if (!chat?.isLoaded) {
-                const {data} = await MessageService.get(chatId, chat?.skip ?? 40, take);
-                dispatch(addOlderMessages(data.data))
+                const { data } = await MessageService.get(chatId, chat?.skip ?? 40, take);
+                dispatch(addOlderMessages(data.data));
             }
         } catch (e) {
             throw e;
         }
-    }
+    },
 );
 
 const initialState: ChatState = {
     chat: null,
     chats: [],
     take: 40,
-}
+};
 
 const chatSlice = createSlice({
     name: 'chat',
     initialState,
     reducers: {
 
-        setChat(state, {payload}) {
+        setChat(state, { payload }) {
             state.chat = payload;
         },
 
-        setChats(state, {payload}) {
+        setChats(state, { payload }) {
             state.chats = payload;
         },
 
-        changeMessage(state, {payload}) {
+        changeMessage(state, { payload }) {
 
             if (state.chat && state.chat.id === payload.chatId) {
-                const idx = state.chat.messages.findIndex(({id}) => id === payload.id);
+                const idx = state.chat.messages.findIndex(({ id }) => id === payload.id);
                 state.chat.messages[idx] = payload;
             }
 
             state.chats = state.chats.map(chat => {
                 if (chat.id === payload.chatId) {
-                    const idx = chat.messages.findIndex(({id}) => id === payload.id);
+                    const idx = chat.messages.findIndex(({ id }) => id === payload.id);
                     chat.messages[idx] = payload;
                 }
                 return chat;
-            })
+            });
         },
 
-        changeUser(state, {payload}) {
+        changeUser(state, { payload }) {
 
             if (state.chat && state.chat.user.id === payload.id) {
                 state.chat.user = payload;
@@ -113,7 +112,7 @@ const chatSlice = createSlice({
             });
         },
 
-        changeChat(state, {payload}) {
+        changeChat(state, { payload }) {
 
             if (state.chat && state.chat.id === payload.id) {
                 state.chat = payload;
@@ -124,39 +123,39 @@ const chatSlice = createSlice({
                     return payload;
                 }
                 return chat;
-            })
+            });
         },
 
-        addChat(state, {payload}) {
+        addChat(state, { payload }) {
             state.chats = [payload, ...state.chats];
         },
 
-        addMessage(state, {payload}) {
-            const {chatId} = payload;
+        addMessage(state, { payload }) {
+            const { chatId } = payload;
 
             if (state.chat && state.chat.id === chatId) {
                 state.chat.messages = [payload, ...state.chat.messages];
             }
 
-            const chat = state.chats.find(({id}) => id === chatId);
+            const chat = state.chats.find(({ id }) => id === chatId);
 
             if (chat) {
-                const chats = state.chats.filter(({id}) => id !== chatId);
+                const chats = state.chats.filter(({ id }) => id !== chatId);
                 chat.messages = [payload, ...chat.messages];
                 state.chats = [chat, ...chats];
             }
 
         },
 
-        addOlderMessages(state, {payload}) {
-            const {messages, ...chat} = payload;
-            const {chatId} = messages[0];
+        addOlderMessages(state, { payload }) {
+            const { messages, ...chat } = payload;
+            const { chatId } = messages[0];
 
             if (state.chat && state.chat.id === chatId) {
                 state.chat = {
                     ...state.chat,
                     ...chat,
-                    messages: [...state.chat.messages, ...messages]
+                    messages: [...state.chat.messages, ...messages],
                 };
             }
 
@@ -165,15 +164,15 @@ const chatSlice = createSlice({
                     return {
                         ...stateChat,
                         ...chat,
-                        messages: [...stateChat.messages, ...messages]
+                        messages: [...stateChat.messages, ...messages],
                     };
                 }
                 return stateChat;
             });
         },
 
-    }
-})
+    },
+});
 
 export const {
     setChats,
@@ -183,7 +182,7 @@ export const {
     changeChat,
     addChat,
     addMessage,
-    addOlderMessages
+    addOlderMessages,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

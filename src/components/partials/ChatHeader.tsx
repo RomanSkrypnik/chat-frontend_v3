@@ -3,9 +3,9 @@ import Avatar from "../ui/buttons/Avatar";
 import {UserDto} from "../../types";
 import CircleButton from "../ui/buttons/CircleButton";
 import ThreeDotsIcon from "../ui/icons/ThreeDotsIcon";
-import Typography from "../common/Typography";
 import {useFormatDuration} from "../../hooks/useDate";
 import UserProfile from "../common/UserProfile";
+import { Typography } from '../common';
 
 interface ChatHeaderProps {
     user: UserDto;

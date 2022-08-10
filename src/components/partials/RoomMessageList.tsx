@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import MessageItem from "../common/MessageItem";
 import {RoomDto} from "../../types/room";
 import useStorageUrl from "../../hooks/useStorageUrl";
+import { MessageItem } from '../common';
 
 interface RoomMessageListProps {
     rooms: RoomDto[];

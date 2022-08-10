@@ -1,6 +1,6 @@
 import React, {FC, ReactNode} from 'react';
 import cn from "classnames";
-import Typography from "../../common/Typography";
+import { Typography } from '../../common';
 
 interface RegularButtonProps {
     type?: 'button' | 'submit' | 'reset';

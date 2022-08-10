@@ -3,11 +3,11 @@ import withAuthorized from "../../hocs/Authorized";
 import RoomWrapper from "../../components/partials/RoomWrapper";
 import {useParams} from "react-router-dom";
 import RoomMessageWrapper from "../../components/partials/RoomMessageWrapper";
-import Typography from "../../components/common/Typography";
 import RegularButton from "../../components/ui/buttons/RegularButton";
 import RoomForm from "../../components/partials/RoomForm";
 import {useAppDispatch} from "../../store";
 import {setRoom} from "../../store/slices/room";
+import { Typography } from '../../components/common';
 
 const Rooms = () => {
     const [show, setShow] = useState(false);

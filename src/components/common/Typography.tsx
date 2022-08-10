@@ -8,7 +8,7 @@ interface TypographyProps {
     className?: string;
 }
 
-const Typography: FC<TypographyProps> = ({as = 'div', children, fz, lh, className}) => {
+export const Typography: FC<TypographyProps> = ({as = 'div', children, fz, lh, className}) => {
 
     const Tag = as;
 
@@ -18,5 +18,3 @@ const Typography: FC<TypographyProps> = ({as = 'div', children, fz, lh, classNam
         </Tag>
     );
 };
-
-export default Typography;

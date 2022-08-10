@@ -1,25 +1,24 @@
-import React, {useContext, useEffect, useState} from 'react';
-import ChatHeader from "./ChatHeader";
-import ChatList from "../common/ChatList";
-import ChatControls from "./ChatControls";
-import {useAppDispatch} from "../../store";
-import {fetchChat, setChat} from "../../store/slices/chat";
-import {useParams} from "react-router-dom";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {CreateMessageValues} from "../../types";
-import MessageService from "../../services/MessageService";
-import {SocketContext} from "../providers/SocketProvider";
-import cn from "classnames";
-import Wrapper from "../common/Wrapper";
+import React, { useContext, useEffect } from 'react';
+import ChatHeader from './ChatHeader';
+import ChatControls from './ChatControls';
+import { useAppDispatch } from '../../store';
+import { fetchChat, setChat } from '../../store/slices/chat';
+import { useParams } from 'react-router-dom';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { CreateMessageValues } from '../../types';
+import { SocketContext } from '../providers/SocketProvider';
+import { ChatList, Wrapper } from '../common';
+import { MessageService } from '../../services';
 
 const ChatWrapper = () => {
-    const {hash} = useParams();
+    const { hash } = useParams();
 
     const dispatch = useAppDispatch();
 
     const socket = useContext(SocketContext);
 
-    const {chat} = useTypedSelector(state => state.chat);
+    const { chat } = useTypedSelector(state => state.chat);
+
 
     useEffect(() => {
         if (hash) {
@@ -28,10 +27,10 @@ const ChatWrapper = () => {
 
         return () => {
             dispatch(setChat(null));
-        }
+        };
     }, [hash]);
 
-    const handleSubmit = async ({files, text}: CreateMessageValues) => {
+    const handleSubmit = async ({ files, text }: CreateMessageValues) => {
         if (hash) {
             const fd = new FormData();
 
@@ -44,23 +43,24 @@ const ChatWrapper = () => {
                 }
             }
 
-            const {data} = await MessageService.create(fd);
-            const withChat = !chat?.id
+            const { data } = await MessageService.create(fd);
+            const withChat = !chat?.id;
 
-            socket?.emit('send-message', {message: data.data, hash, withChat});
+            socket?.emit('send-message', { message: data.data, hash, withChat });
         }
-    }
+    };
 
     return (
         <Wrapper>
-            <div className="flex-grow-1 bg-white">
+            <div className='flex-grow-1 bg-white'>
                 {
                     chat &&
                     <>
-                        <ChatHeader user={chat.user}/>
-                        <ChatList messages={chat.messages}/>
+                        <ChatHeader user={chat.user} />
+                        <ChatList messages={chat.messages} />
                         <ChatControls isBlocked={chat.isBlockedByMe || chat.isBlockedByCompanion}
-                                      onSubmit={handleSubmit}/>
+                                      onSubmit={handleSubmit}
+                        />
                     </>
                 }
             </div>

@@ -6,7 +6,7 @@ interface ImageDialProps {
     src: string;
 }
 
-const ImageDial: FC<ImageDialProps> = ({src, onClose}) => {
+export const ImageDial: FC<ImageDialProps> = ({src, onClose}) => {
 
     return (
         <DialContainer onClose={onClose}>
@@ -14,5 +14,3 @@ const ImageDial: FC<ImageDialProps> = ({src, onClose}) => {
         </DialContainer>
     );
 };
-
-export default ImageDial;

@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
-import ChatList from "../common/ChatList";
 import ChatControls from "./ChatControls";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import RoomHeader from "./RoomHeader";
 import {useParams} from "react-router-dom";
 import {useAppDispatch} from "../../store";
 import {fetchRoom} from "../../store/slices/room";
-import {RoomMessageService} from "../../services/RoomMessageService";
+import {RoomMessageService} from '../../services';
 import {CreateMessageValues} from "../../types";
 import {RoomSocketContext} from "../providers/RoomSocketProvider";
+import { ChatList } from '../common';
 
 const RoomWrapper = () => {
     const [roomId, setRoomId] = useState<null | number>(null);

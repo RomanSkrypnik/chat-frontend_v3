@@ -1,6 +1,5 @@
 import React from 'react';
 import CardContainer from "../containers/CardContainer";
-import Typography from "../common/Typography";
 import TextInput from "../inputs/TextInput";
 import RegularButton from "../ui/buttons/RegularButton";
 import {useForm} from "react-hook-form";
@@ -8,6 +7,7 @@ import {UserService} from "../../services/UserService";
 import {useSnackbar} from "../../hooks/useSnackbar";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {passwordSchema} from "../../validation";
+import { Typography } from '../common';
 
 interface FormValues {
     password: string;

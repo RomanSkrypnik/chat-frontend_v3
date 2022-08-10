@@ -6,7 +6,7 @@ interface WrapperProps {
     children: ReactNode;
 }
 
-const Wrapper: FC<WrapperProps> = ({children}) => {
+export const Wrapper: FC<WrapperProps> = ({children}) => {
     const [flag, setFlag] = useState(false);
     const [anim, setAnim] = useState<null | string>(null);
     const [firstRender, setFirstRender] = useState(false);
@@ -50,5 +50,3 @@ const Wrapper: FC<WrapperProps> = ({children}) => {
         </>
     );
 };
-
-export default Wrapper;

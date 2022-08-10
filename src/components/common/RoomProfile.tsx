@@ -3,15 +3,15 @@ import DialContainer from "../containers/DialContainer";
 import CardContainer from "../containers/CardContainer";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import Avatar from "../ui/buttons/Avatar";
-import Typography from "./Typography";
 import RoomProfileUser from "../partials/RoomProfileUser";
 import {ROOM_AVATAR_URL} from "../../http";
+import { Typography } from './Typography';
 
 interface RoomProfileProps {
     onClose: () => void;
 }
 
-const RoomProfile: FC<RoomProfileProps> = ({onClose}) => {
+export const RoomProfile: FC<RoomProfileProps> = ({onClose}) => {
     const {room} = useTypedSelector(state => state.room);
 
     return (
@@ -45,5 +45,3 @@ const RoomProfile: FC<RoomProfileProps> = ({onClose}) => {
         </DialContainer>
     );
 };
-
-export default RoomProfile;

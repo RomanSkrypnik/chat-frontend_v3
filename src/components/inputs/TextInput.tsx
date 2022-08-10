@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useController, UseControllerProps} from "react-hook-form";
 import cn from "classnames";
-import Typography from "../common/Typography";
+import { Typography } from '../common';
 
 type InputProps = {
     type?: 'text' | 'password';

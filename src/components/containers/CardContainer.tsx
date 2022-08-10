@@ -1,7 +1,7 @@
 import React, {FC, ReactNode} from 'react';
 import {CloseButton} from "react-bootstrap";
-import Typography from "../common/Typography";
 import cn from "classnames";
+import { Typography } from '../common';
 
 interface CardContainer {
     onClose?: () => void;

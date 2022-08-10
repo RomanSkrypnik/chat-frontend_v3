@@ -12,9 +12,11 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <Provider store={store}>
-        <SnackbarProvider>
-            <App/>
-        </SnackbarProvider>
-    </Provider>
+    <React.StrictMode>
+        <Provider store={store}>
+            <SnackbarProvider>
+                <App/>
+            </SnackbarProvider>
+        </Provider>
+    </React.StrictMode>
 );

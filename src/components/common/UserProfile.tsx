@@ -4,7 +4,6 @@ import CardContainer from "../containers/CardContainer";
 import {UserDto} from "../../types";
 import Avatar from "../ui/buttons/Avatar";
 import {useFormatDuration} from "../../hooks/useDate";
-import Typography from "./Typography";
 import ProhibitedIcon from "../ui/icons/ProhibitedIcon";
 import ButtonIcon from "../ui/buttons/ButtonIcon";
 import SwitchButton from "../ui/buttons/SwitchButton";
@@ -12,6 +11,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import UnlockedIcon from "../ui/icons/UnlockedIcon";
 import {SocketContext} from "../providers/SocketProvider";
 import useStorageUrl from "../../hooks/useStorageUrl";
+import { Typography } from './Typography';
 
 interface UserProfileDialProps {
     user: UserDto;

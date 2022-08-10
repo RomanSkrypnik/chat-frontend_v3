@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import CardContainer from "../containers/CardContainer";
 import TextInput from "../inputs/TextInput";
 import {useForm} from "react-hook-form";
-import Typography from "../common/Typography";
 import RegularButton from "../ui/buttons/RegularButton";
 import {useAppDispatch} from "../../store";
 import {editPersonalData} from "../../store/slices/auth";
@@ -13,6 +12,7 @@ import AvatarInput from "../inputs/AvatarInput";
 import useStorageUrl from "../../hooks/useStorageUrl";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {accountSchema} from "../../validation";
+import { Typography } from '../common';
 
 const SettingsAccountForm = () => {
     const [file, setFile] = useState<null | File>(null);

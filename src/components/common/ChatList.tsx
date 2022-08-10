@@ -1,27 +1,27 @@
-import React, {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
-import {MessageDto} from "../../types";
-import ChatListItem from "../partials/ChatListItem";
-import {useMessageArr} from "../../hooks/useMessageArr";
-import {useAppDispatch} from "../../store";
-import {fetchMessages as fetchChatMessages} from "../../store/slices/chat";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {useParams} from "react-router-dom";
-import {fetchMessages as fetchRoomMessages} from "../../store/slices/room";
+import React, { FC, MutableRefObject, useEffect, useRef, useState } from 'react';
+import { MessageDto } from '../../types';
+import ChatListItem from '../partials/ChatListItem';
+import { useMessageArr } from '../../hooks/useMessageArr';
+import { useAppDispatch } from '../../store';
+import { fetchMessages as fetchChatMessages } from '../../store/slices/chat';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useParams } from 'react-router-dom';
+import { fetchMessages as fetchRoomMessages } from '../../store/slices/room';
 
 interface ChatListProps {
-    messages: MessageDto[]
+    messages: MessageDto[];
 }
 
-const ChatList: FC<ChatListProps> = ({messages}) => {
+export const ChatList: FC<ChatListProps> = ({ messages }) => {
     const [lastMessage, setLastMessage] = useState<null | MessageDto>(null);
     const [scrollTop, setScrollTop] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const {hash} = useParams();
+    const { hash } = useParams();
 
-    const {user} = useTypedSelector(state => state.auth);
-    const {chat} = useTypedSelector(state => state.chat);
-    const {room} = useTypedSelector(state => state.room);
+    const { user } = useTypedSelector(state => state.auth);
+    const { chat } = useTypedSelector(state => state.chat);
+    const { room } = useTypedSelector(state => state.room);
 
     const twoDimsArr = useMessageArr(messages);
 
@@ -64,24 +64,22 @@ const ChatList: FC<ChatListProps> = ({messages}) => {
             setScrollTop(ref.current.scrollHeight);
             setIsLoaded(false);
         }
-    }
+    };
 
     const scrollToBottom = () => {
         if (ref) {
             ref.current.scrollTo(0, ref.current.scrollHeight);
         }
-    }
+    };
 
     return (
-        <ul className="chat-list scrollbar list-unstyled"
+        <ul className='chat-list scrollbar list-unstyled'
             ref={ref}
             onLoad={() => setIsLoaded(true)}
             onScroll={handleScroll}>
             {
-                twoDimsArr.map((messageRow, idx) => <ChatListItem messageRow={messageRow} key={idx}/>)
+                twoDimsArr.map((messageRow, idx) => <ChatListItem messageRow={messageRow} key={idx} />)
             }
         </ul>
     );
 };
-
-export default ChatList;
