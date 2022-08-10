@@ -4,7 +4,6 @@ import { Sidebar } from '../components';
 import { useTypedSelector } from '../hooks';
 
 export const DefaultLayout = () => {
-
     const { isLogged } = useTypedSelector(state => state.auth);
 
     return (

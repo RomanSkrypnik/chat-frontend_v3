@@ -1,5 +1,5 @@
-import {format, formatDistance} from "date-fns";
-import {useEffect, useState} from "react";
+import { format, formatDistance } from 'date-fns';
+import { useEffect, useState } from 'react';
 
 export function useFormatDate(date: string, dateFormat: string) {
     return format(new Date(date), dateFormat);
@@ -29,7 +29,7 @@ export function useFormatDuration(dateString: string) {
             const date = formatDistance(new Date(dateString), new Date()) + ' ago';
             setDate(date);
         }
-    }
+    };
 
     return date;
 }

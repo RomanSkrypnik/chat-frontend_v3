@@ -14,6 +14,7 @@ export const AppRoutes = () => {
                     <Route path='rooms' element={<RoomsPage />}>
                         <Route path=':hash' element={<RoomsPage />} />
                     </Route>
+                    <Route path='settings' element={<SettingsPage />} />
                 </Route>
                 <Route element={<EmptyLayout />}>
                     <Route path='/login' element={<LoginPage />} />

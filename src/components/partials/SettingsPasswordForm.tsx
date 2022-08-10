@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { passwordSchema } from '../../validation';
@@ -8,6 +8,7 @@ import { UserService } from '../../services';
 import { RegularButton } from '../ui';
 import { useSnackbar } from '../../hooks';
 import { TextInput } from '../inputs';
+import { useQuery } from '@tanstack/react-query';
 
 interface FormValues {
     password: string;
@@ -15,15 +16,22 @@ interface FormValues {
     oldPassword: string;
 }
 
+const submit = () => {
+
+};
+
 export const SettingsPasswordForm = () => {
 
     const { control, handleSubmit } = useForm<FormValues>({ resolver: yupResolver(passwordSchema) });
+
+    const { data: passwordData } = useQuery(['compare-password'], submit);
 
     const { snackbar } = useSnackbar();
 
     const onSubmit = async (formValues: FormValues) => {
         try {
             const { data } = await UserService.comparePassword(formValues.password);
+
             if (data.data) {
                 await UserService.changePassword(data.password);
                 snackbar('Password is successfully changed');
