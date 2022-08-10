@@ -1,9 +1,8 @@
 import React, { ReactNode, useState } from 'react';
-import withAuthorized from '../hocs/Authorized';
 import { SettingsAccountForm, SettingsMenu, SettingsPasswordForm } from '../components/partials';
 import { HouseIcon, KeyIcon } from '../components/ui';
 
-const Settings = () => {
+export const SettingsPage = () => {
     const [component, setComponent] = useState<ReactNode>(<SettingsAccountForm />);
     const [id, setId] = useState(0);
 
@@ -28,5 +27,3 @@ const Settings = () => {
         </section>
     );
 };
-
-export default withAuthorized(Settings);

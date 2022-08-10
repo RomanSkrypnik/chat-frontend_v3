@@ -1,15 +1,24 @@
-import React, {FC, ReactNode} from 'react';
+import React from 'react';
+import { Outlet, Navigate } from 'react-router-dom';
+import { useTypedSelector } from '../hooks';
 
-interface EmptyLayoutProps {
-    children: ReactNode
-}
+export const EmptyLayout = () => {
 
-const EmptyLayout: FC<EmptyLayoutProps> = ({children}) => {
+    const { isLogged } = useTypedSelector(state => state.auth);
+
     return (
-        <div className="empty-layout">
-            <main>{children}</main>
-        </div>
+        <>
+            {
+                !isLogged
+                    ?
+                    <div className='empty-layout'>
+                        <main>
+                            <Outlet />
+                        </main>
+                    </div>
+                    :
+                    <Navigate to='/' />
+            }
+        </>
     );
 };
-
-export default EmptyLayout;

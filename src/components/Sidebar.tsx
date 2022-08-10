@@ -4,7 +4,7 @@ import { useAppDispatch } from '../store';
 import { SidebarHeader, SidebarMenu } from './partials';
 import { PowerOnIcon, SidebarButton } from './ui';
 
-const Sidebar = () => {
+export const Sidebar = () => {
 
     const dispatch = useAppDispatch();
 
@@ -18,5 +18,3 @@ const Sidebar = () => {
         </aside>
     );
 };
-
-export default Sidebar;

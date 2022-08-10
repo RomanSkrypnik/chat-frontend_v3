@@ -1,20 +1,28 @@
-import React, {FC, ReactNode} from 'react';
-import Sidebar from "../components/Sidebar";
+import React from 'react';
+import { Outlet, Navigate } from 'react-router-dom';
+import { Sidebar } from '../components';
+import { useTypedSelector } from '../hooks';
 
-interface DefaultLayoutProps {
-    children: ReactNode;
-}
+export const DefaultLayout = () => {
 
-const DefaultLayout: FC<DefaultLayoutProps> = ({children}) => {
+    const { isLogged } = useTypedSelector(state => state.auth);
 
     return (
-        <div className="default-layout">
-            <div className="d-flex">
-                <Sidebar/>
-                <main>{children}</main>
-            </div>
-        </div>
+        <>
+            {
+                isLogged
+                    ?
+                    <div className='default-layout'>
+                        <div className='d-flex'>
+                            <Sidebar />
+                            <main>
+                                <Outlet />
+                            </main>
+                        </div>
+                    </div>
+                    :
+                    <Navigate to='/login' />
+            }
+        </>
     );
 };
-
-export default DefaultLayout;

@@ -1,6 +1,6 @@
-import React, {FC, ReactNode} from 'react';
-import Portal from "../Portal";
-import cn from "classnames";
+import React, { FC, ReactNode } from 'react';
+import cn from 'classnames';
+import { Portal } from '../Portal';
 
 interface DialContainerProps {
     className?: string;
@@ -8,10 +8,10 @@ interface DialContainerProps {
     children: ReactNode;
 }
 
-export const DialContainer: FC<DialContainerProps> = ({className, onClose, children}) => {
+export const DialContainer: FC<DialContainerProps> = ({ className, onClose, children }) => {
     return (
         <Portal onClick={onClose}>
-            <div className={cn("dial-container", className)}>
+            <div className={cn('dial-container', className)}>
                 {children}
             </div>
         </Portal>

@@ -1,33 +1,26 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from "./pages";
-import Login from "./pages/login";
-import Register from "./pages/register";
-import Settings from "./pages/settings";
-import Rooms from "./pages/rooms";
-import Users from "./pages/users";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { DefaultLayout, EmptyLayout } from './layouts';
+import { HomePage, LoginPage, RegisterPage, RoomsPage, SettingsPage } from './pages';
 
 
 export const AppRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-
-                <Route path="/" element={Home}>
-                    <Route path=":hash" element={Home}/>
+                <Route element={<DefaultLayout />}>
+                    <Route path='/' element={<HomePage />}>
+                        <Route path=':hash' element={<HomePage />} />
+                    </Route>
+                    <Route path='rooms' element={<RoomsPage />}>
+                        <Route path=':hash' element={<RoomsPage />} />
+                    </Route>
                 </Route>
-
-                <Route path="rooms" element={Rooms}>
-                    <Route path=":hash" element={Rooms}/>
+                <Route element={<EmptyLayout />}>
+                    <Route path='/login' element={<LoginPage />} />
+                    <Route path='/register' element={<RegisterPage />} />
+                    <Route path='/settings' element={<SettingsPage />} />
                 </Route>
-
-                <Route path="users" element={Users}>
-
-                </Route>
-
-                <Route path="/login" element={Login}/>
-                <Route path="/register" element={Register}/>
-                <Route path="/settings" element={Settings} />
             </Routes>
         </BrowserRouter>
-    )
-}
+    );
+};
