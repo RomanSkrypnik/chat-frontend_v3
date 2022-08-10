@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import TextInput from '../inputs/TextInput';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../store';
 import { editPersonalData } from '../../store/slices/auth';
 import { EditUserDto } from '../../types';
-import AvatarInput from '../inputs/AvatarInput';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { accountSchema } from '../../validation';
 import { Typography } from '../common';
 import { CardContainer } from '../containers';
 import { RegularButton } from '../ui';
 import { useSnackbar, useStorageUrl, useTypedSelector } from '../../hooks';
+import { AvatarInput, TextInput } from '../inputs';
 
 export const SettingsAccountForm = () => {
     const [file, setFile] = useState<null | File>(null);

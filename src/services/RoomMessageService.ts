@@ -1,4 +1,4 @@
-import $api from "../http";
+import $api from '../http';
 
 export class RoomMessageService {
 
@@ -7,7 +7,7 @@ export class RoomMessageService {
     }
 
     static async get(roomId: number, skip: number, take: number) {
-        return await $api.get('/room-message/' + roomId, {params: {skip, take}})
+        return await $api.get('/room-message/' + roomId, { params: { skip, take } });
     }
 
 }

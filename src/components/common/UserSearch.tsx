@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
-import TextInput from '../inputs/TextInput';
 import { useForm } from 'react-hook-form';
 import { UserDto } from '../../types';
 import { UserService } from '../../services';
 import { CardContainer, DialContainer } from '../containers';
 import { UserSearchItem } from '../partials';
+import { TextInput } from '../inputs';
 
 interface UserSearchProps {
     onClose: () => void;

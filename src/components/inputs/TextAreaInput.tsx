@@ -9,7 +9,7 @@ type TextInputProps = {
     className?: string;
 } & UseControllerProps<any>
 
-const TextAreaInput: FC<TextInputProps> = (props) => {
+export const TextAreaInput: FC<TextInputProps> = (props) => {
 
     const {field: {onChange, value, name}} = useController({...props, defaultValue: props.defaultValue ?? ''});
 
@@ -19,5 +19,3 @@ const TextAreaInput: FC<TextInputProps> = (props) => {
         </textarea>
     );
 };
-
-export default TextAreaInput;

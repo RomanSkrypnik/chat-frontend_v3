@@ -13,7 +13,7 @@ interface FileInputProps {
     buttonText?: string;
 }
 
-const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({
+export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({
                                                                     name,
                                                                     buttonText,
                                                                     multiple = true,
@@ -54,5 +54,3 @@ const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({
         </div>
     );
 });
-
-export default FileInput;

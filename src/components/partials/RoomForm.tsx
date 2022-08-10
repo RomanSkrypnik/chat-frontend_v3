@@ -2,11 +2,9 @@ import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../store';
 import { createRoom } from '../../store/slices/room';
-import TextInput from '../inputs/TextInput';
-import TextAreaInput from '../inputs/TextAreaInput';
-import AvatarInput from '../inputs/AvatarInput';
 import { CardContainer, DialContainer } from '../containers';
 import { RegularButton } from '../ui';
+import { AvatarInput, TextAreaInput, TextInput } from '../inputs';
 
 interface RoomFormProps {
     onClose: () => void;
@@ -50,8 +48,13 @@ export const RoomForm: FC<RoomFormProps> = ({ onClose }) => {
 
                     <div className='d-flex align-items-center w-100 mb-3'>
                         <AvatarInput onChange={handleChange} />
-                        <TextInput className='flex-grow-1 ms-3' placeholder='Name' defaultValue='' control={control}
-                                   name='name' />
+                        <TextInput
+                            className='flex-grow-1 ms-3'
+                            placeholder='Name'
+                            defaultValue=''
+                            control={control}
+                            name='name'
+                        />
                     </div>
 
                     <TextAreaInput className='mb-3' control={control} name='description' placeholder='Description' />

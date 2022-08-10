@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const API_URL = "http://localhost:5000/api"
-export const SERVER_URL = "http://localhost:5000"
+export const API_URL = 'http://localhost:5000/api';
+export const SERVER_URL = 'http://localhost:5000';
 
-export const ROOM_AVATAR_URL = SERVER_URL + "/room/avatar/"
+export const ROOM_AVATAR_URL = SERVER_URL + '/room/avatar/';
 
 const $api = axios.create({
     baseURL: API_URL,
-    withCredentials: true
+    withCredentials: true,
 });
 
 $api.interceptors.request.use(config => {

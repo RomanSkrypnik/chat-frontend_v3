@@ -1,4 +1,4 @@
-import $api from "../http";
+import $api from '../http';
 
 export class MessageService {
 
@@ -7,7 +7,7 @@ export class MessageService {
     }
 
     static async get(chatId: number, skip: number, take: number) {
-        return await $api.get('/message/' + chatId, {params: {skip, take}})
+        return await $api.get('/message/' + chatId, { params: { skip, take } });
     }
 
 }

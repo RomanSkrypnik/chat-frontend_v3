@@ -1,5 +1,5 @@
-import $api from "../http";
-import {RegisterDto, LoginDto} from "../types";
+import $api from '../http';
+import { RegisterDto, LoginDto } from '../types';
 
 export class AuthService {
 

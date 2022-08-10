@@ -12,7 +12,7 @@ type InputProps = {
     withError?: boolean;
 } & UseControllerProps<any>
 
-const TextInput: FC<InputProps> = ({placeholder, type, label, className, withError = true, disabled, ...props}) => {
+export const TextInput: FC<InputProps> = ({placeholder, type, label, className, withError = true, disabled, ...props}) => {
 
     const {field: {onChange, value, name}, formState: {errors}} = useController({
         ...props,
@@ -39,5 +39,3 @@ const TextInput: FC<InputProps> = ({placeholder, type, label, className, withErr
         </label>
     );
 };
-
-export default TextInput;

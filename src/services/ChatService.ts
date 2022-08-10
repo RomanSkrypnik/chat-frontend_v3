@@ -1,4 +1,4 @@
-import $api from "../http";
+import $api from '../http';
 
 export class ChatService {
 
@@ -7,11 +7,11 @@ export class ChatService {
     }
 
     static async getChat(hash: string) {
-        return await $api.get('/chat/' + hash)
+        return await $api.get('/chat/' + hash);
     }
 
     static async search(search: string) {
-        return await $api.post('/chat/search', {search});
+        return await $api.post('/chat/search', { search });
     }
 
 }

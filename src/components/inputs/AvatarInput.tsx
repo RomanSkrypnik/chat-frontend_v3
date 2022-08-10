@@ -7,7 +7,7 @@ interface AvatarInputProps {
     onChange: (file: File) => void;
 }
 
-const AvatarInput: FC<AvatarInputProps> = ({ onChange, imgSrc }) => {
+export const AvatarInput: FC<AvatarInputProps> = ({ onChange, imgSrc }) => {
     const [src, setSrc] = useState<undefined | string>(imgSrc);
 
     const onDrop = useCallback((files: File[]) => {
@@ -38,5 +38,3 @@ const AvatarInput: FC<AvatarInputProps> = ({ onChange, imgSrc }) => {
         </div>
     );
 };
-
-export default AvatarInput;

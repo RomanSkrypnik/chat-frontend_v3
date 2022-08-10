@@ -1,13 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { RegisterDto } from '../../types';
-import TextInput from '../inputs/TextInput';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema } from '../../validation';
 import { AuthService } from '../../services';
 import { Typography } from '../common';
 import { CardContainer, CenteredContainer } from '../containers';
+import { TextInput } from '../inputs';
 
 export const RegisterForm = () => {
 

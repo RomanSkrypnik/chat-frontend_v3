@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import TextInput from '../inputs/TextInput';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../store';
 import { fetchChats, findChat } from '../../store/slices/chat';
 import { MessageList } from '../common';
 import { useTypedSelector } from '../../hooks';
+import { TextInput } from '../inputs';
 
 export const MessageWrapper = () => {
 

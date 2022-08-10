@@ -1,9 +1,8 @@
 import React, { FC, useRef, useState } from 'react';
-import TextInput from '../inputs/TextInput';
 import { useForm } from 'react-hook-form';
-import FileInput from '../inputs/FileInput';
 import { CreateMessageValues } from '../../types';
 import { CircleButton, CrossIcon, TelegramIcon } from '../ui';
+import { FileInput, TextInput } from '../inputs';
 
 interface ChatControlsProps {
     isBlocked?: boolean;
