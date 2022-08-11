@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { UserDto } from '../../types';
 import { useFormatDuration } from '../../hooks';
-import { Typography, UserProfile } from '../common';
+import { UserProfile } from '../common';
 import { CircleButton, ThreeDotsIcon } from '../ui';
 import { Avatar } from '../ui/buttons/Avatar';
 
@@ -24,10 +24,10 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ user }) => {
                     <div className='d-flex'>
                         <Avatar onClick={handleClick} />
                         <div className='ms-3'>
-                            <Typography fz={18} className='fw-bold'>{user.name}</Typography>
-                            <Typography className='text-primary'>
+                            <h2 className='body-1 fw-bold'>{user.name}</h2>
+                            <h3 className='body-2 text-primary'>
                                 {(user.online && 'Online') || `last seen ${lastSeen}`}
-                            </Typography>
+                            </h3>
                         </div>
                     </div>
 

@@ -20,7 +20,7 @@ export const MessageItem: FC<MessageItemProps> = ({ src, name, hash, online, mes
 
     return (
         <NavLink to={`/${hash}`} className='message-item'>
-            <div className='d-flex'>
+            <div className='d-flex align-items-center'>
                 <Avatar src={src} isOnline={online} />
                 <div className='d-flex justify-content-between w-100 ms-3'>
                     <p className='body-1 message-item__text fw-bold mb-1'>{name}</p>

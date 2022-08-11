@@ -1,6 +1,5 @@
-import React, {FC, ReactNode} from 'react';
-import cn from "classnames";
-import { Typography } from '../../common';
+import React, { FC, ReactNode } from 'react';
+import cn from 'classnames';
 
 interface ButtonWithIconProps {
     onClick?: () => void;
@@ -9,11 +8,11 @@ interface ButtonWithIconProps {
     children: ReactNode;
 }
 
-export const ButtonIcon: FC<ButtonWithIconProps> = ({onClick, className, icon, children}) => {
+export const ButtonIcon: FC<ButtonWithIconProps> = ({ onClick, className, icon, children }) => {
     return (
-        <button className={cn("button-icon", className)} onClick={onClick}>
+        <button className={cn('button-icon', className)} onClick={onClick}>
             {icon}
-            <Typography className="ms-4">{children}</Typography>
+            <span className='ms-4'>{children}</span>
         </button>
     );
 };

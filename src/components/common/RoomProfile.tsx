@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { ROOM_AVATAR_URL } from '../../http';
-import { Typography } from './Typography';
 import { CardContainer, DialContainer } from '../containers';
 import { RoomProfileUser } from '../partials';
 import { Avatar } from '../ui/buttons/Avatar';
@@ -17,28 +16,24 @@ export const RoomProfile: FC<RoomProfileProps> = ({ onClose }) => {
         <DialContainer onClose={onClose}>
             <CardContainer className='_extended' onClose={onClose} title='Group info'>
                 <div className='user-profile'>
-
                     <div className='d-flex align-items-center pb-3'>
                         <Avatar src={ROOM_AVATAR_URL + room?.avatar} width={70} height={70} />
                         <div className='ms-4'>
-                            <Typography fz={18} className='fw-bold'>{room?.name}</Typography>
+                            <h2 className='body-1 fw-bold'>{room?.name}</h2>
                         </div>
                     </div>
-
                     <div className='border-top-grey py-3'>
-                        <Typography>{room?.description}</Typography>
-                        <Typography fz={14} className='text-grey'>Description</Typography>
+                        <h2>{room?.description}</h2>
+                        <h3 className='body-2 text-grey'>Description</h3>
                     </div>
-
                     <div className='border-top-grey py-3'>
-                        <Typography className='mb-3' fz={20}>Users in room</Typography>
+                        <h3 className='mb-3'>Users in room</h3>
                         <div>
                             {
                                 room?.users.map(user => <RoomProfileUser user={user} key={user.id} />)
                             }
                         </div>
                     </div>
-
                 </div>
             </CardContainer>
         </DialContainer>
