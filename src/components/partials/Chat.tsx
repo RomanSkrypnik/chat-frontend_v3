@@ -7,7 +7,7 @@ import { ChatHeader } from './ChatHeader';
 import { ChatControls } from './ChatControls';
 import { useCreateChatMessage, useTypedSelector } from '../../hooks';
 
-export const ChatWrapper = () => {
+export const Chat = () => {
     const { chatHash } = useParams();
 
     const dispatch = useAppDispatch();

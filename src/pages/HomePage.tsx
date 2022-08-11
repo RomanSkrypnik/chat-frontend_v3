@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MessageList, UserSearch } from '../components/common';
-import { ChatWrapper } from '../components/partials';
+import { Chat } from '../components/partials';
 import { RegularButton } from '../components/ui';
 import { TextInput } from '../components/inputs';
 import { useChatConvert, useSearch, useTypedSelector } from '../hooks';
@@ -44,7 +44,7 @@ export const HomePage = () => {
                         <MessageList items={converted} />
                     </div>
                 </div>
-                {chatHash && <ChatWrapper />}
+                {chatHash && <Chat />}
             </div>
             {show && <UserSearch onClose={handleClick} />}
         </section>

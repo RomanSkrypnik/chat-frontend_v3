@@ -1,18 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
 import { fetchRoom } from '../../store/slices/room';
-import { RoomMessageService } from '../../services';
-import { CreateMessageValues } from '../../types';
 import { ChatList } from '../common';
 import { ChatControls } from './ChatControls';
 import { RoomHeader } from './RoomHeader';
-import { useTypedSelector } from '../../hooks';
+import { useCreateRoomMessage, useTypedSelector } from '../../hooks';
 import { RoomSocketContext } from '../providers';
 
-export const RoomWrapper = () => {
-    const [roomId, setRoomId] = useState<null | number>(null);
-
+export const Room = () => {
     const { roomHash } = useParams();
 
     const dispatch = useAppDispatch();
@@ -20,6 +16,8 @@ export const RoomWrapper = () => {
     const { room } = useTypedSelector(state => state.room);
 
     const roomSocket = useContext(RoomSocketContext);
+
+    const handleSubmit = useCreateRoomMessage();
 
     useEffect(() => {
         if (roomHash) {
@@ -32,32 +30,10 @@ export const RoomWrapper = () => {
     }, [roomHash]);
 
     useEffect(() => {
-        if (room) {
-            setRoomId(prev => prev !== room.id ? room.id : prev);
-        }
-    }, [room]);
-
-    useEffect(() => {
-        if (roomSocket && Number.isFinite(roomId)) {
+        if (room && roomSocket) {
             roomSocket.emit('join', room?.id);
         }
-    }, [roomSocket, roomId]);
-
-    const handleSubmit = async ({ text, files }: CreateMessageValues) => {
-        const fd = new FormData();
-
-        fd.append('text', text);
-        fd.append('roomId', `${room?.id}`);
-
-        if (files.length > 0) {
-            for (const file of files) {
-                fd.append('files', file);
-            }
-        }
-
-        const { data } = await RoomMessageService.create(fd);
-        roomSocket?.emit('send-message', data.data);
-    };
+    }, [room]);
 
     return (
         <div className='flex-grow-1 bg-white'>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { RoomForm, RoomWrapper } from '../components/partials';
+import { RoomForm, Room } from '../components/partials';
 import { useAppDispatch } from '../store';
 import { fetchRooms, setRoom } from '../store/slices/room';
 import { useParams } from 'react-router-dom';
@@ -48,7 +48,7 @@ export const RoomsPage = () => {
                         <MessageList items={converted} />
                     </div>
                 </div>
-                {roomHash && <RoomWrapper />}
+                {roomHash && <Room />}
                 {show && <RoomForm onClose={handleClick} />}
             </div>
         </section>
