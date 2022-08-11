@@ -3,34 +3,25 @@ import { ChatDto } from '../../types';
 import { MessageItem } from './MessageItem';
 import { useStorageUrl } from '../../hooks';
 
-interface MessageItemProps {
-    chat: ChatDto;
-}
-
-const MessageItemWrapper: FC<MessageItemProps> = ({ chat }) => {
-
-    const src = useStorageUrl('/avatars/', chat.user.avatar);
-
-    return (
-        <MessageItem name={chat.user.name}
-                     src={src}
-                     hash={chat.user.hash}
-                     messages={chat.messages}
-                     key={chat.id}
-        />
-    );
-};
-
-interface MessageListProps {
+interface Props {
     chats: ChatDto[];
 }
 
-export const MessageList: FC<MessageListProps> = ({ chats }) => {
+export const MessageList: FC<Props> = ({ chats }) => {
+    const path = useStorageUrl('/avatars/');
 
     return (
         <div className='message-list scrollbar'>
             {
-                chats.map((chat) => <MessageItemWrapper chat={chat} key={chat.id} />)
+                chats.map(({ user: { avatar, name, hash }, messages, id }) =>
+                    <MessageItem
+                        name={name}
+                        src={avatar ? path + avatar : undefined}
+                        messages={messages}
+                        hash={hash}
+                        key={id}
+                    />,
+                )
             }
         </div>
     );

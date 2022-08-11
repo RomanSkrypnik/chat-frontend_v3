@@ -6,7 +6,11 @@ import { Avatar } from '../ui/buttons/Avatar';
 import { SocketContext } from '../providers';
 import { useFormatDuration, useStorageUrl, useTypedSelector } from '../../hooks';
 
-const UserBio: FC<{ bio: string }> = ({ bio }) => {
+interface UserBioProps {
+    bio: string;
+}
+
+const UserBio: FC<UserBioProps> = ({ bio }) => {
     return (
         <div className='mt-3'>
             <h2 className='body-1 fw-bold'>{bio}</h2>
