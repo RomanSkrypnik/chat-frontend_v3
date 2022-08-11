@@ -26,6 +26,7 @@ export interface MessageDto {
 }
 
 export interface MessageItemDto {
+    id: number;
     src?: string;
     online?: boolean;
     name: string;

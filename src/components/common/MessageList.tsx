@@ -11,7 +11,7 @@ export const MessageList: FC<Props> = ({ items }) => {
     return (
         <div className='message-list scrollbar'>
             {
-                items.map((chat) => <MessageItem {...chat} />)
+                items.map(({ id, ...chat }) => <MessageItem {...chat} key={id} />)
             }
         </div>
     );

@@ -18,7 +18,6 @@ export const Chat = () => {
 
     useEffect(() => {
         chatHash && dispatch(fetchChat(chatHash));
-
         return () => {
             dispatch(setChat(null));
         };

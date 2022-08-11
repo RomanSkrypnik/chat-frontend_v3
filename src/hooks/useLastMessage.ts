@@ -10,6 +10,8 @@ export function useLastMessage(array: MessageDto[][]) {
             const j = array[i].length - 1;
 
             setLastMessage(array[i][j]);
+        } else {
+            setLastMessage(null);
         }
     }, [array]);
 
