@@ -19,7 +19,7 @@ export const MessageItem: FC<MessageItemDto> = ({ src, name, hash, online, messa
     const date = useFormatDuration(messages[0]?.createdAt ?? '');
 
     return (
-        <NavLink to={`/${hash}`} className='message-item'>
+        <NavLink to={hash} className='message-item'>
             <div className='d-flex align-items-center'>
                 <Avatar src={src} isOnline={online} />
                 <div className='d-flex justify-content-between w-100 ms-3'>

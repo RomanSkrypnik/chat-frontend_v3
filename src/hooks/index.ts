@@ -14,3 +14,4 @@ export * from './useLastMessage';
 export * from './useScrollToBottom';
 export * from './useChatConvert';
 export * from './useRoomConvert';
+export * from './useCreateChatMessage';

@@ -60,7 +60,7 @@ export const RoomWrapper = () => {
     };
 
     return (
-        <div className='flex-grow-1 bg-white slide-in'>
+        <div className='flex-grow-1 bg-white'>
             {
                 room &&
                 <>
