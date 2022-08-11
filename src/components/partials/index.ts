@@ -10,8 +10,6 @@ export * from './MessageWrapper';
 export * from './RegisterForm';
 export * from './RoomForm';
 export * from './RoomHeader';
-export * from './RoomMessageList';
-export * from './RoomMessageWrapper';
 export * from './RoomProfileUser';
 export * from './RoomWrapper';
 export * from './SettingsAccountForm';
