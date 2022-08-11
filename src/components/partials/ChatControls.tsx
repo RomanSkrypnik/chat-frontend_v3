@@ -19,9 +19,7 @@ export const ChatControls: FC<ChatControlsProps> = ({ isBlocked, onSubmit }) => 
     const handleOnSubmit = (data: { text: string }) => {
         if (data.text || files.length > 0) {
             onSubmit({ ...data, files });
-
             reset({ text: '' });
-
             setFiles([]);
         }
     };

@@ -33,7 +33,7 @@ export const ChatWrapper = () => {
         if (chatHash) {
             const fd = new FormData();
 
-            fd.append('chatHash', chatHash);
+            fd.append('hash', chatHash);
             fd.append('text', text);
 
             if (files.length > 0) {
