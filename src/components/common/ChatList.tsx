@@ -1,15 +1,13 @@
-import React, { FC, MutableRefObject, useEffect, useRef } from 'react';
+import React, { FC, MutableRefObject, useRef } from 'react';
 import { MessageDto } from '../../types';
 import { ChatListItem } from '../partials';
-import { useChatScroll, useLastMessage, useMessageArr, useTypedSelector } from '../../hooks';
+import { useChatScroll, useLastMessage, useMessageArr, useScrollToBottom } from '../../hooks';
 
 interface ChatListProps {
     messages: MessageDto[];
 }
 
 export const ChatList: FC<ChatListProps> = ({ messages }) => {
-    const { user } = useTypedSelector(state => state.auth);
-
     const twoDimsArr = useMessageArr(messages);
 
     const ref = useRef() as MutableRefObject<HTMLUListElement>;
@@ -18,17 +16,7 @@ export const ChatList: FC<ChatListProps> = ({ messages }) => {
 
     const lastMessage = useLastMessage(twoDimsArr);
 
-    useEffect(() => {
-        if (lastMessage?.user.id === user?.id) {
-            scrollToBottom();
-        }
-    }, [lastMessage]);
-
-    const scrollToBottom = () => {
-        if (ref) {
-            ref.current.scrollTo(0, ref.current.scrollHeight);
-        }
-    };
+    useScrollToBottom(ref, lastMessage);
 
     return (
         <ul className='chat-list scrollbar list-unstyled'
