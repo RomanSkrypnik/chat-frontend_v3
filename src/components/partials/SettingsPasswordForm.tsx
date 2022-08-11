@@ -2,11 +2,9 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { passwordSchema } from '../../validation';
-import { Typography } from '../common';
 import { CardContainer } from '../containers';
-import { UserService } from '../../services';
 import { RegularButton } from '../ui';
-import { useChangePassword, useComparePassword, useSnackbar } from '../../hooks';
+import { useChangePassword, useComparePassword } from '../../hooks';
 import { TextInput } from '../inputs';
 
 interface FormValues {
@@ -29,7 +27,7 @@ export const SettingsPasswordForm = () => {
 
     return (
         <CardContainer>
-            <Typography as='h2' className='mb-4'>Password Settings</Typography>
+            <h2 className='mb-4'>Password Settings</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='d-flex'>
                     <div className='flex-grow-1 me-4'>

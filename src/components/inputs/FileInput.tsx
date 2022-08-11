@@ -1,7 +1,6 @@
 import React, { forwardRef, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import cn from 'classnames';
-import { Typography } from '../common';
 import { RegularButton, UploadIcon } from '../ui';
 
 interface FileInputProps {
@@ -14,13 +13,13 @@ interface FileInputProps {
 }
 
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({
-                                                                    name,
-                                                                    buttonText,
-                                                                    multiple = true,
-                                                                    visible,
-                                                                    onChange,
-                                                                    value = '',
-                                                                }, ref) => {
+                                                                           name,
+                                                                           buttonText,
+                                                                           multiple = true,
+                                                                           visible,
+                                                                           onChange,
+                                                                           value = '',
+                                                                       }, ref) => {
 
     const onDrop = useCallback((files: File[]) => {
         onChange(files);
@@ -36,8 +35,8 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({
                 <>
                     <div className='d-flex flex-column align-items-center' {...getRootProps()}>
                         <UploadIcon />
-                        <Typography>{isDragActive ? 'Drop here' : 'Drag and drop here'}</Typography>
-                        <Typography className='fw-bold my-2'>Or</Typography>
+                        <h2 className='body-1'>{isDragActive ? 'Drop here' : 'Drag and drop here'}</h2>
+                        <h3 className='body-2 fw-bold my-2'>Or</h3>
                     </div>
                     <RegularButton onClick={open}>{buttonText ?? 'Select files'}</RegularButton>
                 </>

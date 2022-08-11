@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { UserDto } from '../../types';
 import { useNavigate } from 'react-router-dom';
-import { Typography } from '../common';
 import { Avatar } from '../ui/buttons/Avatar';
 import { useStorageUrl } from '../../hooks';
 
@@ -24,7 +23,7 @@ export const UserSearchItem: FC<UserSearchItemProps> = ({ user, onClose }) => {
         <div className='d-flex align-items-center mt-3'>
             <Avatar src={src} />
             <div className='d-flex justify-content-between align-items-center w-100 ms-3'>
-                <Typography>{user.name}</Typography>
+                <span className='body-1'>{user.name}</span>
                 <button className='btn btn-success' onClick={handleClick}>Send message</button>
             </div>
         </div>

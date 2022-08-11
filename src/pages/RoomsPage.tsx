@@ -3,7 +3,6 @@ import { RoomForm, RoomMessageWrapper, RoomWrapper } from '../components/partial
 import { useAppDispatch } from '../store';
 import { setRoom } from '../store/slices/room';
 import { useParams } from 'react-router-dom';
-import { Typography } from '../components/common';
 import { RegularButton } from '../components/ui';
 
 export const RoomsPage = () => {
@@ -17,7 +16,6 @@ export const RoomsPage = () => {
         return () => {
             dispatch(setRoom(null));
         };
-
     }, []);
 
     const handleClick = () => setShow(!show);
@@ -27,7 +25,7 @@ export const RoomsPage = () => {
             <div className='d-flex fade-in'>
                 <div className='w-25 me-3'>
                     <div className='d-flex justify-content-between mb-3'>
-                        <Typography className='mb-3' fz={36}>Rooms</Typography>
+                        <h2 className='h1 mb-3'>Rooms</h2>
                         <RegularButton onClick={handleClick}>Create New Room</RegularButton>
                     </div>
                     <RoomMessageWrapper />

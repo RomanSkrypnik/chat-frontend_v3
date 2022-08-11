@@ -5,7 +5,6 @@ import { editPersonalData } from '../../store/slices/auth';
 import { EditUserDto } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { accountSchema } from '../../validation';
-import { Typography } from '../common';
 import { CardContainer } from '../containers';
 import { RegularButton } from '../ui';
 import { useSnackbar, useStorageUrl, useTypedSelector } from '../../hooks';
@@ -46,16 +45,14 @@ export const SettingsAccountForm = () => {
 
     return (
         <CardContainer>
-            <Typography as='h2' className='mb-4'>Account Settings</Typography>
+            <h2 className='mb-4'>Account Settings</h2>
             {
                 user &&
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='d-flex'>
                         <div className='d-flex flex-column align-items-center me-5 pe-1'>
                             <AvatarInput imgSrc={src} onChange={handleChange} />
-                            <Typography className='text-center mt-1'>
-                                Drag or click here
-                            </Typography>
+                            <p className='body-1 text-center mt-1'>Drag or click here</p>
                             <RegularButton type='submit' className='mt-4'>Change data</RegularButton>
                         </div>
                         <div className='flex-grow-1 me-4'>
