@@ -3,12 +3,12 @@ import { MessageDto, UserDto } from '../../types';
 import { Avatar } from '../ui/buttons/Avatar';
 import { useFormatDate } from '../../hooks';
 
-interface MessageSnackbarProps {
+interface Props {
     user: UserDto;
     message: MessageDto;
 }
 
-export const SnackbarMessage: FC<MessageSnackbarProps> = ({ user, message }) => {
+export const SnackbarMessage: FC<Props> = ({ user, message }) => {
     const date = useFormatDate(message.createdAt, 'hh:mm');
 
     return (

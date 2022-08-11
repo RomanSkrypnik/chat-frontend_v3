@@ -1,13 +1,13 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-interface PortalProps {
+interface Props {
     onClick: () => void;
     transparent?: boolean;
     children: ReactNode;
 }
 
-export const Portal: FC<PortalProps> = ({ onClick, transparent = false, children }) => {
+export const Portal: FC<Props> = ({ onClick, transparent = false, children }) => {
 
     const [container] = useState(() => document.createElement('div'));
 

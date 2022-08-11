@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import cn from 'classnames';
 import { RegularButton, UploadIcon } from '../ui';
 
-interface FileInputProps {
+interface Props {
     name?: string;
     onChange: (files: File[]) => void;
     visible?: boolean;
@@ -12,7 +12,7 @@ interface FileInputProps {
     buttonText?: string;
 }
 
-export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({
+export const FileInput = forwardRef<HTMLInputElement, Props>(({
                                                                            name,
                                                                            buttonText,
                                                                            multiple = true,

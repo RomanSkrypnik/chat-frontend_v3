@@ -5,11 +5,11 @@ import { UserProfile } from '../common';
 import { CircleButton, ThreeDotsIcon } from '../ui';
 import { Avatar } from '../ui/buttons/Avatar';
 
-interface ChatHeaderProps {
+interface Props {
     user: UserDto;
 }
 
-export const ChatHeader: FC<ChatHeaderProps> = ({ user }) => {
+export const ChatHeader: FC<Props> = ({ user }) => {
     const [show, setShow] = useState(false);
 
     const lastSeen = useFormatDuration(user.lastSeen);

@@ -3,11 +3,11 @@ import { MessageDto } from '../../types';
 import { ChatListItem } from '../partials';
 import { useChatScroll, useLastMessage, useMessageArr, useScrollToBottom } from '../../hooks';
 
-interface ChatListProps {
+interface Props {
     messages: MessageDto[];
 }
 
-export const ChatList: FC<ChatListProps> = ({ messages }) => {
+export const ChatList: FC<Props> = ({ messages }) => {
     const twoDimsArr = useMessageArr(messages);
 
     const ref = useRef() as MutableRefObject<HTMLUListElement>;

@@ -5,11 +5,11 @@ import { RoomProfileUser } from '../partials';
 import { Avatar } from '../ui/buttons/Avatar';
 import { useTypedSelector } from '../../hooks';
 
-interface RoomProfileProps {
+interface Props {
     onClose: () => void;
 }
 
-export const RoomProfile: FC<RoomProfileProps> = ({ onClose }) => {
+export const RoomProfile: FC<Props> = ({ onClose }) => {
     const { room } = useTypedSelector(state => state.room);
 
     return (

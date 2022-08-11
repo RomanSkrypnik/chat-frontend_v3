@@ -14,13 +14,13 @@ import { SnackbarMessage } from '../partials';
 import { SoundService } from '../../services';
 import { useSnackbar, useTypedSelector } from '../../hooks';
 
-interface SocketProviderProps {
+interface Props {
     children: ReactNode;
 }
 
 export const SocketContext = createContext<null | Socket<any, any>>(null);
 
-export const SocketProvider: FC<SocketProviderProps> = ({ children }) => {
+export const SocketProvider: FC<Props> = ({ children }) => {
     const [lastMessage, setLastMessage] = useState<null | MessageDto>(null);
     const [socket, setSocket] = useState<null | Socket<any, any>>(null);
 

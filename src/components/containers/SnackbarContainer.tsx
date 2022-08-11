@@ -2,11 +2,11 @@ import React, { FC, ReactNode } from 'react';
 import { CloseCrossIcon, IconButton } from '../ui';
 import { useSnackbar } from '../../hooks';
 
-interface SnackbarContainerProps {
+interface Props {
     children: ReactNode;
 }
 
-export const SnackbarContainer: FC<SnackbarContainerProps> = ({ children }) => {
+export const SnackbarContainer: FC<Props> = ({ children }) => {
     const { close } = useSnackbar();
 
     return (

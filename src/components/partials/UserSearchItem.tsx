@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { Avatar } from '../ui/buttons/Avatar';
 import { useStorageUrl } from '../../hooks';
 
-interface UserSearchItemProps {
+interface Props {
     user: UserDto;
     onClose: () => void;
 }
 
-export const UserSearchItem: FC<UserSearchItemProps> = ({ user, onClose }) => {
+export const UserSearchItem: FC<Props> = ({ user, onClose }) => {
     const navigate = useNavigate();
 
     const src = useStorageUrl('/avatars/', user.avatar);

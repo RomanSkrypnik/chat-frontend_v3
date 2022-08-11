@@ -1,17 +1,17 @@
-import React, {createContext, FC, ReactNode, useEffect, useState} from 'react';
-import {io, Socket} from "socket.io-client";
-import {useAppDispatch} from "../../store";
-import {addMessage, changeMessage, changeUserInRooms, changeUsers} from "../../store/slices/room";
-import {RoomMessageDto} from "../../types/room";
-import {UserDto} from "../../types";
+import React, { createContext, FC, ReactNode, useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
+import { useAppDispatch } from '../../store';
+import { addMessage, changeMessage, changeUserInRooms, changeUsers } from '../../store/slices/room';
+import { RoomMessageDto } from '../../types/room';
+import { UserDto } from '../../types';
 
-interface RoomSocketProviderProps {
+interface Props {
     children: ReactNode;
 }
 
 export const RoomSocketContext = createContext<null | Socket<any, any>>(null);
 
-export const RoomSocketProvider: FC<RoomSocketProviderProps> = ({children}) => {
+export const RoomSocketProvider: FC<Props> = ({ children }) => {
     const [socket, setSocket] = useState<null | Socket<any, any>>(null);
 
     const dispatch = useAppDispatch();
@@ -23,9 +23,9 @@ export const RoomSocketProvider: FC<RoomSocketProviderProps> = ({children}) => {
                     polling: {
                         extraHeaders: {
                             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             }));
         }
     }, []);
@@ -61,8 +61,8 @@ export const RoomSocketProvider: FC<RoomSocketProviderProps> = ({children}) => {
             return () => {
                 setTimeout(() => {
                     socket.disconnect();
-                }, 600)
-            }
+                }, 600);
+            };
 
         }
     }, [socket]);

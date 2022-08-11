@@ -4,12 +4,12 @@ import { CreateMessageValues } from '../../types';
 import { CircleButton, CrossIcon, TelegramIcon } from '../ui';
 import { FileInput, TextInput } from '../inputs';
 
-interface ChatControlsProps {
+interface Props {
     isBlocked?: boolean;
     onSubmit: (data: CreateMessageValues) => void;
 }
 
-export const ChatControls: FC<ChatControlsProps> = ({ isBlocked, onSubmit }) => {
+export const ChatControls: FC<Props> = ({ isBlocked, onSubmit }) => {
     const [files, setFiles] = useState<[] | File[]>([]);
 
     const inputRef = useRef<HTMLInputElement>(null);

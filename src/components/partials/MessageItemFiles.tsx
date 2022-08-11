@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { FileDto } from '../../types';
 import { useFileCount } from '../../hooks';
 
-interface MessageItemAttachmentProps {
+interface Props {
     files: FileDto[];
 }
 
-export const MessageItemFiles: FC<MessageItemAttachmentProps> = ({ files }) => {
+export const MessageItemFiles: FC<Props> = ({ files }) => {
 
     const { fileCount, pictureCount } = useFileCount(files);
 

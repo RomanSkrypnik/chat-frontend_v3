@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useController, UseControllerProps } from 'react-hook-form';
 import cn from 'classnames';
 
-type InputProps = {
+type Props = {
     type?: 'text' | 'password';
     disabled?: boolean;
     placeholder?: string;
@@ -11,15 +11,15 @@ type InputProps = {
     withError?: boolean;
 } & UseControllerProps<any>
 
-export const TextInput: FC<InputProps> = ({
-                                              placeholder,
-                                              type,
-                                              label,
-                                              className,
-                                              withError = true,
-                                              disabled,
-                                              ...props
-                                          }) => {
+export const TextInput: FC<Props> = ({
+                                         placeholder,
+                                         type,
+                                         label,
+                                         className,
+                                         withError = true,
+                                         disabled,
+                                         ...props
+                                     }) => {
 
     const { field: { onChange, value, name }, formState: { errors } } = useController({
         ...props,

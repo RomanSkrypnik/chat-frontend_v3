@@ -1,7 +1,7 @@
-import React, {FC} from 'react';
-import cn from "classnames";
+import React, { FC } from 'react';
+import cn from 'classnames';
 
-interface AvatarProps {
+interface Props {
     src?: string;
     alt?: string;
     isOnline?: boolean;
@@ -11,13 +11,13 @@ interface AvatarProps {
     className?: string;
 }
 
-export const Avatar: FC<AvatarProps> = ({onClick, src, alt, className, width, height, isOnline = false}) => {
+export const Avatar: FC<Props> = ({ onClick, src, alt, className, width, height, isOnline = false }) => {
     return (
-        <div className="position-relative">
-            <button className={cn("avatar", className)} style={{width, height}} onClick={onClick}>
-                <img src={src} alt={alt}/>
+        <div className='position-relative'>
+            <button className={cn('avatar', className)} style={{ width, height }} onClick={onClick}>
+                <img src={src} alt={alt} />
             </button>
-            {isOnline && <span className="avatar__online" />}
+            {isOnline && <span className='avatar__online' />}
         </div>
     );
 };

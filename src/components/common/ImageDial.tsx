@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { DialContainer } from '../containers';
 
-interface ImageDialProps {
+interface Props {
     onClose: () => void;
     src: string;
 }
 
-export const ImageDial: FC<ImageDialProps> = ({ src, onClose }) => {
+export const ImageDial: FC<Props> = ({ src, onClose }) => {
 
     return (
         <DialContainer onClose={onClose}>

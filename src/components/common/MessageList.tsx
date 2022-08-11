@@ -3,10 +3,6 @@ import { ChatDto } from '../../types';
 import { MessageItem } from './MessageItem';
 import { useStorageUrl } from '../../hooks';
 
-interface MessageListProps {
-    chats: ChatDto[];
-}
-
 interface MessageItemProps {
     chat: ChatDto;
 }
@@ -24,6 +20,10 @@ const MessageItemWrapper: FC<MessageItemProps> = ({ chat }) => {
         />
     );
 };
+
+interface MessageListProps {
+    chats: ChatDto[];
+}
 
 export const MessageList: FC<MessageListProps> = ({ chats }) => {
 

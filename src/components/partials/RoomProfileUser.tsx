@@ -3,11 +3,11 @@ import { UserDto } from '../../types';
 import { Avatar } from '../ui/buttons/Avatar';
 import { useFormatDuration } from '../../hooks';
 
-interface RoomProfileUserProps {
+interface Props {
     user: UserDto;
 }
 
-export const RoomProfileUser: FC<RoomProfileUserProps> = ({ user }) => {
+export const RoomProfileUser: FC<Props> = ({ user }) => {
 
     const lastSeen = useFormatDuration(user.lastSeen);
 

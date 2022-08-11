@@ -3,7 +3,7 @@ import { SnackbarContainer } from '../containers';
 
 export const SnackbarContext = createContext<null | SnackbarContextDto>(null);
 
-interface SnackbarProviderProps {
+interface Props {
     children: ReactNode;
 }
 
@@ -13,7 +13,7 @@ interface SnackbarContextDto {
     setSnackbarTimeout: Dispatch<SetStateAction<number>>;
 }
 
-export const SnackbarProvider: FC<SnackbarProviderProps> = ({ children }) => {
+export const SnackbarProvider: FC<Props> = ({ children }) => {
     const [open, setOpen] = useState(false);
     const [snackbarChildren, setSnackbarChildren] = useState<string | ReactNode>('');
     const [snackbarTimeout, setSnackbarTimeout] = useState(5000);

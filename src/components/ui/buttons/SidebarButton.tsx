@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 
-interface IconLinkProps {
+interface Props {
     icon: ReactNode;
     text: string;
     onClick?: (param?: any) => void;
@@ -10,7 +10,7 @@ interface IconLinkProps {
     href?: string;
 }
 
-export const SidebarButton: FC<IconLinkProps> = ({ icon, text, onClick, className, href }) => {
+export const SidebarButton: FC<Props> = ({ icon, text, onClick, className, href }) => {
 
     return (
         <>
