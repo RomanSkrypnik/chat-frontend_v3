@@ -10,3 +10,4 @@ export * from './useChangePassword';
 export * from './useSearch';
 export * from './useCountUnread';
 export * from './useChatScroll';
+export * from './useLastMessage';
