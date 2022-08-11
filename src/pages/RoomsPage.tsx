@@ -9,7 +9,7 @@ import { RegularButton } from '../components/ui';
 export const RoomsPage = () => {
     const [show, setShow] = useState(false);
 
-    const { hash } = useParams();
+    const { roomHash } = useParams();
 
     const dispatch = useAppDispatch();
 
@@ -32,7 +32,7 @@ export const RoomsPage = () => {
                     </div>
                     <RoomMessageWrapper />
                 </div>
-                {hash && <RoomWrapper />}
+                {roomHash && <RoomWrapper />}
                 {show && <RoomForm onClose={handleClick} />}
             </div>
         </section>

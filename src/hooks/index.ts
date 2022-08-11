@@ -7,3 +7,4 @@ export * from './useStorageUrl';
 export * from './useTypedSelector';
 export * from './useComparePassword';
 export * from './useChangePassword';
+export * from './useSearch';

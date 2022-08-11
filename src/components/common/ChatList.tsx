@@ -16,7 +16,7 @@ export const ChatList: FC<ChatListProps> = ({ messages }) => {
     const [scrollTop, setScrollTop] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const { hash } = useParams();
+    const { chatHash } = useParams();
 
     const { user } = useTypedSelector(state => state.auth);
     const { chat } = useTypedSelector(state => state.chat);
@@ -45,7 +45,7 @@ export const ChatList: FC<ChatListProps> = ({ messages }) => {
 
     useEffect(() => {
         setIsLoaded(false);
-    }, [hash]);
+    }, [chatHash]);
 
     useEffect(() => {
         ref.current.scrollTo(0, ref.current.scrollHeight - scrollTop);

@@ -6,4 +6,3 @@ export * from './RoomProfile';
 export * from './Typography';
 export * from './UserProfile';
 export * from './UserSearch';
-export * from './Wrapper';

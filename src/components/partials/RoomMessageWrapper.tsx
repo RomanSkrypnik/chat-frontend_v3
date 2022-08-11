@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../store';
 import { fetchRooms } from '../../store/slices/room';
 import { RoomMessageList } from './RoomMessageList';
-import { useTypedSelector } from '../../hooks';
+import { useSearch, useTypedSelector } from '../../hooks';
 import { TextInput } from '../inputs';
 
 export const RoomMessageWrapper = () => {
     const { rooms } = useTypedSelector(state => state.room);
-
-    const { control, watch, handleSubmit } = useForm<{ search: string }>();
 
     const dispatch = useAppDispatch();
 
@@ -17,15 +14,12 @@ export const RoomMessageWrapper = () => {
         dispatch(fetchRooms());
     }, []);
 
-    useEffect(() => {
-        const subscription = watch(() => handleSubmit(onSearchChange)());
-        return () => subscription.unsubscribe();
-    }, [watch]);
-
-    const onSearchChange = async ({ search }: { search: string }) => {
+    const onChange = async ({ search }: { search: string }) => {
         // const {data} = await RoomService.getBySearch(search);
         // dispatch(setRooms(data.data));
     };
+
+    const control = useSearch(onChange);
 
     return (
         <div className='message-wrapper me-3'>

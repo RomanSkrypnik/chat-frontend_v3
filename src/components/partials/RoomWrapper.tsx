@@ -13,7 +13,7 @@ import { RoomSocketContext } from '../providers';
 export const RoomWrapper = () => {
     const [roomId, setRoomId] = useState<null | number>(null);
 
-    const { hash } = useParams();
+    const { roomHash } = useParams();
 
     const dispatch = useAppDispatch();
 
@@ -22,14 +22,14 @@ export const RoomWrapper = () => {
     const roomSocket = useContext(RoomSocketContext);
 
     useEffect(() => {
-        if (hash) {
-            dispatch(fetchRoom(hash));
+        if (roomHash) {
+            dispatch(fetchRoom(roomHash));
         }
 
         return () => {
             roomSocket?.emit('leave');
         };
-    }, [hash]);
+    }, [roomHash]);
 
     useEffect(() => {
         if (room) {

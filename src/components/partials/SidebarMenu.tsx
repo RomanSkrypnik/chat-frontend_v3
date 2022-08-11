@@ -1,11 +1,13 @@
 import React from 'react';
 import { ChatIcon, HumanIcon, SettingsIcon, SidebarButton } from '../ui';
+import { useParams } from 'react-router-dom';
 
 export const SidebarMenu = () => {
+    const { chatHash, roomHash } = useParams();
 
     const items = [
-        { icon: <ChatIcon />, text: 'Chats', to: '/', key: 0 },
-        { icon: <HumanIcon />, text: 'Rooms', to: '/rooms', key: 1 },
+        { icon: <ChatIcon />, text: 'Chats', to: `/${chatHash ?? ''}`, key: 0 },
+        { icon: <HumanIcon />, text: 'Rooms', to: `/rooms/${roomHash ?? ''}`, key: 1 },
         { icon: <SettingsIcon />, text: 'Settings', to: '/settings', key: 2 },
     ];
 

@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../store';
 import { fetchChat, setChat } from '../../store/slices/chat';
 import { useParams } from 'react-router-dom';
 import { CreateMessageValues } from '../../types';
-import { ChatList, Wrapper } from '../common';
+import { ChatList } from '../common';
 import { MessageService } from '../../services';
 import { ChatHeader } from './ChatHeader';
 import { ChatControls } from './ChatControls';
@@ -11,7 +11,7 @@ import { SocketContext } from '../providers';
 import { useTypedSelector } from '../../hooks';
 
 export const ChatWrapper = () => {
-    const { hash } = useParams();
+    const { chatHash } = useParams();
 
     const dispatch = useAppDispatch();
 
@@ -20,20 +20,20 @@ export const ChatWrapper = () => {
     const { chat } = useTypedSelector(state => state.chat);
 
     useEffect(() => {
-        if (hash) {
-            dispatch(fetchChat(hash));
+        if (chatHash) {
+            dispatch(fetchChat(chatHash));
         }
 
         return () => {
             dispatch(setChat(null));
         };
-    }, [hash]);
+    }, [chatHash]);
 
     const handleSubmit = async ({ files, text }: CreateMessageValues) => {
-        if (hash) {
+        if (chatHash) {
             const fd = new FormData();
 
-            fd.append('hash', hash);
+            fd.append('chatHash', chatHash);
             fd.append('text', text);
 
             if (files.length > 0) {
@@ -45,24 +45,20 @@ export const ChatWrapper = () => {
             const { data } = await MessageService.create(fd);
             const withChat = !chat?.id;
 
-            socket?.emit('send-message', { message: data.data, hash, withChat });
+            socket?.emit('send-message', { message: data.data, chatHash, withChat });
         }
     };
 
     return (
-        <Wrapper>
-            <div className='flex-grow-1 bg-white'>
-                {
-                    chat &&
-                    <>
-                        <ChatHeader user={chat.user} />
-                        <ChatList messages={chat.messages} />
-                        <ChatControls isBlocked={chat.isBlockedByMe || chat.isBlockedByCompanion}
-                                      onSubmit={handleSubmit}
-                        />
-                    </>
-                }
-            </div>
-        </Wrapper>
+        <div className='flex-grow-1 bg-white'>
+            {
+                chat &&
+                <>
+                    <ChatHeader user={chat.user} />
+                    <ChatList messages={chat.messages} />
+                    <ChatControls isBlocked={chat.isBlockedByMe || chat.isBlockedByCompanion} onSubmit={handleSubmit} />
+                </>
+            }
+        </div>
     );
 };

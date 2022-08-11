@@ -7,7 +7,7 @@ import { RegularButton } from '../components/ui';
 export const HomePage = () => {
     const [show, setShow] = useState(false);
 
-    const { hash } = useParams();
+    const { chatHash } = useParams();
 
     const handleClick = () => setShow(!show);
 
@@ -21,7 +21,7 @@ export const HomePage = () => {
                     </div>
                     <MessageWrapper />
                 </div>
-                {hash && <ChatWrapper />}
+                {chatHash && <ChatWrapper />}
             </div>
             {show && <UserSearch onClose={handleClick} />}
         </section>

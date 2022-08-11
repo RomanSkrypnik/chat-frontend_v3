@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { UserDto } from '../../types';
-import { useFormatDuration } from '../../hooks/useDate';
+import { useFormatDuration } from '../../hooks';
 import { Typography, UserProfile } from '../common';
 import { CircleButton, ThreeDotsIcon } from '../ui';
 import { Avatar } from '../ui/buttons/Avatar';

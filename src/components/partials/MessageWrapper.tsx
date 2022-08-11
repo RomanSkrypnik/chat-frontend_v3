@@ -1,16 +1,12 @@
 import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../store';
 import { fetchChats, findChat } from '../../store/slices/chat';
 import { MessageList } from '../common';
-import { useTypedSelector } from '../../hooks';
+import { useSearch, useTypedSelector } from '../../hooks';
 import { TextInput } from '../inputs';
 
 export const MessageWrapper = () => {
-
     const { chats } = useTypedSelector(state => state.chat);
-
-    const { control, watch, handleSubmit } = useForm<{ search: string }>();
 
     const dispatch = useAppDispatch();
 
@@ -18,14 +14,11 @@ export const MessageWrapper = () => {
         dispatch(fetchChats());
     }, []);
 
-    useEffect(() => {
-        const subscription = watch(() => handleSubmit(onSearchChange)());
-        return () => subscription.unsubscribe();
-    }, [watch]);
-
-    const onSearchChange = ({ search }: { search: string }) => {
+    const onChange = ({ search }: { search: string }) => {
         dispatch(findChat(search));
     };
+
+    const control = useSearch(onChange);
 
     return (
         <div className='message-wrapper me-3'>
