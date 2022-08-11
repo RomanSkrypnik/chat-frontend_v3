@@ -27,7 +27,7 @@ const Notification: FC<NotificationProps> = ({ isMuted, userId }) => {
 
     return (
         <div className='user-profile__personal mt-3'>
-            <h2 className='body-1 fw-bold'>Notification</h2>
+            <h2 className='body-1'>Notification</h2>
             <SwitchButton onChange={muteUnmute} value={!isMuted} />
         </div>
     );
