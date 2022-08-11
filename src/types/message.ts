@@ -24,3 +24,11 @@ export interface MessageDto {
     chatId: number;
     isRead: boolean;
 }
+
+export interface MessageItemDto {
+    src?: string;
+    online?: boolean;
+    name: string;
+    hash: string;
+    messages: MessageDto[];
+}

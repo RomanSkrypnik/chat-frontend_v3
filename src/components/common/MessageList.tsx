@@ -1,27 +1,17 @@
 import React, { FC } from 'react';
-import { ChatDto } from '../../types';
+import { MessageItemDto } from '../../types';
 import { MessageItem } from './MessageItem';
-import { useStorageUrl } from '../../hooks';
 
 interface Props {
-    chats: ChatDto[];
+    items: MessageItemDto[];
 }
 
-export const MessageList: FC<Props> = ({ chats }) => {
-    const path = useStorageUrl('/avatars/');
+export const MessageList: FC<Props> = ({ items }) => {
 
     return (
         <div className='message-list scrollbar'>
             {
-                chats.map(({ user: { avatar, name, hash }, messages, id }) =>
-                    <MessageItem
-                        name={name}
-                        src={avatar ? path + avatar : undefined}
-                        messages={messages}
-                        hash={hash}
-                        key={id}
-                    />,
-                )
+                items.map((chat) => <MessageItem {...chat} />)
             }
         </div>
     );

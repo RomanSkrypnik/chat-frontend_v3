@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch } from '../../store';
 import { fetchChats, findChat } from '../../store/slices/chat';
 import { MessageList } from '../common';
-import { useSearch, useTypedSelector } from '../../hooks';
+import { useChatConvert, useSearch, useTypedSelector } from '../../hooks';
 import { TextInput } from '../inputs';
 
 export const MessageWrapper = () => {
@@ -20,10 +20,12 @@ export const MessageWrapper = () => {
 
     const control = useSearch(onChange);
 
+    const converted = useChatConvert(chats);
+
     return (
         <div className='message-wrapper me-3'>
             <TextInput placeholder='Search' className='w-100 mb-3' control={control} name='search' />
-            <MessageList chats={chats} />
+            <MessageList items={converted} />
         </div>
     );
 };

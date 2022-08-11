@@ -12,3 +12,4 @@ export * from './useCountUnread';
 export * from './useChatScroll';
 export * from './useLastMessage';
 export * from './useScrollToBottom';
+export * from './useChatConvert';

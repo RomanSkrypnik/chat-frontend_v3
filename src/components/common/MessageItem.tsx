@@ -5,7 +5,7 @@ import { MessageItemFiles } from '../partials';
 import { Avatar } from '../ui/buttons/Avatar';
 import { useCountUnread, useFormatDuration } from '../../hooks';
 
-interface Props {
+interface MessageItemDto {
     src?: string;
     online?: boolean;
     name: string;
@@ -13,7 +13,7 @@ interface Props {
     messages: MessageDto[];
 }
 
-export const MessageItem: FC<Props> = ({ src, name, hash, online, messages }) => {
+export const MessageItem: FC<MessageItemDto> = ({ src, name, hash, online, messages }) => {
     const unreadCount = useCountUnread(messages);
 
     const date = useFormatDuration(messages[0]?.createdAt ?? '');

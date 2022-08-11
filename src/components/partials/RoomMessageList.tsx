@@ -3,33 +3,25 @@ import { RoomDto } from '../../types/room';
 import { MessageItem } from '../common';
 import { useStorageUrl } from '../../hooks';
 
-interface RoomMessageListProps {
+interface Props {
     rooms: RoomDto[];
 }
 
-interface RoomMessageItemWrapper {
-    room: RoomDto;
-}
+export const RoomMessageList: FC<Props> = ({ rooms }) => {
+    const path = useStorageUrl('/room/avatar/');
 
-const RoomMessageWrapper: FC<RoomMessageItemWrapper> = ({ room }) => {
-
-    const src = useStorageUrl('/room/avatar/', room.avatar);
-
-    return (
-        <MessageItem name={room.name}
-                     hash={`rooms/${room.hash}`}
-                     messages={room.messages}
-                     src={src}
-                     key={room.id}
-        />
-    );
-};
-
-export const RoomMessageList: FC<RoomMessageListProps> = ({ rooms }) => {
     return (
         <div className='message-list scrollbar'>
             {
-                rooms.map((room) => <RoomMessageWrapper room={room} key={room.id} />)
+                rooms.map(({ name, hash, messages, avatar, id }) =>
+                    <MessageItem
+                        name={name}
+                        hash={hash}
+                        messages={messages}
+                        src={avatar ? path + avatar : undefined}
+                        key={id}
+                    />,
+                )
             }
         </div>
     );
