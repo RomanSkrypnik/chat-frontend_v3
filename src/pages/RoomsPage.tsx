@@ -11,9 +11,11 @@ import { useRoomConvert, useSearch, useTypedSelector } from '../hooks';
 export const RoomsPage = () => {
     const [show, setShow] = useState(false);
 
+    const { roomHash } = useParams();
+
     const { rooms } = useTypedSelector(state => state.room);
 
-    const { roomHash } = useParams();
+    const converted = useRoomConvert(rooms);
 
     const dispatch = useAppDispatch();
 
@@ -24,16 +26,14 @@ export const RoomsPage = () => {
         };
     }, []);
 
-    const onChange = async ({ search }: { search: string }) => {
+    const handleChange = async ({ search }: { search: string }) => {
         // const {data} = await RoomService.getBySearch(search);
         // dispatch(setRooms(data.data));
     };
 
     const handleClick = () => setShow(!show);
 
-    const control = useSearch(onChange);
-
-    const converted = useRoomConvert(rooms);
+    const control = useSearch(handleChange);
 
     return (
         <section className='rooms'>

@@ -6,7 +6,6 @@ export * from './ChatMessageSwitch';
 export * from './ChatWrapper';
 export * from './LoginForm';
 export * from './MessageItemFiles';
-export * from './MessageWrapper';
 export * from './RegisterForm';
 export * from './RoomForm';
 export * from './RoomHeader';

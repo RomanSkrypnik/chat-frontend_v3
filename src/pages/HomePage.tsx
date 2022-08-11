@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { UserSearch } from '../components/common';
-import { ChatWrapper, MessageWrapper } from '../components/partials';
+import { MessageList, UserSearch } from '../components/common';
+import { ChatWrapper } from '../components/partials';
 import { RegularButton } from '../components/ui';
+import { TextInput } from '../components/inputs';
+import { useChatConvert, useSearch, useTypedSelector } from '../hooks';
+import { useAppDispatch } from '../store';
+import { fetchChats, findChat } from '../store/slices/chat';
 
 export const HomePage = () => {
     const [show, setShow] = useState(false);
 
     const { chatHash } = useParams();
 
+    const dispatch = useAppDispatch();
+
+    const { chats } = useTypedSelector(state => state.chat);
+
+    const converted = useChatConvert(chats);
+
+    useEffect(() => {
+        dispatch(fetchChats());
+    }, []);
+
+    const handleChange = ({ search }: { search: string }) => {
+        dispatch(findChat(search));
+    };
+
     const handleClick = () => setShow(!show);
+
+    const control = useSearch(handleChange);
 
     return (
         <section className='home'>
@@ -19,7 +39,10 @@ export const HomePage = () => {
                         <h1 className='mb-3'>Chats</h1>
                         <RegularButton onClick={handleClick}>Create New Chat</RegularButton>
                     </div>
-                    <MessageWrapper />
+                    <div className='message-wrapper me-3'>
+                        <TextInput placeholder='Search' className='w-100 mb-3' control={control} name='search' />
+                        <MessageList items={converted} />
+                    </div>
                 </div>
                 {chatHash && <ChatWrapper />}
             </div>
