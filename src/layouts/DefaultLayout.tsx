@@ -13,13 +13,11 @@ export const DefaultLayout = () => {
                 isLogged
                     ?
                     <SocketProvider>
-                        <div className='default-layout'>
-                            <div className='d-flex'>
-                                <Sidebar />
-                                <main>
-                                    <Outlet />
-                                </main>
-                            </div>
+                        <div className='flex'>
+                            <Sidebar />
+                            <main>
+                                <Outlet />
+                            </main>
                         </div>
                     </SocketProvider>
                     :
