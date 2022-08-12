@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { SocketContext } from '../components/providers';
 import { useAppDispatch } from '../store';
-import { addMessage } from '../store/slices/chat';
+import { addMessage, setChat } from '../store/slices/chat';
 
 export function useCreateChatMessage() {
     const { chatHash } = useParams();
@@ -28,9 +28,13 @@ export function useCreateChatMessage() {
 
             const { data } = await MessageService.create(fd);
 
-            dispatch(addMessage(data.data));
-
-            socket?.emit('send-message', { message: data.data, hash: chatHash });
+            if (data.chat) {
+                socket?.emit('new-chat', { chat: data.chat, hash: chatHash });
+                dispatch(setChat(data.chat));
+            } else {
+                socket?.emit('send-message', { message: data.message, hash: chatHash });
+                dispatch(addMessage(data.message));
+            }
         }
     };
 
