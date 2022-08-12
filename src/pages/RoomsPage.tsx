@@ -7,6 +7,7 @@ import { RegularButton } from '../components/ui';
 import { TextInput } from '../components/inputs';
 import { MessageList } from '../components/common';
 import { useRoomConvert, useSearch, useTypedSelector } from '../hooks';
+import { RoomSocketProvider } from '../components/providers';
 
 export const RoomsPage = () => {
     const [show, setShow] = useState(false);
@@ -36,21 +37,23 @@ export const RoomsPage = () => {
     const control = useSearch(handleChange);
 
     return (
-        <section className='rooms'>
-            <div className='d-flex fade-in'>
-                <div className='w-25 me-3'>
-                    <div className='d-flex justify-content-between mb-3'>
-                        <h2 className='h1 mb-3'>Rooms</h2>
-                        <RegularButton onClick={handleClick}>Create New Room</RegularButton>
+        <RoomSocketProvider>
+            <section className='rooms'>
+                <div className='d-flex fade-in'>
+                    <div className='w-25 me-3'>
+                        <div className='d-flex justify-content-between mb-3'>
+                            <h2 className='h1 mb-3'>Rooms</h2>
+                            <RegularButton onClick={handleClick}>Create New Room</RegularButton>
+                        </div>
+                        <div className='message-wrapper me-3'>
+                            <TextInput placeholder='Search' className='w-100 mb-3' control={control} name='search' />
+                            <MessageList items={converted} />
+                        </div>
                     </div>
-                    <div className='message-wrapper me-3'>
-                        <TextInput placeholder='Search' className='w-100 mb-3' control={control} name='search' />
-                        <MessageList items={converted} />
-                    </div>
+                    {roomHash && <Room />}
+                    {show && <RoomForm onClose={handleClick} />}
                 </div>
-                {roomHash && <Room />}
-                {show && <RoomForm onClose={handleClick} />}
-            </div>
-        </section>
+            </section>
+        </RoomSocketProvider>
     );
 };

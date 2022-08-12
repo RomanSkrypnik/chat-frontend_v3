@@ -11,12 +11,12 @@ const options = {
     },
 };
 
-export function useChatSocketConnect(): null | Socket {
+export function useSocketConnect(uri: string): null | Socket {
     const [socket, setSocket] = useState<null | Socket<any, any>>(null);
 
     useEffect(() => {
         if (!socket) {
-            setSocket(io('localhost:5000', options));
+            setSocket(io(uri, options));
         }
     }, []);
 
