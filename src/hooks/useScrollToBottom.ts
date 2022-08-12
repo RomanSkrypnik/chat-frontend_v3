@@ -1,9 +1,9 @@
 import { MessageDto } from '../types';
-import { MutableRefObject, useEffect } from 'react';
+import { RefObject, useEffect } from 'react';
 import { useTypedSelector } from './useTypedSelector';
 import { useParams } from 'react-router-dom';
 
-export function useScrollToBottom(ref: MutableRefObject<HTMLUListElement>, lastMessage: MessageDto | null) {
+export function useScrollToBottom(ref: RefObject<HTMLUListElement>, lastMessage: MessageDto | null) {
     const { chatHash } = useParams();
 
     const { user } = useTypedSelector(state => state.auth);
@@ -15,6 +15,6 @@ export function useScrollToBottom(ref: MutableRefObject<HTMLUListElement>, lastM
     }, [lastMessage, chatHash]);
 
     const scrollToBottom = () => {
-        ref.current.scrollTo(0, ref.current.scrollHeight);
+        ref?.current && ref.current.scrollTo(0, ref.current.scrollHeight);
     };
 }

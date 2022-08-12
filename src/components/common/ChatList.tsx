@@ -1,4 +1,4 @@
-import React, { FC, MutableRefObject, useEffect, useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import { MessageDto } from '../../types';
 import { ChatListItem } from '../partials';
 import { useChatScroll, useLastMessage, useMessageArr, useScrollToBottom } from '../../hooks';
@@ -10,7 +10,7 @@ interface Props {
 export const ChatList: FC<Props> = ({ messages }) => {
     const twoDimsArr = useMessageArr(messages);
 
-    const ref = useRef() as MutableRefObject<HTMLUListElement>;
+    const ref = useRef<HTMLUListElement>(null);
 
     const handleScroll = useChatScroll(ref);
 
