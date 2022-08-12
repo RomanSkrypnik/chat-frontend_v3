@@ -83,7 +83,6 @@ const chatSlice = createSlice({
         },
 
         changeMessage(state, { payload }) {
-
             if (state.chat && state.chat.id === payload.chatId) {
                 const idx = state.chat.messages.findIndex(({ id }) => id === payload.id);
                 state.chat.messages[idx] = payload;
@@ -99,7 +98,6 @@ const chatSlice = createSlice({
         },
 
         changeUser(state, { payload }) {
-
             if (state.chat && state.chat.user.id === payload.id) {
                 state.chat.user = payload;
             }

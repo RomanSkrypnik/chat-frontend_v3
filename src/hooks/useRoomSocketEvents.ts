@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { UserDto } from '../types';
+import { RoomMessageDto, UserDto } from '../types';
 import { addMessage, changeMessage, changeUserInRooms, changeUsers } from '../store/slices/room';
-import { RoomMessageDto } from '../types/room';
 import { useAppDispatch } from '../store';
 import { Socket } from 'socket.io-client';
 

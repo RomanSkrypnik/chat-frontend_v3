@@ -6,3 +6,4 @@ export * from './user';
 export * from './file';
 export * from './snackbar';
 export * from './error';
+export * from './room';

@@ -1,4 +1,4 @@
-import { MutableRefObject, useState } from 'react';
+import { MutableRefObject } from 'react';
 import { fetchMessages as fetchChatMessages } from '../store/slices/chat';
 import { fetchMessages as fetchRoomMessages } from '../store/slices/room';
 import { useTypedSelector } from './useTypedSelector';

@@ -38,5 +38,4 @@ export function useChatSocketEvents(socket: Socket | null) {
             };
         }
     }, [socket]);
-
 }
