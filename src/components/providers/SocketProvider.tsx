@@ -1,7 +1,6 @@
 import React, { createContext, FC, ReactNode } from 'react';
 import { Socket } from 'socket.io-client';
-import { useChatSocketConnect } from '../../hooks';
-import { useChatSocketEvents } from '../../hooks/useChatSocketEvents';
+import { useChatSocketConnect, useChatSocketEvents } from '../../hooks';
 
 interface Props {
     children: ReactNode;
