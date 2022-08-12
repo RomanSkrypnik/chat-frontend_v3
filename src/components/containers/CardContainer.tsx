@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react';
-import { CloseButton } from 'react-bootstrap';
 import cn from 'classnames';
 
 interface CardContainer {
@@ -22,7 +21,6 @@ export const CardContainer: FC<CardContainer> = ({ onClose, className, title, ch
                 withHeader &&
                 <div className='card-container__header mb-4'>
                     {title && <h3>{title}</h3>}
-                    {onClose && <CloseButton onClick={onClose} />}
                 </div>
             }
             {children}

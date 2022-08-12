@@ -25,5 +25,3 @@ export * from './icons/TelegramIcon';
 export * from './icons/ThreeDotsIcon';
 export * from './icons/UnlockedIcon';
 export * from './icons/UploadIcon';
-
-export * from './snackbars/Snackbar';
