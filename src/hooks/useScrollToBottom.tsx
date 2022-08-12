@@ -9,7 +9,9 @@ export function useScrollToBottom(ref: MutableRefObject<HTMLUListElement>, lastM
     const { user } = useTypedSelector(state => state.auth);
 
     useEffect(() => {
-        scrollToBottom();
+        if (lastMessage?.user.id === user?.id) {
+            scrollToBottom();
+        }
     }, [lastMessage, chatHash]);
 
     const scrollToBottom = () => {

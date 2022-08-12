@@ -16,3 +16,4 @@ export * from './useChatConvert';
 export * from './useRoomConvert';
 export * from './useCreateChatMessage';
 export * from './useCreateRoomMessage';
+export * from './useChatSocketConnect';
