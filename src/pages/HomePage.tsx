@@ -36,7 +36,7 @@ export const HomePage = () => {
             <div className='d-flex fade-in'>
                 <div className='w-25 me-3'>
                     <div className='d-flex justify-content-between mb-3'>
-                        <h1 className='mb-3'>Chats</h1>
+                        <h1 className='mb-3 text-3xl font-bold underline'>Chats</h1>
                         <RegularButton onClick={handleClick}>Create New Chat</RegularButton>
                     </div>
                     <div className='message-wrapper me-3'>

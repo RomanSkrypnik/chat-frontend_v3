@@ -14,7 +14,6 @@ export * from './Room';
 export * from './SettingsAccountForm';
 export * from './SettingsMenu';
 export * from './SettingsPasswordForm';
-export * from './SidebarHeader';
 export * from './SidebarMenu';
 export * from './SnackbarMessage';
 export * from './UserSearchItem';

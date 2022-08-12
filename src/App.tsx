@@ -3,6 +3,7 @@ import { AppRoutes } from './routes';
 import { refresh } from './store/slices/auth';
 import { useAppDispatch } from './store';
 import { useTypedSelector } from './hooks';
+import './index.css';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
