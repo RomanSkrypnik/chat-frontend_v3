@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { MessageDto } from '../../types';
 import { ChatMessage } from './ChatMessage';
-import { useTypedSelector } from '../../hooks';
+import { useIsCurrentUser } from '../../hooks';
 import { Avatar, Box, ListItem } from '@mui/material';
 
 interface ChatListItemProps {
@@ -9,25 +9,27 @@ interface ChatListItemProps {
 }
 
 export const ChatListItem: FC<ChatListItemProps> = ({ messageRow }) => {
-
-    const { user } = useTypedSelector(state => state.auth);
-
-    const isCurrUser = messageRow[0].user.id === user?.id;
+    const isCurrUser = useIsCurrentUser(messageRow[0].user.hash);
 
     return (
-        <ListItem sx={{ mt: 3, alignSelf: isCurrUser ? 'align-self-end' : 'align-self-start' }}>
+        <ListItem sx={{ p: 0, mt: 3 }}>
             <Box sx={{ display: 'flex' }}>
-                {!isCurrUser && <Avatar className='order-0' />}
-                <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignSelf: isCurrUser ? 'align-items-end' : 'align-items-start',
-                }}>
+                <Avatar />
+                <Box sx={{ ml: 3, alignSelf: isCurrUser ? 'align-items-end' : 'align-items-start' }}>
                     {
-                        messageRow.map(message => (<ChatMessage message={message} key={message.id} />))
+                        messageRow.map(({ id, text, files, isRead, user: { hash } }) => (
+                                <ChatMessage
+                                    messageId={id}
+                                    text={text}
+                                    files={files}
+                                    isRead={isRead}
+                                    hash={hash}
+                                    key={id}
+                                />
+                            ),
+                        )
                     }
                 </Box>
-
             </Box>
         </ListItem>
     );

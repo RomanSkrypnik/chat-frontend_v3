@@ -1,51 +1,39 @@
-import React, { FC, useContext, useEffect } from 'react';
-import { MessageDto } from '../../types';
+import React, { FC } from 'react';
+import { FileDto } from '../../types';
 import cn from 'classnames';
-import { useInView } from 'react-intersection-observer';
-import { SocketContext, RoomSocketContext } from '../providers';
 import { ChatMessageSwitch } from './ChatMessageSwitch';
 import { ClipsIcon } from '../ui';
-import { useTypedSelector } from '../../hooks';
+import { useIsCurrentUser, useReadMessage } from '../../hooks';
 import { Box, Typography } from '@mui/material';
 
 interface ChatMessageProps {
-    message: MessageDto;
+    messageId: number;
+    text: string;
+    isRead: boolean;
+    hash: string;
+    files: FileDto[];
 }
 
-export const ChatMessage: FC<ChatMessageProps> = ({ message }) => {
-    const { user } = useTypedSelector(state => state.auth);
-    const { room } = useTypedSelector(state => state.room);
+export const ChatMessage: FC<ChatMessageProps> = ({ messageId, text, isRead, hash, files }) => {
+    const ref = useReadMessage({ messageId, isRead, hash });
 
-    const { inView, ref } = useInView({ threshold: 0.8 });
-
-    const socket = useContext(SocketContext);
-    const roomSocket = useContext(RoomSocketContext);
-
-    const isCurrUser = user?.hash === message.user.hash;
-
-    useEffect(() => {
-        if (inView && !message.isRead) {
-            if (!isCurrUser) {
-                const messageBody = { userId: user?.id, messageId: message.id };
-
-                if (room) {
-                    roomSocket?.emit('read-message', { ...messageBody, roomId: room?.id });
-                } else {
-                    socket?.emit('read-message', messageBody);
-                }
-            }
-        }
-    }, [inView]);
+    const isCurrUser = useIsCurrentUser(hash);
 
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }} ref={ref}>
-            <Box className={cn('chat-message mx-2 bg-light', !isCurrUser && '_alternate')}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }} ref={ref}>
+            <Box sx={{ ...sx, bgcolor: isCurrUser ? 'primary.main' : 'text.primary' }}>
                 {
-                    message.files.map(file => <ChatMessageSwitch file={file} key={file.id} />)
+                    files.map(file => <ChatMessageSwitch file={file} key={file.id} />)
                 }
-                <Typography>{message.text}</Typography>
+                <Typography sx={{ color: 'white' }}>{text}</Typography>
             </Box>
-            {isCurrUser && <ClipsIcon className={message.isRead ? '_active' : ''} />}
+            {isCurrUser && <ClipsIcon isActive={isRead} />}
         </Box>
     );
+};
+
+const sx = {
+    borderRadius: '6px',
+    m: '0 8px 5px 0',
+    p: 1,
 };

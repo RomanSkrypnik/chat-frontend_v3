@@ -1,5 +1,5 @@
-import {MessageDto} from "../types";
-import {useEffect, useState} from "react";
+import { MessageDto } from '../types';
+import { useEffect, useState } from 'react';
 
 export function useMessageArr(messages: MessageDto[]) {
     const [twoDimsArr, setTwoDimsArr] = useState<[] | MessageDto[][]>([]);
@@ -9,7 +9,7 @@ export function useMessageArr(messages: MessageDto[]) {
     }, [messages]);
 
     const convertIntoTwoDimsArr = () => {
-        const arr: [] | MessageDto[][] = [];
+        const arr: MessageDto[][] = [];
         const reversed = [...messages].reverse();
         let i = 0;
 
@@ -21,7 +21,7 @@ export function useMessageArr(messages: MessageDto[]) {
         });
 
         setTwoDimsArr(arr);
-    }
+    };
 
     return twoDimsArr;
 }

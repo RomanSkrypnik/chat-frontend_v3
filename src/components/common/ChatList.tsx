@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { MessageDto } from '../../types';
 import { ChatListItem } from '../partials';
 import { useChatScroll, useLastMessage, useMessageArr, useScrollToBottom } from '../../hooks';
@@ -17,7 +17,7 @@ export const ChatList: FC<Props> = ({ messages }) => {
 
     const lastMessage = useLastMessage(twoDimsArr);
 
-    useScrollToBottom(ref, lastMessage);
+    useScrollToBottom(ref, lastMessage?.user.id);
 
     return (
         <List ref={ref} onScroll={handleScroll} sx={sx}>
@@ -29,6 +29,8 @@ export const ChatList: FC<Props> = ({ messages }) => {
 };
 
 const sx = {
-    maxHeight: '60vh',
+    display: 'flex',
+    flexDirection: 'column',
+    height: `${window.screen.height - 350}px`,
     overflowY: 'scroll',
 };

@@ -33,3 +33,11 @@ export interface MessageItemDto {
     hash: string;
     messages: MessageDto[];
 }
+
+export interface ChatMessageItemDto {
+    messageId: number;
+    text: string;
+    isRead: boolean;
+    hash: string;
+    files: FileDto[];
+}
