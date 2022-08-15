@@ -13,4 +13,9 @@ export const CenteredContainer: FC<Props> = ({ children }) => {
     );
 };
 
-const sx = { display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' };
+const sx = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+};
