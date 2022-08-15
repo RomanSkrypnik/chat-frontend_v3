@@ -20,7 +20,7 @@ export function useCreateChatMessage() {
             fd.append('hash', chatHash);
             fd.append('text', text);
 
-            if (files.length > 0) {
+            if (files) {
                 for (const file of files) {
                     fd.append('files', file);
                 }

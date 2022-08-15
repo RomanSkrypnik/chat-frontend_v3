@@ -2,6 +2,7 @@ import React, { FC, useRef } from 'react';
 import { MessageDto } from '../../types';
 import { ChatListItem } from '../partials';
 import { useChatScroll, useLastMessage, useMessageArr, useScrollToBottom } from '../../hooks';
+import { List } from '@mui/material';
 
 interface Props {
     messages: MessageDto[];
@@ -19,12 +20,15 @@ export const ChatList: FC<Props> = ({ messages }) => {
     useScrollToBottom(ref, lastMessage);
 
     return (
-        <ul className='chat-list scrollbar list-unstyled'
-            ref={ref}
-            onScroll={handleScroll}>
+        <List ref={ref} onScroll={handleScroll} sx={sx}>
             {
                 twoDimsArr.map((messageRow, idx) => <ChatListItem messageRow={messageRow} key={idx} />)
             }
-        </ul>
+        </List>
     );
+};
+
+const sx = {
+    maxHeight: '60vh',
+    overflowY: 'scroll',
 };

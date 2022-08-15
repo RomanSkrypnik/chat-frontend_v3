@@ -8,7 +8,7 @@ export interface CreateMessageDto {
 
 export interface CreateMessageValues {
     text: string;
-    files: File[] | [];
+    files: File[] | null;
 }
 
 export interface MessageState {

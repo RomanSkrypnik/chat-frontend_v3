@@ -1,8 +1,10 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { CreateMessageValues } from '../../types';
-import { CircleButton, CrossIcon, TelegramIcon } from '../ui';
-import { FileInput, TextInput } from '../inputs';
+import { TelegramIcon } from '../ui';
+import { FileInput } from '../inputs';
+import { Box, IconButton, TextField } from '@mui/material';
+import { Controller } from 'react-hook-form';
 
 interface Props {
     isBlocked?: boolean;
@@ -10,43 +12,44 @@ interface Props {
 }
 
 export const ChatControls: FC<Props> = ({ isBlocked, onSubmit }) => {
-    const [files, setFiles] = useState<[] | File[]>([]);
-
-    const inputRef = useRef<HTMLInputElement>(null);
+    const [files, setFiles] = useState<File[] | null>(null);
 
     const { handleSubmit, control, reset } = useForm<CreateMessageValues>();
 
     const handleOnSubmit = (data: { text: string }) => {
-        if (data.text || files.length > 0) {
+        if (data.text || files) {
             onSubmit({ ...data, files });
             reset({ text: '' });
-            setFiles([]);
+            setFiles(null);
         }
     };
 
-    const handleFileClick = () => inputRef?.current?.click();
-
-    const handleFileChange = (files: File[]) => {
+    const handleFileChange = (files: File[] | null) => {
         setFiles(files);
     };
 
     return (
-        <div className='chat-controls'>
-            <form onSubmit={handleSubmit(handleOnSubmit)} className='d-flex align-items-center'>
-                <CircleButton disabled={isBlocked}
-                              onClick={handleFileClick}
-                              className='bg-blue-linear'
-                              icon={<CrossIcon />}
+        <form onSubmit={handleSubmit(handleOnSubmit)}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: 3 }}>
+                <FileInput onChange={handleFileChange} />
+                <Controller
+                    name='text'
+                    control={control}
+                    defaultValue=''
+                    render={({ field: { onChange, value } }) =>
+                        <TextField
+                            onChange={onChange}
+                            value={value}
+                            disabled={isBlocked}
+                            placeholder='Type a message here'
+                            sx={{ width: '100%', px: 3 }}
+                        />
+                    }
                 />
-                <FileInput ref={inputRef} onChange={handleFileChange} />
-                <TextInput disabled={isBlocked}
-                           className='w-100 px-4'
-                           name='text'
-                           control={control}
-                           placeholder='Type a message here'
-                />
-                <CircleButton disabled={isBlocked} type='submit' className='bg-blue-linear' icon={<TelegramIcon />} />
-            </form>
-        </div>
+                <IconButton sx={{ bgcolor: 'info.main' }} disabled={isBlocked} type='submit'>
+                    <TelegramIcon />
+                </IconButton>
+            </Box>
+        </form>
     );
 };

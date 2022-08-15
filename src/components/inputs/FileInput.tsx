@@ -1,55 +1,27 @@
-import React, { forwardRef, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
-import cn from 'classnames';
-import { RegularButton, UploadIcon } from '../ui';
+import React, { ChangeEvent, FC } from 'react';
+import { IconButton } from '@mui/material';
+import { CrossIcon } from '../ui';
 
 interface Props {
-    name?: string;
-    onChange: (files: File[]) => void;
-    visible?: boolean;
+    onChange: (files: File[] | null) => void;
     value?: string;
-    multiple?: boolean;
-    buttonText?: string;
 }
 
-export const FileInput = forwardRef<HTMLInputElement, Props>(({
-                                                                           name,
-                                                                           buttonText,
-                                                                           multiple = true,
-                                                                           visible,
-                                                                           onChange,
-                                                                           value = '',
-                                                                       }, ref) => {
+export const FileInput: FC<Props> = ({ onChange, value }) => {
 
-    const onDrop = useCallback((files: File[]) => {
-        onChange(files);
-    }, []);
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { files } = e.target;
 
-    const { getRootProps, getInputProps, isDragActive, open } = useDropzone({ onDrop, noClick: true, multiple });
+        if (files) {
+            const arr = Array.from(files);
+            onChange(arr);
+        }
+    };
 
     return (
-        <div className={cn('file-input', isDragActive && '_active')}>
-
-            {
-                visible &&
-                <>
-                    <div className='d-flex flex-column align-items-center' {...getRootProps()}>
-                        <UploadIcon />
-                        <h2 className='body-1'>{isDragActive ? 'Drop here' : 'Drag and drop here'}</h2>
-                        <h3 className='body-2 fw-bold my-2'>Or</h3>
-                    </div>
-                    <RegularButton onClick={open}>{buttonText ?? 'Select files'}</RegularButton>
-                </>
-            }
-
-            <input {...getInputProps()}
-                   name={name}
-                   multiple={multiple}
-                   ref={ref}
-                   className='file-input'
-                   type='file'
-                   value={value}
-            />
-        </div>
+        <IconButton sx={{ bgcolor: 'info.main' }} component='label'>
+            <input type='file' onChange={handleChange} style={{ display: 'none' }} />
+            <CrossIcon />
+        </IconButton>
     );
-});
+};

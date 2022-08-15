@@ -15,7 +15,7 @@ export function useCreateRoomMessage() {
         fd.append('text', text);
         fd.append('roomId', `${room?.id}`);
 
-        if (files.length > 0) {
+        if (files) {
             for (const file of files) {
                 fd.append('files', file);
             }

@@ -33,7 +33,7 @@ export const HomePage = () => {
 
     return (
         <section className='home'>
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', gap: '24px' }}>
                 <Box sx={{ flexGrow: 1 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                         <Typography variant='h3' sx={{ mr: 3 }}>Chats</Typography>

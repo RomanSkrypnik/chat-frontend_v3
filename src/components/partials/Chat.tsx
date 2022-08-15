@@ -6,6 +6,7 @@ import { ChatList } from '../common';
 import { ChatHeader } from './ChatHeader';
 import { ChatControls } from './ChatControls';
 import { useCreateChatMessage, useTypedSelector } from '../../hooks';
+import { Box } from '@mui/material';
 
 export const Chat = () => {
     const { chatHash } = useParams();
@@ -24,7 +25,7 @@ export const Chat = () => {
     }, [chatHash]);
 
     return (
-        <div className='flex-grow-1 bg-white'>
+        <Box sx={{ flexGrow: 1 }}>
             {
                 chat &&
                 <>
@@ -33,6 +34,6 @@ export const Chat = () => {
                     <ChatControls isBlocked={chat.isBlockedByMe || chat.isBlockedByCompanion} onSubmit={handleSubmit} />
                 </>
             }
-        </div>
+        </Box>
     );
 };

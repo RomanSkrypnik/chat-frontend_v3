@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { MessageDto } from '../../types';
-import cn from 'classnames';
 import { ChatMessage } from './ChatMessage';
-import { Avatar } from '../ui/buttons/Avatar';
 import { useTypedSelector } from '../../hooks';
+import { Avatar, Box, ListItem } from '@mui/material';
 
 interface ChatListItemProps {
     messageRow: MessageDto[];
@@ -16,18 +15,20 @@ export const ChatListItem: FC<ChatListItemProps> = ({ messageRow }) => {
     const isCurrUser = messageRow[0].user.id === user?.id;
 
     return (
-        <li className={cn('mt-3', isCurrUser ? 'align-self-end' : 'align-self-start')}>
-            <div className='d-flex'>
-
+        <ListItem sx={{ mt: 3, alignSelf: isCurrUser ? 'align-self-end' : 'align-self-start' }}>
+            <Box sx={{ display: 'flex' }}>
                 {!isCurrUser && <Avatar className='order-0' />}
-
-                <div className={cn('d-flex flex-column', isCurrUser ? 'align-items-end' : 'align-items-start')}>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignSelf: isCurrUser ? 'align-items-end' : 'align-items-start',
+                }}>
                     {
                         messageRow.map(message => (<ChatMessage message={message} key={message.id} />))
                     }
-                </div>
+                </Box>
 
-            </div>
-        </li>
+            </Box>
+        </ListItem>
     );
 };
