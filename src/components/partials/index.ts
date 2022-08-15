@@ -16,3 +16,4 @@ export * from './SettingsPasswordForm';
 export * from './SidebarMenu';
 export * from './SnackbarMessage';
 export * from './UserSearchItem';
+export * from './DialogHeader';

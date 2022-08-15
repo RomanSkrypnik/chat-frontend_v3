@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { MessageDto } from '../../types';
 import { useCountUnread, useFormatDuration } from '../../hooks';
-import { Avatar, Box, Card, Link, Typography } from '@mui/material';
+import { Avatar, Box, Card, Typography } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 interface MessageItemDto {
     src?: string;
@@ -17,7 +18,7 @@ export const MessageItem: FC<MessageItemDto> = ({ src, name, hash, online, messa
     const date = useFormatDuration(messages[0]?.createdAt ?? '');
 
     return (
-        <Link href={hash} underline='none'>
+        <NavLink to={hash} style={{ textDecoration: 'none' }}>
             <Card sx={sx}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <Avatar src={src} />
@@ -36,7 +37,7 @@ export const MessageItem: FC<MessageItemDto> = ({ src, name, hash, online, messa
                     }
                 </Box>
             </Card>
-        </Link>
+        </NavLink>
     );
 };
 

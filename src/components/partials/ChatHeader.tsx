@@ -32,7 +32,7 @@ export const ChatHeader: FC<Props> = ({ user }) => {
                     <ThreeDotsIcon />
                 </IconButton>
             </Card>
-            {show && <UserProfile user={user} onClose={handleClick} />}
+            <UserProfile open={show} handleClose={handleClick} user={user} onClose={handleClick} />
         </>
     );
 };

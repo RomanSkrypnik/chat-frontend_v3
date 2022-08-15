@@ -1,10 +1,10 @@
 import React, { FC, useContext } from 'react';
 import { UserDto } from '../../types';
-import { CardContainer, DialContainer } from '../containers';
-import { ButtonIcon, ProhibitedIcon, SwitchButton, UnlockedIcon } from '../ui';
-import { Avatar } from '../ui/buttons/Avatar';
+import { ProhibitedIcon, UnlockedIcon } from '../ui';
 import { SocketContext } from '../providers';
 import { useFormatDuration, useStorageUrl, useTypedSelector } from '../../hooks';
+import { Avatar, Box, Dialog, DialogContent, DialogTitle, IconButton, Switch, Typography } from '@mui/material';
+import { DialogHeader } from '../partials';
 
 interface UserBioProps {
     bio: string;
@@ -12,10 +12,10 @@ interface UserBioProps {
 
 const UserBio: FC<UserBioProps> = ({ bio }) => {
     return (
-        <div className='mt-3'>
-            <h2 className='body-1 fw-bold'>{bio}</h2>
-            <h3 className='body-2 text-grey'>Bio</h3>
-        </div>
+        <Box sx={{ mt: 3 }}>
+            <Typography variant='body1'>{bio}</Typography>
+            <Typography variant='body2'>Bio</Typography>
+        </Box>
     );
 };
 
@@ -30,10 +30,10 @@ const Notification: FC<NotificationProps> = ({ isMuted, userId }) => {
     const muteUnmute = () => socket?.emit('mute-unmute', userId);
 
     return (
-        <div className='user-profile__personal mt-3'>
-            <h2 className='body-1'>Notification</h2>
-            <SwitchButton onChange={muteUnmute} value={!isMuted} />
-        </div>
+        <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Typography variant='body1'>Notification</Typography>
+            <Switch onChange={muteUnmute} checked={!isMuted} />
+        </Box>
     );
 };
 
@@ -51,23 +51,27 @@ const BlockButton: FC<BlockButtonProps> = ({ isBlockedByMe, userId }) => {
         <>
             {
                 isBlockedByMe
-                    ? <ButtonIcon onClick={blockUnblock} className='red' icon={<UnlockedIcon />}>
-                        Unblock user
-                    </ButtonIcon>
-                    : <ButtonIcon onClick={blockUnblock} className='red' icon={<ProhibitedIcon />}>
-                        Block user
-                    </ButtonIcon>
+                    ? <IconButton disableRipple onClick={blockUnblock} sx={{ px: 0, borderRadius: 0 }}>
+                        <UnlockedIcon />
+                        <Typography sx={{ ml: 1 }} variant='body1'>Unblock user</Typography>
+                    </IconButton>
+                    : <IconButton disableRipple onClick={blockUnblock} sx={{ px: 0, borderRadius: 0 }}>
+                        <ProhibitedIcon />
+                        <Typography sx={{ ml: 1 }} variant='body1'>Block user</Typography>
+                    </IconButton>
             }
         </>
     );
 };
 
 interface UserProfileDialProps {
+    open: boolean;
+    handleClose: () => void;
     user: UserDto;
     onClose: () => void;
 }
 
-export const UserProfile: FC<UserProfileDialProps> = ({ user, onClose }) => {
+export const UserProfile: FC<UserProfileDialProps> = ({ handleClose, open, user, onClose }) => {
     const { chat } = useTypedSelector(state => state.chat);
 
     const date = useFormatDuration(user.lastSeen);
@@ -75,28 +79,37 @@ export const UserProfile: FC<UserProfileDialProps> = ({ user, onClose }) => {
     const src = useStorageUrl('/avatars/', user.avatar);
 
     return (
-        <DialContainer onClose={onClose}>
-            <CardContainer className='_extended' onClose={onClose} title='User info'>
-                <div className='user-profile'>
-                    <div className='d-flex align-items-center pb-3'>
-                        <Avatar src={src} width={70} height={70} />
-                        <div className='ms-4'>
-                            <h2 className='body-1 fw-bold'>{user.name}</h2>
-                            <h2 className='body-1'>{(user.online && 'Online') || `last seen ${date}`}</h2>
-                        </div>
-                    </div>
-                    <div className='border-top-grey py-3'>
-                        <h2 className='body-1'>{user.username}</h2>
-                        <h3 className='body-2 text-grey'>Username</h3>
-
-                        {user.bio && <UserBio bio={user.bio} />}
-                        {chat && <Notification userId={user.id} isMuted={chat?.isMuted} />}
-                    </div>
-                    <div className='border-top-grey pt-3'>
-                        {chat && <BlockButton userId={user.id} isBlockedByMe={chat.isBlockedByMe} />}
-                    </div>
-                </div>
-            </CardContainer>
-        </DialContainer>
+        <Dialog
+            fullWidth
+            maxWidth='xs'
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='alert-dialog-title'
+            aria-describedby='alert-dialog-description'
+        >
+            <DialogHeader onClose={handleClose}>
+                User info
+            </DialogHeader>
+            <DialogContent>
+                <Box sx={{ display: 'flex', alignItems: 'center', pb: 3 }}>
+                    <Avatar src={src} />
+                    <Box sx={{ ml: 2 }}>
+                        <Typography variant='body1'>{user.name}</Typography>
+                        <Typography variant='body1' sx={{ color: 'info.main' }}>
+                            {(user.online && 'Online') || `last seen ${date}`}
+                        </Typography>
+                    </Box>
+                </Box>
+                <Box sx={{ borderTop: 1, py: 1 }}>
+                    <Typography variant='body1'>{user.username}</Typography>
+                    <Typography variant='body2'>Username</Typography>
+                    {user.bio && <UserBio bio={user.bio} />}
+                    {chat && <Notification userId={user.id} isMuted={chat.isMuted} />}
+                </Box>
+                <Box sx={{ borderTop: 1, py: 1 }}>
+                    {chat && <BlockButton userId={user.id} isBlockedByMe={chat.isBlockedByMe} />}
+                </Box>
+            </DialogContent>
+        </Dialog>
     );
 };
