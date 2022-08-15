@@ -1,36 +1,27 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { ChatIcon, HumanIcon, PowerOnIcon, SettingsIcon } from './ui';
 import { logout } from '../store/slices/auth';
 import {
-    Avatar,
-    Divider,
-    Drawer,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-    Toolbar, Typography,
+    Avatar, Divider, Drawer, List,
+    ListItem, ListItemButton, ListItemIcon,
+    ListItemText, Toolbar, Typography,
 } from '@mui/material';
 import { useTypedSelector } from '../hooks';
 
+const items = [
+    { icon: <ChatIcon />, text: 'Chats', to: '/' },
+    { icon: <HumanIcon />, text: 'Rooms', to: '/rooms' },
+    { icon: <SettingsIcon />, text: 'Settings', to: '/settings' },
+];
+
 export const Sidebar = () => {
-
-    const { chatHash, roomHash } = useParams();
-
     const { user } = useTypedSelector(state => state.auth);
 
     const dispatch = useAppDispatch();
 
     const navigate = useNavigate();
-
-    const items = [
-        { icon: <ChatIcon />, text: 'Chats', to: `/${chatHash ?? ''}` },
-        { icon: <HumanIcon />, text: 'Rooms', to: `/rooms/${roomHash ?? ''}` },
-        { icon: <SettingsIcon />, text: 'Settings', to: '/settings' },
-    ];
 
     const handleClick = (to: string) => navigate(to);
 

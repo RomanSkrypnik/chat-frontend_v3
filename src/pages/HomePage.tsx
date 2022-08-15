@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MessageList, UserSearch } from '../components/common';
 import { Chat } from '../components/partials';
-import { RegularButton } from '../components/ui';
-import { TextInput } from '../components/inputs';
 import { useChatConvert, useSearch, useTypedSelector } from '../hooks';
 import { useAppDispatch } from '../store';
 import { fetchChats, findChat } from '../store/slices/chat';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { Controller } from 'react-hook-form';
 
 export const HomePage = () => {
     const [show, setShow] = useState(false);
@@ -33,19 +33,32 @@ export const HomePage = () => {
 
     return (
         <section className='home'>
-            <div className='d-flex fade-in'>
-                <div className='w-25 me-3'>
-                    <div className='d-flex justify-content-between mb-3'>
-                        <h1 className='mb-3 text-3xl font-bold underline'>Chats</h1>
-                        <RegularButton onClick={handleClick}>Create New Chat</RegularButton>
-                    </div>
-                    <div className='message-wrapper me-3'>
-                        <TextInput placeholder='Search' className='w-100 mb-3' control={control} name='search' />
+            <Box sx={{ display: 'flex' }}>
+                <Box sx={{ flexGrow: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                        <Typography variant='h3' sx={{ mr: 3 }}>Chats</Typography>
+                        <Button variant='contained' onClick={handleClick}>Create New Chat</Button>
+                    </Box>
+                    <Box>
+                        <Controller
+                            name='search'
+                            control={control}
+                            defaultValue=''
+                            render={({ field: { onChange, value } }) =>
+                                <TextField
+                                    onChange={onChange}
+                                    value={value}
+                                    placeholder='Search'
+                                    name='search'
+                                    sx={{ width: '100%' }}
+                                />
+                            }
+                        />
                         <MessageList items={converted} />
-                    </div>
-                </div>
+                    </Box>
+                </Box>
                 {chatHash && <Chat />}
-            </div>
+            </Box>
             {show && <UserSearch onClose={handleClick} />}
         </section>
     );

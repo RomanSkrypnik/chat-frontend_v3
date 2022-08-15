@@ -15,7 +15,7 @@ export const DefaultLayout = () => {
                     <SocketProvider>
                         <div className='flex'>
                             <Sidebar />
-                            <main style={{ paddingLeft: '300px' }}>
+                            <main style={{ padding: '50px 50px 50px 300px' }}>
                                 <Outlet />
                             </main>
                         </div>
