@@ -4,7 +4,6 @@ export * from './ChatListItem';
 export * from './ChatMessage';
 export * from './ChatMessageSwitch';
 export * from './Chat';
-export * from './LoginForm';
 export * from './MessageItemFiles';
 export * from './RegisterForm';
 export * from './RoomForm';

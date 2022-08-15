@@ -51,6 +51,7 @@ export const LoginPage = () => {
                                             <TextField
                                                 onChange={onChange}
                                                 value={value}
+                                                type='password'
                                                 placeholder='password'
                                                 sx={{ width: '100%', mt: 2 }}
                                             />
@@ -58,7 +59,7 @@ export const LoginPage = () => {
                                     />
                                 </Box>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <Button variant='contained'>
+                                    <Button type='submit' variant='contained'>
                                         Sign in
                                     </Button>
                                     <Link sx={{ mt: 2 }} href='/register' underline='none'>
