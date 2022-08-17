@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { MessageList, UserSearch } from '../components/common';
+import { MessageItem, UserSearch } from '../components/common';
 import { Chat } from '../components/partials';
 import { useChatConvert, useSearch, useTypedSelector } from '../hooks';
 import { useAppDispatch } from '../store';
@@ -54,7 +54,11 @@ export const HomePage = () => {
                                 />
                             }
                         />
-                        <MessageList items={converted} />
+                        <Box sx={{ mt: 2 }}>
+                            {
+                                converted.map(({ id, ...chat }) => <MessageItem {...chat} key={id} />)
+                            }
+                        </Box>
                     </Box>
                 </Box>
                 {chatHash && <Chat />}

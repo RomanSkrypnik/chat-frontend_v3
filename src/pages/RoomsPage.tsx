@@ -5,9 +5,10 @@ import { fetchRooms, setRoom } from '../store/slices/room';
 import { useParams } from 'react-router-dom';
 import { RegularButton } from '../components/ui';
 import { TextInput } from '../components/inputs';
-import { MessageList } from '../components/common';
+import { MessageItem, MessageList } from '../components/common';
 import { useRoomConvert, useSearch, useTypedSelector } from '../hooks';
 import { RoomSocketProvider } from '../components/providers';
+import { Box } from '@mui/material';
 
 export const RoomsPage = () => {
     const [show, setShow] = useState(false);
@@ -47,7 +48,11 @@ export const RoomsPage = () => {
                         </div>
                         <div className='message-wrapper me-3'>
                             <TextInput placeholder='Search' className='w-100 mb-3' control={control} name='search' />
-                            <MessageList items={converted} />
+                            <Box sx={{ mt: 2 }}>
+                                {
+                                    converted.map(({ id, ...chat }) => <MessageItem {...chat} key={id} />)
+                                }
+                            </Box>
                         </div>
                     </div>
                     {roomHash && <Room />}
