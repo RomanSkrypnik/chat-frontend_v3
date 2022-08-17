@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { CameraIcon } from '../ui';
+import { Avatar } from '@mui/material';
 
 interface Props {
     imgSrc?: string;
@@ -25,16 +25,10 @@ export const AvatarInput: FC<Props> = ({ onChange, imgSrc }) => {
     const { getInputProps, getRootProps } = useDropzone({ onDrop });
 
     return (
-        <div className='avatar-input' {...getRootProps()}>
-            {
-                src ?
-                    <img src={src} alt='Avatar' />
-                    :
-                    <div className='avatar-input__wrapper'>
-                        <CameraIcon />
-                    </div>
-            }
-            <input type='file' accept='image/png, image/gif, image/jpeg' {...getInputProps()} />
-        </div>
+        <>
+            <Avatar src={src} sx={{ width: 56, height: 56 }} {...getRootProps()}>
+                <input type='file' style={{ display: 'none' }} {...getInputProps} />
+            </Avatar>
+        </>
     );
 };

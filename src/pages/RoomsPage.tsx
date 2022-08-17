@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { RoomForm, Room } from '../components/partials';
+import { Room, RoomCreateForm } from '../components/partials';
 import { useAppDispatch } from '../store';
 import { fetchRooms, setRoom } from '../store/slices/room';
 import { useParams } from 'react-router-dom';
-import { RegularButton } from '../components/ui';
-import { TextInput } from '../components/inputs';
-import { MessageItem, MessageList } from '../components/common';
+import { MessageItem } from '../components/common';
 import { useRoomConvert, useSearch, useTypedSelector } from '../hooks';
 import { RoomSocketProvider } from '../components/providers';
-import { Box } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { Controller } from 'react-hook-form';
 
 export const RoomsPage = () => {
     const [show, setShow] = useState(false);
@@ -39,26 +38,39 @@ export const RoomsPage = () => {
 
     return (
         <RoomSocketProvider>
-            <section className='rooms'>
-                <div className='d-flex fade-in'>
-                    <div className='w-25 me-3'>
-                        <div className='d-flex justify-content-between mb-3'>
-                            <h2 className='h1 mb-3'>Rooms</h2>
-                            <RegularButton onClick={handleClick}>Create New Room</RegularButton>
-                        </div>
-                        <div className='message-wrapper me-3'>
-                            <TextInput placeholder='Search' className='w-100 mb-3' control={control} name='search' />
+            <section>
+                <Box sx={{ display: 'flex', gap: '24px' }}>
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                            <Typography variant='h3' sx={{ mr: 3 }}>Rooms</Typography>
+                            <Button variant='contained' onClick={handleClick}>Create New Room</Button>
+                        </Box>
+                        <Box>
+                            <Controller
+                                name='search'
+                                control={control}
+                                defaultValue=''
+                                render={({ field: { onChange, value } }) =>
+                                    <TextField
+                                        onChange={onChange}
+                                        value={value}
+                                        placeholder='Search'
+                                        name='search'
+                                        sx={{ width: '100%' }}
+                                    />
+                                }
+                            />
                             <Box sx={{ mt: 2 }}>
                                 {
                                     converted.map(({ id, ...chat }) => <MessageItem {...chat} key={id} />)
                                 }
                             </Box>
-                        </div>
-                    </div>
+                        </Box>
+                    </Box>
                     {roomHash && <Room />}
-                    {show && <RoomForm onClose={handleClick} />}
-                </div>
+                </Box>
             </section>
+            <RoomCreateForm open={show} onClose={handleClick} />
         </RoomSocketProvider>
     );
 };
