@@ -17,7 +17,7 @@ export const ClipsIcon: FC<Props> = ({ isActive }) => {
                       fill='white' />
             </mask>
             <g mask='url(#mask0_1_492)'>
-                <rect width='16' height='16' fill={isActive ? '#3d5afe' : '#B7BDCB'} />
+                <rect width='16' height='16' fill={isActive ? '#73c2fb' : '#ffffff'} />
             </g>
         </svg>
     );

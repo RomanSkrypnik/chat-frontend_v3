@@ -3,6 +3,7 @@ import axios from 'axios';
 export const API_URL = 'http://localhost:5000/api';
 export const SERVER_URL = 'http://localhost:5000';
 
+export const CHAT_AVATAR_URL = SERVER_URL + '/avatars/';
 export const ROOM_AVATAR_URL = SERVER_URL + '/room/avatar/';
 
 const $api = axios.create({

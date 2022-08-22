@@ -4,6 +4,7 @@ import { useCountUnread, useFormatDuration } from '../../hooks';
 import { Avatar, Box, Card, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { getFirstLetter } from '../../helpers';
+import { CHAT_AVATAR_URL } from '../../http';
 
 interface MessageItemDto {
     src?: string;
@@ -23,7 +24,7 @@ export const MessageItem: FC<MessageItemDto> = ({ src, name, hash, username, onl
         <NavLink to={hash} style={{ textDecoration: 'none' }}>
             <Card sx={sx}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar src={src}>{getFirstLetter(username ?? name)}</Avatar>
+                    <Avatar src={CHAT_AVATAR_URL + src} alt={getFirstLetter(username ?? name)} />
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', ml: 3 }}>
                         <Typography sx={{ color: 'text.secondary' }}>{name}</Typography>
                         <Typography>{date}</Typography>

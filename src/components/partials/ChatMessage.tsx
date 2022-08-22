@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { FileDto } from '../../types';
 import { ChatMessageSwitch } from './ChatMessageSwitch';
 import { ClipsIcon } from '../ui';
-import { useIsCurrentUser, useReadMessage } from '../../hooks';
+import { useFormatDate, useIsCurrentUser, useReadMessage } from '../../hooks';
 import { Box, Typography } from '@mui/material';
 
 interface ChatMessageProps {
@@ -10,11 +10,14 @@ interface ChatMessageProps {
     text: string;
     isRead: boolean;
     hash: string;
+    createdAt: string;
     files: FileDto[];
 }
 
-export const ChatMessage: FC<ChatMessageProps> = ({ messageId, text, isRead, hash, files }) => {
+export const ChatMessage: FC<ChatMessageProps> = ({ messageId, text, isRead, createdAt, hash, files }) => {
     const ref = useReadMessage({ messageId, isRead, hash });
+
+    const date = useFormatDate(createdAt, 'HH:mm');
 
     const isCurrUser = useIsCurrentUser(hash);
 
@@ -24,9 +27,14 @@ export const ChatMessage: FC<ChatMessageProps> = ({ messageId, text, isRead, has
                 {
                     files.map(file => <ChatMessageSwitch file={file} key={file.id} />)
                 }
-                <Typography sx={{ color: 'white' }}>{text}</Typography>
+                <Box sx={{ display: 'flex', color: 'white' }}>
+                    <Typography variant='body1'>{text}</Typography>
+                    <Typography variant='body2' sx={{ display: 'flex', alignSelf: 'flex-end', fontSize: 12 }}>
+                        <Box sx={{ mx: 0.5 }}>{date}</Box>
+                        {isCurrUser && <ClipsIcon isActive={isRead} />}
+                    </Typography>
+                </Box>
             </Box>
-            {isCurrUser && <ClipsIcon isActive={isRead} />}
         </Box>
     );
 };
