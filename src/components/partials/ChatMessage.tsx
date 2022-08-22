@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { FileDto } from '../../types';
-import cn from 'classnames';
 import { ChatMessageSwitch } from './ChatMessageSwitch';
 import { ClipsIcon } from '../ui';
 import { useIsCurrentUser, useReadMessage } from '../../hooks';

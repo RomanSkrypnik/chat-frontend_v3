@@ -29,6 +29,15 @@ const theme = createTheme({
                 LinkComponent: LinkBehavior,
             },
         },
+        MuiIconButton: {
+            styleOverrides: {
+                root: {
+                    '&.Mui-disabled': {
+                        backgroundColor: 'grey'
+                    }
+                }
+            }
+        }
     },
 });
 

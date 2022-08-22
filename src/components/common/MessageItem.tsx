@@ -3,16 +3,18 @@ import { MessageDto } from '../../types';
 import { useCountUnread, useFormatDuration } from '../../hooks';
 import { Avatar, Box, Card, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { getFirstLetter } from '../../helpers';
 
 interface MessageItemDto {
     src?: string;
     online?: boolean;
     name: string;
+    username?: string;
     hash: string;
     messages: MessageDto[];
 }
 
-export const MessageItem: FC<MessageItemDto> = ({ src, name, hash, online, messages }) => {
+export const MessageItem: FC<MessageItemDto> = ({ src, name, hash, username, online, messages }) => {
     const unreadCount = useCountUnread(messages);
 
     const date = useFormatDuration(messages[0]?.createdAt ?? '');
@@ -21,7 +23,7 @@ export const MessageItem: FC<MessageItemDto> = ({ src, name, hash, online, messa
         <NavLink to={hash} style={{ textDecoration: 'none' }}>
             <Card sx={sx}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar src={src} />
+                    <Avatar src={src}>{getFirstLetter(username ?? name)}</Avatar>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', ml: 3 }}>
                         <Typography sx={{ color: 'text.secondary' }}>{name}</Typography>
                         <Typography>{date}</Typography>

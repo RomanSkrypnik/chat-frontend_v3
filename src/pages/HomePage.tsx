@@ -63,7 +63,7 @@ export const HomePage = () => {
                 </Box>
                 {chatHash && <Chat />}
             </Box>
-            {show && <UserSearch onClose={handleClick} />}
+            <UserSearch open={show} onClose={handleClick} />
         </section>
     );
 };

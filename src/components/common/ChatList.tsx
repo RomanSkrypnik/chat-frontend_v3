@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import { MessageDto } from '../../types';
 import { ChatListItem } from '../partials';
 import { useChatScroll, useLastMessage, useMessageArr, useScrollToBottom } from '../../hooks';

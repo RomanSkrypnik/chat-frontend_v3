@@ -31,7 +31,7 @@ export const ChatControls: FC<Props> = ({ isBlocked, onSubmit }) => {
     return (
         <form onSubmit={handleSubmit(handleOnSubmit)}>
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 3 }}>
-                <FileInput onChange={handleFileChange} />
+                <FileInput disabled={isBlocked} onChange={handleFileChange} />
                 <Controller
                     name='text'
                     control={control}

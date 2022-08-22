@@ -1,20 +1,23 @@
 import React, { FC } from 'react';
 import { MessageDto } from '../../types';
 import { ChatMessage } from './ChatMessage';
-import { useIsCurrentUser } from '../../hooks';
+import { useGetUserFromRow, useIsCurrentUser } from '../../hooks';
 import { Avatar, Box, ListItem } from '@mui/material';
+import { getFirstLetter } from '../../helpers';
 
 interface ChatListItemProps {
     messageRow: MessageDto[];
 }
 
 export const ChatListItem: FC<ChatListItemProps> = ({ messageRow }) => {
-    const isCurrUser = useIsCurrentUser(messageRow[0].user.hash);
+    const { hash, username } = useGetUserFromRow(messageRow[0]);
+
+    const isCurrUser = useIsCurrentUser(hash);
 
     return (
         <ListItem sx={{ p: 0, mt: 3 }}>
             <Box sx={{ display: 'flex' }}>
-                <Avatar />
+                <Avatar>{getFirstLetter(username)}</Avatar>
                 <Box sx={{ ml: 3, alignSelf: isCurrUser ? 'align-items-end' : 'align-items-start' }}>
                     {
                         messageRow.map(({ id, text, files, isRead, user: { hash } }) => (

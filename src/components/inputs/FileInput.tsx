@@ -4,10 +4,11 @@ import { CrossIcon } from '../ui';
 
 interface Props {
     onChange: (files: File[] | null) => void;
+    disabled?: boolean;
     value?: string;
 }
 
-export const FileInput: FC<Props> = ({ onChange, value }) => {
+export const FileInput: FC<Props> = ({ onChange, value, disabled }) => {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { files } = e.target;
@@ -19,8 +20,8 @@ export const FileInput: FC<Props> = ({ onChange, value }) => {
     };
 
     return (
-        <IconButton sx={{ bgcolor: 'info.main' }} component='label'>
-            <input type='file' onChange={handleChange} style={{ display: 'none' }} />
+        <IconButton disabled={disabled} sx={{ bgcolor: 'info.main' }} component='label'>
+            <input value={value} type='file' onChange={handleChange} style={{ display: 'none' }} />
             <CrossIcon />
         </IconButton>
     );

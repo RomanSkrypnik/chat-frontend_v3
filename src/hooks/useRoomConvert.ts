@@ -1,4 +1,4 @@
-import { RoomDto } from '../types/room';
+import { RoomDto } from '../types';
 import { useStorageUrl } from './useStorageUrl';
 
 export function useRoomConvert(rooms: RoomDto[]) {

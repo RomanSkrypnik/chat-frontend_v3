@@ -1,12 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { FC } from 'react';
+import { Controller } from 'react-hook-form';
+import { DialogHeader, UserSearchItem } from '../partials';
+import { useFetchUsers, useFetchUsersBySearch, useWatchField } from '../../hooks';
+import { Box, CircularProgress, Dialog, DialogContent, TextField } from '@mui/material';
 import { UserDto } from '../../types';
-import { UserService } from '../../services';
-import { CardContainer, DialContainer } from '../containers';
-import { UserSearchItem } from '../partials';
-import { TextInput } from '../inputs';
 
-interface UserSearchProps {
+interface Props {
+    open: boolean;
     onClose: () => void;
 }
 
@@ -14,43 +14,35 @@ interface FormValues {
     search: string;
 }
 
-export const UserSearch: FC<UserSearchProps> = ({ onClose }) => {
-    const [users, setUsers] = useState<[] | UserDto[]>([]);
+export const UserSearch: FC<Props> = ({ open, onClose }) => {
+    const { data: users, isLoading } = useFetchUsers();
 
-    const { control, watch, handleSubmit } = useForm<FormValues>();
-
-    useEffect(() => {
-        const subscription = watch(() => handleSubmit(onSubmit)());
-
-        return () => subscription.unsubscribe();
-    }, [watch]);
-
-    useEffect(() => {
-        fetchUsers();
-    }, []);
-
-    const onSubmit = async (data: FormValues) => {
-        const { data: users } = await UserService.usersBySearch(data.search);
-        setUsers(users.data);
-    };
-
-    const fetchUsers = async () => {
-        const { data } = await UserService.users();
-        setUsers(data.data);
-    };
+    const control = useWatchField<FormValues>(useFetchUsersBySearch);
 
     return (
-        <DialContainer onClose={onClose}>
-            <CardContainer className='_extended' title='User search' onClose={onClose}>
-                <div className='user-search'>
-                    <TextInput defaultValue='' control={control} name='search' placeholder='Search Users' />
+        <Dialog open={open} onClose={onClose}>
+            <DialogHeader onClose={onClose}>
+                User search
+            </DialogHeader>
+            <DialogContent>
+                <Box>
+                    <Controller
+                        name='search'
+                        control={control}
+                        defaultValue=''
+                        render={({ field: { onChange, value } }) =>
+                            <TextField onChange={onChange} value={value} name='search' placeholder='Search Users' />}
+                    />
                     <div className='user-search__list scrollbar'>
                         {
-                            users.map(user => <UserSearchItem onClose={onClose} user={user} />)
+                            isLoading && <CircularProgress />
+                        }
+                        {
+                            users?.data.data.map((user: UserDto) => <UserSearchItem user={user} onClose={onClose} />)
                         }
                     </div>
-                </div>
-            </CardContainer>
-        </DialContainer>
+                </Box>
+            </DialogContent>
+        </Dialog>
     );
 };
