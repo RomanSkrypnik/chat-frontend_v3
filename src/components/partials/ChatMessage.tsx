@@ -17,7 +17,7 @@ interface ChatMessageProps {
 export const ChatMessage: FC<ChatMessageProps> = ({ messageId, text, isRead, createdAt, hash, files }) => {
     const ref = useReadMessage({ messageId, isRead, hash });
 
-    const date = useFormatDate(createdAt, 'HH:mm');
+    const time = useFormatDate(createdAt, 'HH:mm');
 
     const isCurrUser = useIsCurrentUser(hash);
 
@@ -30,7 +30,7 @@ export const ChatMessage: FC<ChatMessageProps> = ({ messageId, text, isRead, cre
                 <Box sx={{ display: 'flex', color: 'white' }}>
                     <Typography variant='body1'>{text}</Typography>
                     <Typography variant='body2' sx={{ display: 'flex', alignSelf: 'flex-end', fontSize: 12 }}>
-                        <Box sx={{ mx: 0.5 }}>{date}</Box>
+                        <Box sx={{ mx: 0.5 }}>{time}</Box>
                         {isCurrUser && <ClipsIcon isActive={isRead} />}
                     </Typography>
                 </Box>

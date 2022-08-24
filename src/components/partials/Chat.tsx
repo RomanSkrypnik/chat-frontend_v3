@@ -25,7 +25,7 @@ export const Chat = () => {
     }, [chatHash]);
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, width: '70%' }}>
             {
                 chat &&
                 <>

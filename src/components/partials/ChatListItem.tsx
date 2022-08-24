@@ -5,6 +5,7 @@ import { useGetUserFromRow, useIsCurrentUser } from '../../hooks';
 import { Avatar, Box, ListItem } from '@mui/material';
 import { getFirstLetter } from '../../helpers';
 import { CHAT_AVATAR_URL } from '../../http';
+import { ChatDate } from './ChatDate';
 
 interface ChatListItemProps {
     messageRow: MessageDto[];
@@ -21,16 +22,22 @@ export const ChatListItem: FC<ChatListItemProps> = ({ messageRow }) => {
                 <Avatar src={CHAT_AVATAR_URL + avatar} alt={getFirstLetter(username)} />
                 <Box sx={{ ml: 3, alignSelf: isCurrUser ? 'align-items-end' : 'align-items-start' }}>
                     {
-                        messageRow.map(({ id, text, files, isRead, createdAt, user: { hash } }) => (
-                                <ChatMessage
-                                    createdAt={createdAt}
-                                    messageId={id}
-                                    text={text}
-                                    files={files}
-                                    isRead={isRead}
-                                    hash={hash}
-                                    key={id}
-                                />
+                        messageRow.map(({ id, text, files, isRead, createdAt, user: { hash } }, idx) => (
+                                <>
+                                    <ChatDate
+                                        date={createdAt}
+                                        previousDate={idx > 1 ? messageRow[idx - 1].createdAt : null}
+                                    />
+                                    <ChatMessage
+                                        createdAt={createdAt}
+                                        messageId={id}
+                                        text={text}
+                                        files={files}
+                                        isRead={isRead}
+                                        hash={hash}
+                                        key={id}
+                                    />
+                                </>
                             ),
                         )
                     }

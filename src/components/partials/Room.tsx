@@ -7,6 +7,7 @@ import { ChatControls } from './ChatControls';
 import { RoomHeader } from './RoomHeader';
 import { useCreateRoomMessage, useTypedSelector } from '../../hooks';
 import { RoomSocketContext } from '../providers';
+import { Box } from '@mui/material';
 
 export const Room = () => {
     const { roomHash } = useParams();
@@ -36,7 +37,7 @@ export const Room = () => {
     }, [room]);
 
     return (
-        <div className='flex-grow-1 bg-white'>
+        <Box sx={{ flexGrow: 1, width: '70%' }}>
             {
                 room &&
                 <>
@@ -45,6 +46,6 @@ export const Room = () => {
                     <ChatControls onSubmit={handleSubmit} />
                 </>
             }
-        </div>
+        </Box>
     );
 };
