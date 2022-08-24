@@ -1,9 +1,8 @@
 import React, { FC, useRef } from 'react';
 import { MessageDto } from '../../types';
-import { ChatDate, ChatMessage } from '../partials';
+import { ChatAvatar, ChatDate, ChatMessage } from '../partials';
 import { useChatScroll } from '../../hooks';
-import { Avatar, Box, List } from '@mui/material';
-import { getFirstLetter } from '../../helpers';
+import { Box, List } from '@mui/material';
 
 interface Props {
     messages: MessageDto[];
@@ -20,24 +19,35 @@ export const ChatList: FC<Props> = ({ messages }) => {
     return (
         <List ref={ref} onScroll={handleScroll} sx={sx}>
             {
-                reversed.map(({ id, text, isRead, user: { hash, username }, createdAt, files }, idx) =>
-                    <Box sx={{ display: 'flex', flexDirection: 'column' }} key={id}>
-                        <ChatDate
-                            date={createdAt}
-                            previousDate={idx > 1 ? reversed[idx - 1].createdAt : null}
-                        />
-                        <Box sx={{ display: 'flex' }}>
-                            {<Avatar sx={{ mr: 1 }}>{getFirstLetter(username)}</Avatar>}
-                            <ChatMessage
-                                messageId={id}
-                                text={text}
-                                isRead={isRead}
-                                hash={hash}
-                                createdAt={createdAt}
-                                files={files}
-                            />
-                        </Box>
-                    </Box>,
+                reversed.map(({ id, text, isRead, user: { hash, username, avatar }, createdAt, files }, idx) => {
+                        const prevCreatedAt = idx > 1 ? reversed[idx - 1].createdAt : null;
+                        const prevUsername = idx > 1 ? reversed[idx - 1].user.username : null;
+                        return (
+                            <Box sx={{ display: 'flex', flexDirection: 'column' }} key={id}>
+                                <ChatDate
+                                    date={createdAt}
+                                    previousDate={prevCreatedAt}
+                                />
+                                <Box sx={{ display: 'flex' }}>
+                                    <ChatAvatar
+                                        src={avatar}
+                                        username={username}
+                                        createdAt={createdAt}
+                                        prevUsername={prevUsername}
+                                        prevCreatedAt={prevCreatedAt}
+                                    />
+                                    <ChatMessage
+                                        messageId={id}
+                                        text={text}
+                                        isRead={isRead}
+                                        hash={hash}
+                                        createdAt={createdAt}
+                                        files={files}
+                                    />
+                                </Box>
+                            </Box>
+                        );
+                    },
                 )
             }
         </List>

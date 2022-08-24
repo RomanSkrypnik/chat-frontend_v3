@@ -28,7 +28,7 @@ export const ChatMessage: FC<ChatMessageProps> = ({ messageId, text, isRead, cre
                     files.map(file => <ChatMessageSwitch file={file} key={file.id} />)
                 }
                 <Box sx={{ display: 'flex', color: 'white' }}>
-                    <Typography variant='body1'>{text}</Typography>
+                    <Typography sx={{ maxWidth: '320px' }} variant='body1'>{text}</Typography>
                     <Typography variant='body2' sx={{ display: 'flex', alignSelf: 'flex-end', fontSize: 12 }}>
                         <Box sx={{ mx: 0.5 }}>{time}</Box>
                         {isCurrUser && <ClipsIcon isActive={isRead} />}

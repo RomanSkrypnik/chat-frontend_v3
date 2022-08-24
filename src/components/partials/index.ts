@@ -1,6 +1,5 @@
 export * from './ChatControls';
 export * from './ChatHeader';
-export * from './ChatListItem';
 export * from './ChatMessage';
 export * from './ChatMessageSwitch';
 export * from './Chat';
@@ -18,3 +17,4 @@ export * from './SnackbarMessage';
 export * from './UserSearchItem';
 export * from './DialogHeader';
 export * from './ChatDate';
+export * from './ChatAvatar';
