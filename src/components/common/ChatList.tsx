@@ -2,7 +2,8 @@ import React, { FC, useRef } from 'react';
 import { MessageDto } from '../../types';
 import { ChatDate, ChatMessage } from '../partials';
 import { useChatScroll } from '../../hooks';
-import { List } from '@mui/material';
+import { Avatar, Box, List } from '@mui/material';
+import { getFirstLetter } from '../../helpers';
 
 interface Props {
     messages: MessageDto[];
@@ -14,24 +15,29 @@ export const ChatList: FC<Props> = ({ messages }) => {
 
     const handleScroll = useChatScroll(ref);
 
+    const reversed = [...messages].reverse();
+
     return (
         <List ref={ref} onScroll={handleScroll} sx={sx}>
             {
-                messages.map(({ id, text, isRead, user: { hash }, createdAt, files }, idx) =>
-                    <>
+                reversed.map(({ id, text, isRead, user: { hash, username }, createdAt, files }, idx) =>
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }} key={id}>
                         <ChatDate
                             date={createdAt}
-                            previousDate={idx > 1 ? messages[idx - 1].createdAt : null}
+                            previousDate={idx > 1 ? reversed[idx - 1].createdAt : null}
                         />
-                        <ChatMessage
-                            messageId={id}
-                            text={text}
-                            isRead={isRead}
-                            hash={hash}
-                            createdAt={createdAt}
-                            files={files}
-                        />
-                    </>,
+                        <Box sx={{ display: 'flex' }}>
+                            {<Avatar sx={{ mr: 1 }}>{getFirstLetter(username)}</Avatar>}
+                            <ChatMessage
+                                messageId={id}
+                                text={text}
+                                isRead={isRead}
+                                hash={hash}
+                                createdAt={createdAt}
+                                files={files}
+                            />
+                        </Box>
+                    </Box>,
                 )
             }
         </List>

@@ -41,6 +41,6 @@ export const ChatMessage: FC<ChatMessageProps> = ({ messageId, text, isRead, cre
 
 const sx = {
     borderRadius: '6px',
-    m: '0 8px 5px 0',
+    m: '5px 8px 5px 0',
     p: 1,
 };
