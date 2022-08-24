@@ -1,6 +1,6 @@
 import React, { FC, useRef } from 'react';
 import { MessageDto } from '../../types';
-import { ChatMessage } from '../partials';
+import { ChatDate, ChatMessage } from '../partials';
 import { useChatScroll } from '../../hooks';
 import { List } from '@mui/material';
 
@@ -17,13 +17,21 @@ export const ChatList: FC<Props> = ({ messages }) => {
     return (
         <List ref={ref} onScroll={handleScroll} sx={sx}>
             {
-                messages.map(({ id, text, isRead, user: { hash }, createdAt, files }) =>
-                    <ChatMessage messageId={id}
-                                 text={text}
-                                 isRead={isRead}
-                                 hash={hash}
-                                 createdAt={createdAt}
-                                 files={files} />,
+                messages.map(({ id, text, isRead, user: { hash }, createdAt, files }, idx) =>
+                    <>
+                        <ChatDate
+                            date={createdAt}
+                            previousDate={idx > 1 ? messages[idx - 1].createdAt : null}
+                        />
+                        <ChatMessage
+                            messageId={id}
+                            text={text}
+                            isRead={isRead}
+                            hash={hash}
+                            createdAt={createdAt}
+                            files={files}
+                        />
+                    </>,
                 )
             }
         </List>
